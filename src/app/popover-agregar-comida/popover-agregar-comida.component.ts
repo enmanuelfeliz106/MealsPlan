@@ -23,5 +23,9 @@ export class PopoverAgregarComidaComponent implements OnInit {
     
   }
 
+  agregarComida() {
+    
+  }
+
 
 }

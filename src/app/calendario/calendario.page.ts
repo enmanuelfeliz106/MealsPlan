@@ -60,7 +60,7 @@ export class CalendarioPage implements OnInit {
       event: ev,
       translucent: true,
       componentProps:  {
-        date: this.date,
+        date: this.date
         
       },
       cssClass: 'popover'

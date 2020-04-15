@@ -24,7 +24,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
             AppRoutingModule,
-
+            Calendar
           ],
 
   providers: [
