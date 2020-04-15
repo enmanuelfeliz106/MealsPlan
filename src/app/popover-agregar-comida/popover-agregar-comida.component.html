@@ -10,6 +10,8 @@
 
 <ion-content>
 
+  <p><strong>Fecha elegida:</strong> {{fecha}} </p>
+
   <ion-list>
   
     <ion-item>
@@ -45,13 +47,10 @@
     </ion-item>
   
   </ion-list>
+  
 
-  <ion-footer>
-    <p><strong>Fecha elegida:</strong> {{date}} </p>
-  </ion-footer>
-
-  <ion-button color="primary" expand="block">Guardar</ion-button>
-  <ion-button color="danger" expand="block">Cancelar</ion-button>
+  <ion-button color="primary" expand="block" (click)="agregarComida(fecha)">Guardar</ion-button>
+  <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
 
 </ion-content>
 

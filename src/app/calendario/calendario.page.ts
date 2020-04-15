@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { PopoverController, AlertController } from '@ionic/angular';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
 import { stringify } from 'querystring';
+
 
 
 @Component({
@@ -11,7 +12,7 @@ import { stringify } from 'querystring';
 })
 export class CalendarioPage implements OnInit {
 
-  date: string = '';
+  date: Date;
   type: 'string';
 
 
@@ -30,7 +31,7 @@ export class CalendarioPage implements OnInit {
 
   mostrarPopover() {
 
-    if (this.date === '') {
+    if (this.date === null) {
       this.presentAlert();
     } else {
 
@@ -60,8 +61,8 @@ export class CalendarioPage implements OnInit {
       event: ev,
       translucent: true,
       componentProps:  {
-        date: this.date
-        
+        fecha: this.date
+
       },
       cssClass: 'popover'
       
