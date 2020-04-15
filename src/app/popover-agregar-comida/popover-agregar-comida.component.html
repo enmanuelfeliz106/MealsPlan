@@ -1,0 +1,59 @@
+
+
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-title>Agregar comida</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+  
+    <ion-item>
+      <ion-label>Comida</ion-label>
+      <ion-select required interface="action-sheet" placeholder="Selecciona" mode="ios" [(ngModel)]="comida">
+        <ion-select-option value="desayuno">Desayuno</ion-select-option>
+        <ion-select-option value="MariendaMatutina">Merienda Matunina</ion-select-option>
+        <ion-select-option value="almuerzo">Almuerzo</ion-select-option>
+        <ion-select-option value="meriendaVespertina">Merienda Vespertina</ion-select-option>
+        <ion-select-option value="cena">Cena</ion-select-option>
+        <ion-select-option value="meriendaNocturna">Merienda Nocturna</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nombre del plato o comida</ion-label>
+      <ion-input required type="text" name="nombre" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ingredientes</ion-label>
+      <ion-textarea name="ingredientes" [(ngModel)]="ingredientes"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Notas</ion-label>
+      <ion-textarea name="notas" [(ngModel)]="notas"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Cantidad de calorias</ion-label>
+      <ion-input required type="number" name="calorias" [(ngModel)]="calorias"></ion-input>
+    </ion-item>
+  
+  </ion-list>
+
+  <ion-footer>
+    <p><strong>Fecha elegida:</strong> {{date}}</p>
+  </ion-footer>
+
+  <ion-button color="primary" expand="block">Guardar</ion-button>
+  <ion-button color="danger" expand="block">Cancelar</ion-button>
+
+</ion-content>
+
+
+

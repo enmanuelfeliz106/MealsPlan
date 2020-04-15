@@ -23,18 +23,19 @@
       <ion-calendar [(ngModel)]="date"
         (onChange)="onChange($event)"
         [type]="type"
-        [format]="'YYYY-MM-DD'">
+        [format]="'DD-MM-YYYY'">
       </ion-calendar>
   
     </div>
 
     
 
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" (click)="mostrarPopover()">
       <ion-fab-button>
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+
 
 
 </ion-content>

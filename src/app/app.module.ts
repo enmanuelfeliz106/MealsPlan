@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -30,7 +30,8 @@ import { Calendar } from '@ionic-native/calendar/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    { provide: LOCALE_ID, useValue: 'zh-CN'}
     
   ],
   bootstrap: [AppComponent]
