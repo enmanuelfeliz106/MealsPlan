@@ -8,6 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { Calendar } from '@ionic-native/calendar/ngx';
+
 
 
 
@@ -15,13 +17,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     ],
   exports: [
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
             AppRoutingModule,
+
           ],
 
   providers: [

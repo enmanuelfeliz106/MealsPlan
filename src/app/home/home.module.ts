@@ -32,7 +32,7 @@ import { MenuComponent } from '../menu/menu.component';
   declarations: [
     HomePage,
     PopoverComponent,
-    MenuComponent
+    MenuComponent,
     
   ]
 

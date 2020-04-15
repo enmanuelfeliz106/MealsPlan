@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @Component({
   selector: 'app-menu',
@@ -10,5 +11,6 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+
 
 }
