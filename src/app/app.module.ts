@@ -8,7 +8,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { Calendar } from '@ionic-native/calendar/ngx';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { PopoverAgregarComidaComponent } from './popover-agregar-comida/popover-agregar-comida.component';
+
+
 
 
 
@@ -24,14 +31,18 @@ import { Calendar } from '@ionic-native/calendar/ngx';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
             AppRoutingModule,
-
+            AngularFireModule.initializeApp(environment.firebase),
+            AngularFirestoreModule,
+            
           ],
 
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    { provide: LOCALE_ID, useValue: 'zh-CN'}
+    { provide: LOCALE_ID, useValue: 'zh-CN'},
+    Firebase,
+    FirebaseAuthentication
     
   ],
   bootstrap: [AppComponent]
