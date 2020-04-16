@@ -10,7 +10,7 @@
 
 <ion-content>
 
-  <p><strong>Fecha elegida:</strong> {{fecha}} </p>
+  <p id="fecha"><strong>Fecha elegida:</strong> </p>
 
   <ion-list>
   
@@ -49,7 +49,7 @@
   </ion-list>
   
 
-  <ion-button color="primary" expand="block" (click)="agregarComida(fecha)">Guardar</ion-button>
+  <ion-button color="primary" expand="block" (click)="agregarComida()">Guardar</ion-button>
   <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
 
 </ion-content>

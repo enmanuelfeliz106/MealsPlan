@@ -1,4 +1,4 @@
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, AlertController } from '@ionic/angular';
 import { Component, OnInit} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
@@ -7,7 +7,7 @@ import { FirebaseApp } from '@angular/fire';
 import * as firebase from 'firebase';
 import { Cordova} from '@ionic-native/core';
 
-interface nuevaComida {
+export interface Comida {
   fecha: Date;
   userID: string;
   comida: string;
@@ -33,29 +33,42 @@ export class PopoverAgregarComidaComponent implements OnInit {
   notas: string;
   calorias: number;
 
-  nuevaComida: nuevaComida;
-
-
+  nuevaComida: Comida;
 
   constructor(private firestore: AngularFirestore, private user: FirebaseAuthentication,
-              private popover: PopoverController, private firebase: Firebase) {
+              private popover: PopoverController, private firebase: Firebase, public alerta: AlertController) {
     this.user.signInWithEmailAndPassword('enmanuelfeliz106@gmail.com', 'universal0707');
-  
+
   }
     ngOnInit() {
       
   }
 
-    agregarComida(fecha: Date) {
-    this.nuevaComida.fecha = fecha;
-    this.nuevaComida.userID = firebase.auth().currentUser.uid;
-    this.nuevaComida.nombre = this.nombre;
-    this.nuevaComida.comida = this.comida;
-    this.nuevaComida.ingredientes = this.ingredientes;
-    this.nuevaComida.notas = this.notas;
-    this.nuevaComida.calorias = this.calorias;
+    agregarComida() {
 
-    this.firestore.collection('comidasGuardadas').add(this.nuevaComida);
+    this.nuevaComida = {
+        fecha: new Date(),
+        userID: firebase.auth().currentUser.uid,
+        comida: this.comida,
+        nombre: this.nombre,
+        ingredientes: this.ingredientes,
+        notas: this.notas,
+        calorias: this.calorias
+
+      };
+
+    this.firestore.collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
+      
+      this.alertaExito();
+      this.popover.dismiss();
+
+      }).catch( (error) => {
+
+        this.alertaError();
+        this.popover.dismiss();
+
+        
+      });
   }
 
   cerrarPopover() {
@@ -67,6 +80,36 @@ export class PopoverAgregarComidaComponent implements OnInit {
     
     this.popover.dismiss();
   }
+
+  async alertaExito() {
+    const alert = await this.alerta.create({
+      header: 'Exito',
+      subHeader: 'Comida guardada',
+      message: 'Puedes visualizarla en tu lista de comidas guardadas',
+      buttons: ['OK'],
+      cssClass: 'alertaExito'
+    });
+
+    await alert.present();
+    
+  }
+
+  async alertaError() {
+    this.popover.dismiss();
+    const alert = await this.alerta.create({
+          header: 'Error',
+          subHeader: 'Algo salio mal',
+          message: 'Consulta con tu proveedor',
+          buttons: ['OK'],
+          cssClass: 'alertaError'
+        });
+    
+    await alert.present();
+  }
+
+
+
+  
 
 
 }
