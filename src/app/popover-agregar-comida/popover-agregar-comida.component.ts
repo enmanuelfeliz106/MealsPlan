@@ -100,7 +100,7 @@ export class PopoverAgregarComidaComponent implements OnInit {
   }
 
   async alertaError() {
-    this.popover.dismiss();
+    
     const alert = await this.alerta.create({
           header: 'Error',
           subHeader: 'Algo salio mal',
