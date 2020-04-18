@@ -6,9 +6,11 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { FirebaseApp } from '@angular/fire';
 import * as firebase from 'firebase';
 import { Cordova} from '@ionic-native/core';
+import { CalendarioPage } from '../calendario/calendario.page';
+import { FechaService } from '../services/fecha.service';
 
 export interface Comida {
-  fecha: Date;
+  fecha: string;
   userID: string;
   comida: string;
   nombre: string;
@@ -21,7 +23,7 @@ export interface Comida {
 @Component({
   selector: 'app-popover-agregar-comida',
   templateUrl: './popover-agregar-comida.component.html',
-  styleUrls: ['./popover-agregar-comida.component.scss'],
+  styleUrls: ['./popover-agregar-comida.component.scss']
 })
 
 
@@ -32,22 +34,25 @@ export class PopoverAgregarComidaComponent implements OnInit {
   ingredientes: string;
   notas: string;
   calorias: number;
-
   nuevaComida: Comida;
+  fechaElegida = this.fecha.fecha.toString();
 
   constructor(private firestore: AngularFirestore, private user: FirebaseAuthentication,
-              private popover: PopoverController, private firebase: Firebase, public alerta: AlertController) {
+              private popover: PopoverController, private firebase: Firebase, public alerta: AlertController,
+              private fecha: FechaService) {
     this.user.signInWithEmailAndPassword('enmanuelfeliz106@gmail.com', 'universal0707');
+
+    
 
   }
     ngOnInit() {
-      
+     
   }
 
     agregarComida() {
 
     this.nuevaComida = {
-        fecha: new Date(),
+        fecha: this.fechaElegida,
         userID: firebase.auth().currentUser.uid,
         comida: this.comida,
         nombre: this.nombre,
