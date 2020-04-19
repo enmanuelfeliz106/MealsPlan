@@ -1,0 +1,42 @@
+
+<ion-content fullscreen="true">
+
+  <ion-header color="transparent">
+    <img src="/assets/Logo.png" alt="">
+  </ion-header>
+    
+  
+  
+  <div id="login">
+    <ion-item>
+      <ion-input type="email" placeholder="Email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input type="password" placeholder="Contraseña"></ion-input>
+    </ion-item>
+
+    
+    <ion-button color="success" expand="block" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
+    
+    
+
+  </div>
+
+  <ion-footer class="footer1">
+
+    <ion-text>Si ha olvidado su contraseña <a (click)= "recuperarContrasena()" >Pulse aquí</a></ion-text>
+
+  </ion-footer>
+
+  <ion-footer class="footer2">
+
+    <ion-text>¿No tienes una cuenta? <a (click)= "registrarse()" >Create una</a></ion-text>
+
+  </ion-footer>
+
+  
+  
+
+</ion-content>
+
