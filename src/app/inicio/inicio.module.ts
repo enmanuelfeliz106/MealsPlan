@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
+import { PopoverRegistroComponent } from '../popover-registro/popover-registro.component';
+import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contrasena/popover-recuperar-contrasena.component';
 
 @NgModule({
+  entryComponents: [PopoverRegistroComponent, PopoverRecuperarContrasenaComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     InicioPageRoutingModule
   ],
-  declarations: [InicioPage]
+  declarations: [InicioPage, PopoverRegistroComponent, PopoverRecuperarContrasenaComponent]
 })
 export class InicioPageModule {}

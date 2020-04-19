@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  constructor(public alerta: AlertController, private router: Router) { }
+  constructor(public alerta: AlertController, private router: Router) { 
+    firebase.initializeApp(environment.firebase);
+  }
 
   registrarUsuario(email: string, contrasena: string) {
 
@@ -43,7 +46,7 @@ export class AuthenticationService {
   login(email: string, contrasena: string) {
     firebase.auth().signInWithEmailAndPassword(email, contrasena).then((exito) => {
 
-      this.router.navigate(['/inicio']);
+      this.router.navigate(['/home']);
 
     }).catch((error) => {
         // Handle Errors here.
