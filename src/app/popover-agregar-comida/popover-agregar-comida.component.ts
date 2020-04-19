@@ -38,11 +38,8 @@ export class PopoverAgregarComidaComponent implements OnInit {
   fechaElegida = this.fecha.fecha.toString();
 
   constructor(private firestore: AngularFirestore, private user: FirebaseAuthentication,
-              private popover: PopoverController, private firebase: Firebase, public alerta: AlertController,
+              private popover: PopoverController, public alerta: AlertController,
               private fecha: FechaService) {
-    this.user.signInWithEmailAndPassword('enmanuelfeliz106@gmail.com', 'universal0707');
-
-    
 
   }
     ngOnInit() {

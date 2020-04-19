@@ -1,0 +1,33 @@
+
+
+<ion-content>
+  <ion-header>
+  
+    <ion-toolbar>
+      <ion-title>Registro</ion-title>
+      
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="registro">
+    <ion-item>
+      <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input type="text" placeholder="Contraseña" name="contrasena" [(ngModel)]="contrasena"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Confirmar Contraseña" name="confirmarCcontrasena" [(ngModel)]="confirmarContrasena"></ion-input>
+    </ion-item>
+
+    
+    <ion-button color="success" expand="block" (click)="registrarUsuario()">Registrarme</ion-button>
+    
+    <p></p>
+    
+
+  </div>
+
+</ion-content>
