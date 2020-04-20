@@ -17,6 +17,7 @@ export interface Comida {
   ingredientes: string;
   notas: string;
   calorias: number;
+  check: boolean;
 }
 
 
@@ -35,7 +36,7 @@ export class PopoverAgregarComidaComponent implements OnInit {
   notas: string;
   calorias: number;
   nuevaComida: Comida;
-  fechaElegida = this.fecha.fecha.toString();
+  fechaElegida = new Date(this.fecha.fecha).toLocaleDateString();
 
   constructor(private firestore: AngularFirestore, private user: FirebaseAuthentication,
               private popover: PopoverController, public alerta: AlertController,
@@ -55,8 +56,8 @@ export class PopoverAgregarComidaComponent implements OnInit {
         nombre: this.nombre,
         ingredientes: this.ingredientes,
         notas: this.notas,
-        calorias: this.calorias
-
+        calorias: this.calorias,
+        check: false
       };
 
     this.firestore.collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {

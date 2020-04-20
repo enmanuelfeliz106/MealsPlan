@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
 
   constructor(public alerta: AlertController, private router: Router) { 
-    firebase.initializeApp(environment.firebase);
+    
   }
 
   registrarUsuario(email: string, contrasena: string) {

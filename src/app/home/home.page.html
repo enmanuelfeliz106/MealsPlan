@@ -4,23 +4,32 @@
     <ion-title>
       
       Meals Plan
+      
     </ion-title>
+    {{hoy}}
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let comida of comidas" >
+ 
+  <ion-card *ngFor="let comida of comidas; index as i">
     <ion-item>
-      <ion-button (click)="check(comida.posicion)" color="light" id="check{{comida.posicion}}">
+      <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
+        
         <ion-icon name="checkmark-outline"></ion-icon>
       </ion-button>
+      <ng-template #elseBlock>
+        <ion-button (click)="check(i, idsDocument[i])" color="success" id="{{idsDocument[i]}}">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ng-template>
       
       <ion-label>{{comida.comida}}</ion-label>
-      <ion-button fill="outline" slot="end" (click)="presentPopover()">Ver</ion-button>
+      <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
     </ion-item>
   
     <ion-card-content>
-      {{comida.descripcion}}
+      {{comida.nombre}}
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -3,6 +3,11 @@ import * as $ from 'jquery';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 import { MenuController } from '@ionic/angular';
+import * as firebase from 'firebase';
+import { environment } from '../../environments/environment';
+import { AuthenticationService } from '../services/authentication.service';
+import { Observable, observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -13,31 +18,79 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage {
 
+  idUsuario;
+  comidas = [];
+  idsDocument = [];
+  checkButton = [];
+  hoy = new Date().toLocaleDateString();
+  fecha = new Date().toLocaleDateString();
 
-  comidas = [{ posicion: 0, comida: 'Desayuno', descripcion: 'Muy buena comida', checked: false  },
-             { posicion: 1, comida: 'Snack Matutino', descripcion: 'Muy buena comida', checked: false   },
-             { posicion: 2, comida: 'Almuerzo', descripcion: 'Muy buena comida', checked: false   },
-             { posicion: 3, comida: 'Snack Vespertino', descripcion: 'Muy buena comida', checked: false   },
-             { posicion: 4, comida: 'Cena', descripcion: 'Muy buena comida', checked: false   }];
+  constructor(public popoverController: PopoverController, private menu: MenuController, 
+              private autenticacion: AuthenticationService, private router: Router) {
 
-  constructor(private popoverController: PopoverController, private menu: MenuController) {}
+    this.autenticacion.login('enmanuelfeliz106@gmail.com', 'universal0707');
+    this.idUsuario = firebase.auth().currentUser.uid;
+                
+    let comida = firebase.firestore().collection('comidasGuardadas');
+    let query = comida.where('userID', '==', this.idUsuario).where('fecha', '==', this.fecha).get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          console.log('No matching documents.');
+          return;
+        }
 
-  public check(posicion: number) {
-    if (this.comidas[posicion].checked === false) {
-      $("ion-item #check" + posicion).attr("color", "success");
-      this.comidas[posicion].checked = true;
-    } else {
-      $("ion-item #check" + posicion).attr("color", "light");
-      this.comidas[posicion].checked = false;
-    }
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+          this.comidas.push(doc.data());
+          this.idsDocument.push(doc.id);
+          
+          this.checkButton.push(doc.get('check'));
+
+
+        });
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
+      });
+
+     
 
   }
 
-  async presentPopover(ev: any) {
+  check(index: number, idDoc: string) {
+    if (this.checkButton[index] === false) {
+      
+   
+      $("ion-item #" + idDoc).removeAttr("color");
+      $("ion-item #" + idDoc).attr("color", "success");
+      
+
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({check: true});
+      this.checkButton[index] = true;
+      
+
+      
+
+    } else {
+      
+      $("ion-item #" + idDoc).removeAttr("color");
+      $("ion-item #" + idDoc).attr("color", "light");
+
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({check: false});
+      this.checkButton[index] = false;
+    } 
+     
+
+  }
+
+  async presentPopover(ev: any, comida) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       event: ev,
-      translucent: true
+      componentProps: {
+        comidaObj: comida
+      }
+      
     });
     return await popover.present();
   }
