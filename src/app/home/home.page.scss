@@ -14,6 +14,22 @@ ion-card ion-item ion-label{
   font-size: 1.4em;
 }
 
-.check{
-  background: green;
+ion-card{
+  border: 1px solid rgba(0, 0, 114, 0.781);
+  margin: 15px 10px;
+  
 }
+
+/*ion-card, ion-item{
+  --background:  rgb(255, 205, 133);
+}*/
+
+/*h1{
+  text-align: center;
+  width: 90%;
+  border: 2px groove grey;
+  border-radius: 20px;
+  margin: 20px auto;
+  background: rgb(0, 89, 255);
+  color: aliceblue;
+}*/

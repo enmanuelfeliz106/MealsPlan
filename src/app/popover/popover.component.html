@@ -1,3 +1,51 @@
-<p>
-  popover works!
-</p>
+
+
+
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-title>{{comidaObj.nombre}}</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Ingredientes:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{comidaObj.ingredientes}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Notas:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{comidaObj.notas}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Calorías:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{comidaObj.calorias}}
+    </ion-card-content>
+  </ion-card>
+
+  
+
+</ion-content>
+
+
+

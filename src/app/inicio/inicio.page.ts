@@ -15,7 +15,7 @@ export class InicioPage implements OnInit {
   contrasena: string;
 
   constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { 
-    firebase.initializeApp(environment.firebase);
+   
   }
 
   ngOnInit() {
