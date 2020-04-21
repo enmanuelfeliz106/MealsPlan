@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { PopoverController } from '@ionic/angular';
+import { PopoverTablaMedidasComponent } from '../popover-tabla-medidas/popover-tabla-medidas.component';
+
+
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +12,20 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public popover: PopoverController) { }
 
   ngOnInit() {}
 
+  async presentPopover(ev: any) {
+    const popover = await this.popover.create({
+      component: PopoverTablaMedidasComponent,
+      event: ev,
+      translucent: true,
+      cssClass: 'popover'
+      
+    });
+    return await popover.present();
+  }
 
 }
+

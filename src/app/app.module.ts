@@ -1,3 +1,4 @@
+import { PopoverRegistroComponent } from './popover-registro/popover-registro.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,6 +15,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { PopoverAgregarComidaComponent } from './popover-agregar-comida/popover-agregar-comida.component';
+import { PopoverTablaMedidasComponent } from './popover-tabla-medidas/popover-tabla-medidas.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -24,15 +28,18 @@ import { PopoverAgregarComidaComponent } from './popover-agregar-comida/popover-
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PopoverTablaMedidasComponent
     ],
   exports: [
   ],
-  entryComponents: [],
+  entryComponents: [PopoverTablaMedidasComponent],
   imports: [BrowserModule, IonicModule.forRoot(), 
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebase),
             AngularFirestoreModule,
+            CommonModule,
+            FormsModule
             
             
           ],
