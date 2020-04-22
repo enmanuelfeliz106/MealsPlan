@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { PopoverController } from '@ionic/angular';
 import { PopoverTablaMedidasComponent } from '../popover-tabla-medidas/popover-tabla-medidas.component';
+import { Router } from '@angular/router';
 
 
 
@@ -26,6 +27,8 @@ export class MenuComponent implements OnInit {
     });
     return await popover.present();
   }
+
+ 
 
 }
 

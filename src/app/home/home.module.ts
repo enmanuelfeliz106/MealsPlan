@@ -14,7 +14,7 @@ import { MenuComponent } from '../menu/menu.component';
 
 
 @NgModule({
-  entryComponents:  [PopoverComponent, MenuComponent ],
+  entryComponents:  [ MenuComponent ],
   imports: [
     CommonModule,
     FormsModule,
@@ -31,7 +31,6 @@ import { MenuComponent } from '../menu/menu.component';
   ],
   declarations: [
     HomePage,
-    PopoverComponent,
     MenuComponent,
     
   ]

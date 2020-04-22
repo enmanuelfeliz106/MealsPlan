@@ -1,0 +1,69 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button href="/home">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Historial de comidas</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-item color="primary">
+    <ion-label>Filtrar por:</ion-label>
+    <ion-select interface="popover" [(ngModel)]="select">
+      <ion-select-option value="fecha">Fecha</ion-select-option>
+      <ion-select-option value="nombre">Nombre del plato</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Fecha</ion-label>
+    <ion-input type="date" name="fecha" [(ngModel)]="fecha"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked"> Nombre del plato </ion-label>
+    <ion-input type="text" name="palabraClave" [(ngModel)]="palabraClave"></ion-input>
+  </ion-item>
+
+  <ion-button color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
+
+  <hr>
+ 
+  <ion-card *ngFor="let comida of comidas; index as i">
+    <ion-item>
+      {{comida.fecha}}
+      <ion-label>{{comida.comida}}</ion-label>
+      <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      {{comida.nombre}}
+    </ion-card-content>
+  </ion-card>
+
+  <br>
+  <br>
+
+  <ion-card color="warning">
+    <ion-item color="warning">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-label>Advertencia</ion-label>
+    </ion-item>
+  
+    <ion-card-content>
+      El nombre del plato debe ser escrito de forma exacta. Esto incluye espacios, numeros, puntos, 
+      mayúsculas, minúsculas y cualquier signo o simbolo.
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+
+
+
