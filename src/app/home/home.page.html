@@ -11,6 +11,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item color="success">
+    <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
+    <ion-label>
+      Desliza para refrescar
+    </ion-label>
+    <ion-icon name="arrow-down-circle-outline" slot="end"></ion-icon>
+  </ion-item>
   
   <ion-item-sliding *ngFor="let comida of comidas; index as i">
  
@@ -32,7 +50,7 @@
         </h1>
         
       </ion-label>
-      <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
+      <ion-button fill="outline" slot="end" (click)="presentPopover(null, comidas[i])" color="primary">Ver</ion-button>
       <br> <br> <br> <br>
     </ion-item>
 
@@ -40,7 +58,7 @@
       <ion-item-option color="warning">
         <ion-icon slot="icon-only" name="star-outline"></ion-icon>
       </ion-item-option>
-      <ion-item-option color="success">
+      <ion-item-option color="success" (click)="actualizarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)">
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-item-option>
     </ion-item-options>
@@ -52,7 +70,10 @@
     </ion-item-options>
   </ion-item-sliding>
 
- 
 </ion-content>
+
+
+
+
 
 <app-menu></app-menu>

@@ -3,7 +3,7 @@
 <ion-header>
   
   <ion-toolbar>
-    <ion-title>Agregar comida</ion-title>
+    <ion-title>{{titulo}}</ion-title>
     
   </ion-toolbar>
 </ion-header>
@@ -49,7 +49,7 @@
   </ion-list>
   
 
-  <ion-button color="primary" expand="block" (click)="agregarComida()">Guardar</ion-button>
+  <ion-button color="primary" expand="block" (click)="agregarOActualizarComida(opcion, docId, comida, nombre, ingredientes, notas, calorias)">Guardar</ion-button>
   <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
 
 </ion-content>

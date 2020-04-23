@@ -8,6 +8,8 @@ import { environment } from '../../environments/environment';
 import { AuthenticationService } from '../services/authentication.service';
 import { Observable, observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
+import { FechaService } from '../services/fecha.service';
 
 
 
@@ -25,12 +27,24 @@ export class HomePage {
   hoy = new Date().toLocaleDateString();
   fecha = new Date().toLocaleDateString();
 
+
   constructor(public popoverController: PopoverController, private menu: MenuController, 
-              private autenticacion: AuthenticationService, private router: Router) {
+              private autenticacion: AuthenticationService, private router: Router, public popover: PopoverController) {
+    
+        
 
     this.autenticacion.login('enmanuelfeliz106@gmail.com', 'universal0707');
     this.idUsuario = firebase.auth().currentUser.uid;
-                
+    this.obtenerComidas();
+
+    
+  }
+
+  obtenerComidas() {
+    this.comidas = [];
+    this.idsDocument = [];
+    this.checkButton = [];
+
     let comida = firebase.firestore().collection('comidasGuardadas');
     let query = comida.where('userID', '==', this.idUsuario).where('fecha', '==', this.fecha).get()
       .then(snapshot => {
@@ -53,7 +67,6 @@ export class HomePage {
         console.log('Error getting documents', err);
       });
 
-     
 
   }
 
@@ -100,4 +113,53 @@ export class HomePage {
     this.menu.open('first');
   }
 
+  actualizarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
+                 calorias: number ) {
+
+    this.presentPopoverAgregarComida(ev, idDoc, comida, nombre, ingredientes, notas, calorias);
+    
+    
+    
+    
+  }
+
+  async presentPopoverAgregarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
+                                    calorias: number ) {
+    
+
+    const popover = await this.popover.create({
+      component: PopoverAgregarComidaComponent,
+      event: ev,
+      translucent: true,
+      componentProps:  {
+        fechaElegida: this.hoy,
+        titulo: 'Editar Comida',
+        opcion: 'editar',
+        docId: idDoc,
+        comida: comida,
+        nombre: nombre,
+        ingredientes: ingredientes,
+        notas: notas,
+        calorias: calorias
+
+      },
+      cssClass: 'popover'
+      
+    });
+    
+    return await popover.present();
+   
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.obtenerComidas();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
+
+  
 }
