@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, AlertController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 import { MenuController } from '@ionic/angular';
 import * as firebase from 'firebase';
@@ -29,7 +29,8 @@ export class HomePage {
 
 
   constructor(public popoverController: PopoverController, private menu: MenuController, 
-              private autenticacion: AuthenticationService, private router: Router, public popover: PopoverController) {
+              private autenticacion: AuthenticationService, private router: Router, public popover: PopoverController,
+              public alert: AlertController) {
     
         
 
@@ -117,9 +118,11 @@ export class HomePage {
                  calorias: number ) {
 
     this.presentPopoverAgregarComida(ev, idDoc, comida, nombre, ingredientes, notas, calorias);
-    
-    
-    
+  }
+
+  borrarComida(idDoc) {
+
+    firebase.firestore().collection('comidasGuardadas').doc(idDoc).delete();
     
   }
 
@@ -160,6 +163,27 @@ export class HomePage {
     }, 2000);
   }
 
+  async presentAlertBorrarComida(idDoc) {
+    const alert = await this.alert.create({
+      header: 'Eliminar Comida',
+      subHeader: '¿Seguro que desea eliminar esta comida?',
+      message: 'Si la elimina no se registrará en el historial de comidas ni en favoritas.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          cssClass: 'danger',
+          handler: () => {
+            this.borrarComida(idDoc);
+          }
+        }]
+    });
+
+    await alert.present();
+  }
 
   
 }
