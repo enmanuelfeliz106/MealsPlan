@@ -4,6 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { PopoverComponent } from '../popover/popover.component';
 import * as firebase from 'firebase';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-historial-comidas',
@@ -15,6 +16,7 @@ export class HistorialComidasPage {
   idUsuario;
   comidas = [];
   idsDocument = [];
+  favoritas = [];
   fecha: Date;
   select = 'fecha'; // campo
   palabraClave = '';
@@ -44,6 +46,7 @@ export class HistorialComidasPage {
 
     this.comidas = [];
     this.idsDocument = [];
+    this.favoritas = [];
 
     let fechaConvertida = new Date(this.fecha).toLocaleDateString();
     let fechaSub = new String(fechaConvertida).split('/');
@@ -71,6 +74,7 @@ export class HistorialComidasPage {
           console.log(doc.id, '=>', doc.data());
           this.comidas.push(doc.data());
           this.idsDocument.push(doc.id);
+          this.favoritas.push(doc.get('favorita'));
           
           
 
@@ -80,6 +84,32 @@ export class HistorialComidasPage {
       .catch(err => {
         console.log('Error getting documents', err);
       });
+
+  }
+
+  favorita(index: number, idDoc: string) {
+    if (this.favoritas[index] === false) {
+      
+   
+      $("#boton" + idDoc).removeAttr("color");
+      $("#boton" + idDoc).attr("color", "warning");
+      
+
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: true});
+      this.favoritas[index] = true;
+      
+
+      
+
+    } else {
+      
+      $("#boton" + idDoc).removeAttr("color");
+      $("#boton" + idDoc).attr("color", "light");
+
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: false});
+      this.favoritas[index] = false;
+    } 
+     
 
   }
 
