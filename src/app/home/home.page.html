@@ -55,9 +55,14 @@
     </ion-item>
 
     <ion-item-options side="end">
-      <ion-item-option color="warning">
+      <ion-item-option *ngIf="comida.favorita == false; else elseBlock2" color="light" (click)="agregarAFavoritas(i, idsDocument[i])" id="favorita{{idsDocument[i]}}">
         <ion-icon slot="icon-only" name="star-outline"></ion-icon>
       </ion-item-option>
+      <ng-template #elseBlock2>
+        <ion-item-option color="warning" (click)="agregarAFavoritas(i, idsDocument[i])" id="favorita{{idsDocument[i]}}">
+          <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+        </ion-item-option>
+      </ng-template>
       <ion-item-option color="success" (click)="actualizarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)">
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-item-option>

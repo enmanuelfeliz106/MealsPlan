@@ -24,6 +24,7 @@ export class HomePage {
   comidas = [];
   idsDocument = [];
   checkButton = [];
+  favoritas = [];
   hoy = new Date().toLocaleDateString();
   fecha = new Date().toLocaleDateString();
 
@@ -57,8 +58,8 @@ export class HomePage {
           console.log(doc.id, '=>', doc.data());
           this.comidas.push(doc.data());
           this.idsDocument.push(doc.id);
-          
           this.checkButton.push(doc.get('check'));
+          this.favoritas.push(doc.get('favorita'));
 
 
         });
@@ -91,6 +92,32 @@ export class HomePage {
 
       firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({check: false});
       this.checkButton[index] = false;
+    } 
+     
+
+  }
+
+  agregarAFavoritas(index: number, idDoc: string) {
+    if (this.favoritas[index] === false) {
+      
+   
+      $("ion-item-options #favorita" + idDoc).removeAttr("color");
+      $("ion-item-options #favorita" + idDoc).attr("color", "warning");
+      
+
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: true});
+      this.favoritas[index] = true;
+      
+
+      
+
+    } else {
+      
+      $("ion-item-options #favorita" + idDoc).removeAttr("color");
+      $("ion-item-options #favorita" + idDoc).attr("color", "light");
+
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: false});
+      this.favoritas[index] = false;
     } 
      
 

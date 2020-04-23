@@ -18,6 +18,7 @@ export interface Comida {
   notas: string;
   calorias: number;
   check: boolean;
+  favorita: boolean;
 }
 
 
@@ -60,7 +61,8 @@ export class PopoverAgregarComidaComponent implements OnInit {
         ingredientes: this.ingredientes,
         notas: this.notas,
         calorias: this.calorias,
-        check: false
+        check: false,
+        favorita: false
       };
 
     this.firestore.collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {

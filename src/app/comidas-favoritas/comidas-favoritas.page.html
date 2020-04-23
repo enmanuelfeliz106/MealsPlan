@@ -1,0 +1,28 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" routerDirection="back">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Comidas Favoritas</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let comida of comidas; index as i">
+      <ion-item>
+        {{comida.fecha}}
+        <ion-label>{{comida.comida}}</ion-label>
+        <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
+      </ion-item>
+    
+      <ion-card-content>
+        {{comida.nombre}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
