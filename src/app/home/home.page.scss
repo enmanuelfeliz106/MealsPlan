@@ -4,21 +4,30 @@ ion-toolbar{
   color: aliceblue;
 }
 
-ion-card ion-item{
-  text-align: center;
-  
-}
-
-ion-card ion-item ion-label{
+ion-item ion-label{
   font-weight: bold;
   font-size: 1.4em;
+  text-align: center;
 }
 
-ion-card{
+ion-item-sliding{
   border: 1px solid rgba(0, 0, 114, 0.781);
-  margin: 15px 10px;
+  margin: 15px 0;
   
+
 }
+
+
+ion-item ion-label h1{
+
+  font-size: 0.85em; 
+}
+
+ion-header{
+  margin-bottom: 25px;
+}
+
+
 
 /*ion-card, ion-item{
   --background:  rgb(255, 205, 133);

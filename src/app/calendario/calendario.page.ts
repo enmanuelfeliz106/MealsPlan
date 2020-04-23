@@ -63,10 +63,19 @@ export class CalendarioPage implements OnInit {
       event: ev,
       translucent: true,
       componentProps:  {
-        fecha: this.date
+        fecha: this.date,
+        titulo: 'Agregar Comida',
+        opcion: 'agregar',
+        docId: null,
+        comida: '',
+        nombre: '',
+        ingredientes: '',
+        notas: '',
+        calorias: 0
 
       },
-      cssClass: 'popover'
+      cssClass: 'popover',
+      
       
     });
     

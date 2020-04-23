@@ -47,7 +47,10 @@ export class PopoverAgregarComidaComponent implements OnInit {
      
   }
 
-    agregarComida() {
+    agregarOActualizarComida(opcion: string, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
+                             calorias: number) {
+
+    if (opcion === 'agregar') {
 
     this.nuevaComida = {
         fecha: this.fechaElegida,
@@ -72,6 +75,26 @@ export class PopoverAgregarComidaComponent implements OnInit {
 
         
       });
+
+    } else {
+      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({
+        comida: comida,
+        nombre: nombre,
+        ingredientes: ingredientes,
+        notas: notas,
+        calorias: calorias}).then( (exito) => {
+      
+          this.alertaExito();
+          this.popover.dismiss();
+    
+          }).catch( (error) => {
+    
+            this.alertaError();
+            this.popover.dismiss();
+    
+            
+          });
+    }
   }
 
   cerrarPopover() {

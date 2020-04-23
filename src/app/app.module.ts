@@ -31,11 +31,12 @@ import { PopoverComponent } from './popover/popover.component';
   declarations: [
     AppComponent,
     PopoverTablaMedidasComponent,
-    PopoverComponent
+    PopoverComponent,
+    PopoverAgregarComidaComponent
     ],
   exports: [
   ],
-  entryComponents: [PopoverTablaMedidasComponent, PopoverComponent],
+  entryComponents: [PopoverTablaMedidasComponent, PopoverComponent, PopoverAgregarComidaComponent],
   imports: [BrowserModule, IonicModule.forRoot(), 
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebase),

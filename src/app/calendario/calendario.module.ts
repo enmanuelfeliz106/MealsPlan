@@ -11,7 +11,7 @@ import { CalendarModule } from 'ion2-calendar';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
 
 @NgModule({
-  entryComponents: [PopoverAgregarComidaComponent],
+  entryComponents: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,7 +19,6 @@ import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover
     CalendarioPageRoutingModule,
     CalendarModule
   ],
-  declarations: [CalendarioPage,
-                 PopoverAgregarComidaComponent]
+  declarations: [CalendarioPage]
 })
 export class CalendarioPageModule {}
