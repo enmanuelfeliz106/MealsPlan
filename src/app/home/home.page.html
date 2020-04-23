@@ -11,9 +11,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
+  <ion-item-sliding *ngFor="let comida of comidas; index as i">
  
-  <ion-card *ngFor="let comida of comidas; index as i">
     <ion-item>
+      <br> <br> <br> <br>
       <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
         
         <ion-icon name="checkmark-outline"></ion-icon>
@@ -24,14 +26,33 @@
         </ion-button>
       </ng-template>
       
-      <ion-label>{{comida.comida}}</ion-label>
+      <ion-label>
+        <h1>
+          {{comida.comida}}
+        </h1>
+        
+      </ion-label>
       <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
+      <br> <br> <br> <br>
     </ion-item>
-  
-    <ion-card-content>
-      {{comida.nombre}}
-    </ion-card-content>
-  </ion-card>
+
+    <ion-item-options side="start">
+      <ion-item-option>
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+      <ion-item-option>
+        <ion-icon slot="icon-only" name="star"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+ 
 </ion-content>
 
 <app-menu></app-menu>
