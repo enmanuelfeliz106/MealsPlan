@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'historial-comidas',
     loadChildren: () => import('./historial-comidas/historial-comidas.module').then( m => m.HistorialComidasPageModule)
+  },  {
+    path: 'comidas-favoritas',
+    loadChildren: () => import('./comidas-favoritas/comidas-favoritas.module').then( m => m.ComidasFavoritasPageModule)
   }
+
 
 
 ];
