@@ -6,3 +6,9 @@ ion-button{
 ion-label{
     text-align: center;
 }
+
+ion-card-content ion-button{
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+}

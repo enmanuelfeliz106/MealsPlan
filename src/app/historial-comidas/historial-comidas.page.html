@@ -44,7 +44,16 @@
   
     <ion-card-content>
       {{comida.nombre}}
+      <ion-button slot="end" *ngIf="comida.favorita == false; else elseBlock" color="light" size="small" (click)="favorita(i, idsDocument[i])" id="boton{{idsDocument[i]}}">
+        <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+      </ion-button>
+      <ng-template #elseBlock>
+        <ion-button slot="end" color="warning"  size="small" (click)="favorita(i, idsDocument[i])" id="boton{{idsDocument[i]}}">
+          <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+        </ion-button>
+      </ng-template>
     </ion-card-content>
+    
   </ion-card>
 
   <br>
