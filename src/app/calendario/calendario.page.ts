@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, AlertController, NavController } from '@ionic/angular';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
 import { stringify } from 'querystring';
 import { FechaService } from '../services/fecha.service';
@@ -18,8 +18,13 @@ export class CalendarioPage implements OnInit {
   type: 'string';
 
 
-  constructor(private popover: PopoverController, private alert: AlertController, private fecha: FechaService) {
+  constructor(private popover: PopoverController, private alert: AlertController, private fecha: FechaService,
+              private nav: NavController) {
 
+   }
+
+   irAtras() {
+     this.nav.back();
    }
 
   ngOnInit() {

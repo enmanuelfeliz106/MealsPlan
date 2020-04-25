@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, NavController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import * as firebase from 'firebase';
 import { PopoverComponent } from '../popover/popover.component';
@@ -15,13 +15,18 @@ export class ComidasFavoritasPage implements OnInit {
   comidas = [];
   
 
-  constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService) {
+  constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService, private nav: NavController) {
 
     this.idUsuario = firebase.auth().currentUser.uid;
 
     this.mostrarComidas();
 
   }
+
+  irAtras() {
+    this.nav.back();
+  }
+
 
 
   async presentPopover(ev: any, comida) {

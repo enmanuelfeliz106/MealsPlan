@@ -15,8 +15,11 @@ import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contra
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    InicioPageRoutingModule
+    IonicModule.forRoot(),
+    InicioPageRoutingModule,
+    CommonModule,
+    FormsModule,
+
   ],
   declarations: [InicioPage, PopoverRegistroComponent, PopoverRecuperarContrasenaComponent]
 })
