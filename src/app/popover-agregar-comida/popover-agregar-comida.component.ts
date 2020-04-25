@@ -14,7 +14,7 @@ export interface Comida {
   userID: string;
   comida: string;
   nombre: string;
-  ingredientes: string;
+  ingredientes: Array<any>;
   notas: string;
   calorias: number;
   check: boolean;
@@ -38,6 +38,8 @@ export class PopoverAgregarComidaComponent implements OnInit {
   calorias: number;
   nuevaComida: Comida;
   fechaElegida = new Date(this.fecha.fecha).toLocaleDateString();
+  
+  
 
   constructor(private firestore: AngularFirestore, private user: FirebaseAuthentication,
               private popover: PopoverController, public alerta: AlertController,
@@ -53,12 +55,14 @@ export class PopoverAgregarComidaComponent implements OnInit {
 
     if (opcion === 'agregar') {
 
+    let ingredientesArray = new String(this.ingredientes).split(',');
+    
     this.nuevaComida = {
         fecha: this.fechaElegida,
         userID: firebase.auth().currentUser.uid,
         comida: this.comida,
         nombre: this.nombre,
-        ingredientes: this.ingredientes,
+        ingredientes: ingredientesArray,
         notas: this.notas,
         calorias: this.calorias,
         check: false,
