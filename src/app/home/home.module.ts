@@ -14,7 +14,7 @@ import { MenuComponent } from '../menu/menu.component';
 
 
 @NgModule({
-  entryComponents:  [ MenuComponent ],
+  entryComponents:  [],
   imports: [
     CommonModule,
     FormsModule,
@@ -25,15 +25,16 @@ import { MenuComponent } from '../menu/menu.component';
         component: HomePage
 
       },
+      
     
     ]),
+    
 
   ],
   declarations: [
     HomePage,
-    MenuComponent,
     
-  ]
-
+  ],
+  
 })
 export class HomePageModule {}

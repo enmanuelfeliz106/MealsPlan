@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, AlertController, NavController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { PopoverComponent } from '../popover/popover.component';
@@ -28,12 +28,17 @@ export class HistorialComidasPage {
   
 
   constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService,
-              public alert: AlertController) {
+              public alert: AlertController, private nav: NavController) {
 
     this.idUsuario = firebase.auth().currentUser.uid;
     this.obtenerComidasDeHoy();
 
   }
+
+  irAtras() {
+    this.nav.back();
+  }
+
 
   obtenerComidasDeHoy() {
     this.comidasDeHoy = [];

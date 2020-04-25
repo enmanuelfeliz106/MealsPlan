@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, AlertController, MenuController, NavController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
-import { MenuController } from '@ionic/angular';
 import * as firebase from 'firebase';
 import { environment } from '../../environments/environment';
 import { AuthenticationService } from '../services/authentication.service';
@@ -29,17 +28,17 @@ export class HomePage {
   fecha = new Date().toLocaleDateString();
 
 
-  constructor(public popoverController: PopoverController, private menu: MenuController, 
-              private autenticacion: AuthenticationService, private router: Router, public popover: PopoverController,
-              public alert: AlertController) {
+  constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService, 
+              private router: Router, public popover: PopoverController, public alert: AlertController,
+              private menu: MenuController, private nav: NavController) {
     
         
 
     this.autenticacion.login('enmanuelfeliz106@gmail.com', 'universal0707');
     this.idUsuario = firebase.auth().currentUser.uid;
     this.obtenerComidas();
-
     
+                
   }
 
   obtenerComidas() {
@@ -136,10 +135,6 @@ export class HomePage {
     return await popover.present();
   }
 
-  openFirstMenu() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
-  }
 
   actualizarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
                  calorias: number ) {

@@ -19,6 +19,7 @@ import { PopoverTablaMedidasComponent } from './popover-tabla-medidas/popover-ta
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PopoverComponent } from './popover/popover.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 
@@ -29,14 +30,15 @@ import { PopoverComponent } from './popover/popover.component';
 
 @NgModule({
   declarations: [
+    MenuComponent,
     AppComponent,
     PopoverTablaMedidasComponent,
     PopoverComponent,
-    PopoverAgregarComidaComponent
+    PopoverAgregarComidaComponent,
     ],
   exports: [
   ],
-  entryComponents: [PopoverTablaMedidasComponent, PopoverComponent, PopoverAgregarComidaComponent],
+  entryComponents: [MenuComponent, PopoverTablaMedidasComponent, PopoverComponent, PopoverAgregarComidaComponent],
   imports: [BrowserModule, IonicModule.forRoot(), 
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebase),
