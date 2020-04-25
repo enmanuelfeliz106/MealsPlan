@@ -4,7 +4,7 @@
 <ion-header>
   
   <ion-toolbar>
-    <ion-title>{{comidaObj.nombre}}</ion-title>
+    <p>{{comidaObj.nombre}}</p>
     
   </ion-toolbar>
 </ion-header>
@@ -17,7 +17,9 @@
     </ion-card-header>
   
     <ion-card-content>
-      {{comidaObj.ingredientes}}
+      <p *ngFor="let ingrediente of comidaObj.ingredientes; index as i">
+        <ion-icon name="chevron-forward-outline"></ion-icon> {{comidaObj.ingredientes[i]}}
+      </p>
     </ion-card-content>
   </ion-card>
 
@@ -43,7 +45,7 @@
     </ion-card-content>
   </ion-card>
 
-  
+  <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cerrar</ion-button>
 
 </ion-content>
 

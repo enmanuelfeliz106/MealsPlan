@@ -35,7 +35,8 @@ export class ComidasFavoritasPage implements OnInit {
       event: ev,
       componentProps: {
         comidaObj: comida
-      }
+      },
+      cssClass: 'popover'
       
     });
     return await popover.present();
