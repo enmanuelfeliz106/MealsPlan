@@ -13,7 +13,7 @@ export class ComidasFavoritasPage implements OnInit {
 
   idUsuario;
   comidas = [];
-  
+  vacio: boolean;
 
   constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService, private nav: NavController) {
 
@@ -51,8 +51,11 @@ export class ComidasFavoritasPage implements OnInit {
     let query = comida.where('userID', '==', this.idUsuario).where('favorita', '==', true).get()
       .then(snapshot => {
         if (snapshot.empty) {
+          this.vacio = true;
           console.log('No matching documents.');
           return;
+        } else { 
+          this.vacio = false;
         }
 
         snapshot.forEach(doc => {
