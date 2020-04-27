@@ -77,8 +77,9 @@ export class AuthenticationService {
       subHeader: msg1,
       message: msg2,
       buttons: ['OK'],
-      cssClass: 'alertaExito'
+      cssClass: 'alertaExito',
     });
+
 
     await alert.present();
     
@@ -120,7 +121,7 @@ export class AuthenticationService {
           let errorCode = error.code;
           let errorMessage = error.message;
           if (errorCode === 'auth/invalid-email') {
-            this.alertaError('Email incorrecto o no invalido.');
+            this.alertaError('Email incorrecto o invalido.');
     
           } else if (errorCode === 'auth/user-not-found') {
             this.alertaError('Usuario no existente.');
