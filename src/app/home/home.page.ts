@@ -137,7 +137,7 @@ export class HomePage {
   }
 
 
-  actualizarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
+  actualizarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: Array<any>, notas: string,
                  calorias: number ) {
 
     this.presentPopoverAgregarComida(ev, idDoc, comida, nombre, ingredientes, notas, calorias);
@@ -149,9 +149,17 @@ export class HomePage {
     
   }
 
-  async presentPopoverAgregarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
+  async presentPopoverAgregarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: Array<any>, notas: string,
                                     calorias: number ) {
     
+    let ingredientesArrayToString: string = '';                                 
+    for (let i = 0; i < ingredientes.length - 1; i++) {
+      
+      ingredientesArrayToString += ingredientes[i] + ',';
+    }
+    
+    ingredientesArrayToString += ingredientes[ingredientes.length - 1];
+
 
     const popover = await this.popover.create({
       component: PopoverAgregarComidaComponent,
@@ -164,7 +172,7 @@ export class HomePage {
         docId: idDoc,
         comida: comida,
         nombre: nombre,
-        ingredientes: ingredientes,
+        ingredientes: ingredientesArrayToString,
         notas: notas,
         calorias: calorias
 

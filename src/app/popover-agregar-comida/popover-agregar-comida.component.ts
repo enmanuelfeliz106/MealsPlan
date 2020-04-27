@@ -30,7 +30,8 @@ export interface Comida {
 
 
 export class PopoverAgregarComidaComponent implements OnInit {
-
+  mensajeError = '';
+  tieneComa: boolean;
   comida: string;
   nombre: string;
   ingredientes: string;
@@ -50,56 +51,90 @@ export class PopoverAgregarComidaComponent implements OnInit {
      
   }
 
+  validarComas(ingredientes: string) {
+
+    let ing = new String(ingredientes);
+
+    for (let i = 0; i < this.ingredientes.length; i++) {
+      if (ing.charAt(i) === ',') {
+        this.tieneComa = true;
+        break;
+      } else { 
+        this.tieneComa = false;
+      }
+    }
+  }
+
     agregarOActualizarComida(opcion: string, idDoc, comida: string, nombre: string, ingredientes: string, notas: string,
                              calorias: number) {
+    
+    this.mensajeError = '';
 
     if (opcion === 'agregar') {
+      this.validarComas(this.ingredientes);
+    } else { 
+      this.validarComas(ingredientes);
+    }
 
-    let ingredientesArray = new String(this.ingredientes).split(',');
-    
-    this.nuevaComida = {
-        fecha: this.fechaElegida,
-        userID: firebase.auth().currentUser.uid,
-        comida: this.comida,
-        nombre: this.nombre,
-        ingredientes: ingredientesArray,
-        notas: this.notas,
-        calorias: this.calorias,
-        check: false,
-        favorita: false
-      };
+    if (this.comida === '' || this.nombre === '' || this.ingredientes === '') {
+      this.mensajeError = 'Solo los campos de notas y calorías pueden estar vacíos.';
 
-    this.firestore.collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
-      
-      this.alertaExito();
-      this.popover.dismiss();
-
-      }).catch( (error) => {
-
-        this.alertaError();
-        this.popover.dismiss();
-
-        
-      });
+    } else if (this.tieneComa === false) {
+      this.mensajeError = 'Por favor, divida los ingredientes por comas.';
 
     } else {
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({
-        comida: comida,
-        nombre: nombre,
-        ingredientes: ingredientes,
-        notas: notas,
-        calorias: calorias}).then( (exito) => {
+
+      if (opcion === 'agregar') {
+
+      let ingredientesArray = new String(this.ingredientes).split(',');
       
-          this.alertaExito();
+      this.nuevaComida = {
+          fecha: this.fechaElegida,
+          userID: firebase.auth().currentUser.uid,
+          comida: this.comida,
+          nombre: this.nombre,
+          ingredientes: ingredientesArray,
+          notas: this.notas,
+          calorias: this.calorias,
+          check: false,
+          favorita: false
+        };
+
+      this.firestore.collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
+        
+        this.alertaExito();
+        this.popover.dismiss();
+
+        }).catch( (error) => {
+
+          this.alertaError();
           this.popover.dismiss();
-    
-          }).catch( (error) => {
-    
-            this.alertaError();
+
+          
+        });
+
+      } else {
+        let ingredientesArray = new String(ingredientes).split(',');
+
+        firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({
+          comida: comida,
+          nombre: nombre,
+          ingredientes: ingredientesArray,
+          notas: notas,
+          calorias: calorias}).then( (exito) => {
+        
+            this.alertaExito();
             this.popover.dismiss();
-    
-            
-          });
+      
+            }).catch( (error) => {
+      
+              this.alertaError();
+              this.popover.dismiss();
+      
+              
+            });
+      }
+
     }
   }
 
