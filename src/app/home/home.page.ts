@@ -146,6 +146,9 @@ export class HomePage {
   borrarComida(idDoc) {
 
     firebase.firestore().collection('comidasGuardadas').doc(idDoc).delete();
+
+    this.presentAlertComidaBorrada();
+
     
   }
 
@@ -211,6 +214,17 @@ export class HomePage {
             this.borrarComida(idDoc);
           }
         }]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertComidaBorrada() {
+    const alert = await this.alert.create({
+      header: 'Exito',
+      subHeader: 'Comida eliminada.',
+      message: 'Recuerde refrescar para ver los cambios en la pantalla.',
+      buttons: ['Ok']
     });
 
     await alert.present();
