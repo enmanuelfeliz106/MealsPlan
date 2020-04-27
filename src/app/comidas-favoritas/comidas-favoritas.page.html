@@ -12,6 +12,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngIf="vacio" color="warning" id="mensajePantallaVacia">
+    <ion-card-content> No has agregado ninguna comida favorita.</ion-card-content>
+  </ion-card>
+
   <ion-list>
     <ion-card *ngFor="let comida of comidas; index as i">
       <ion-item>

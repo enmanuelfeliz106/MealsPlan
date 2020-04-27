@@ -21,6 +21,7 @@ export class HomePage {
 
   idUsuario;
   comidas = [];
+  vacio: boolean;
   idsDocument = [];
   checkButton = [];
   favoritas = [];
@@ -33,12 +34,10 @@ export class HomePage {
               private menu: MenuController, private nav: NavController) {
     
         
-
-    this.autenticacion.login('enmanuelfeliz106@gmail.com', 'universal0707');
     this.idUsuario = firebase.auth().currentUser.uid;
     this.obtenerComidas();
-    
-                
+
+
   }
 
   obtenerComidas() {
@@ -50,8 +49,11 @@ export class HomePage {
     let query = comida.where('userID', '==', this.idUsuario).where('fecha', '==', this.fecha).get()
       .then(snapshot => {
         if (snapshot.empty) {
+          this.vacio = true;
           console.log('No matching documents.');
           return;
+        } else {
+          this.vacio = false;
         }
 
         snapshot.forEach(doc => {
@@ -65,9 +67,11 @@ export class HomePage {
         });
       })
       .catch(err => {
+        
         console.log('Error getting documents', err);
       });
 
+    
 
   }
 
