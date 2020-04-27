@@ -9,25 +9,26 @@ import * as $ from 'jquery';
 })
 export class PopoverRegistroComponent implements OnInit {
 
-  email: string;
-  contrasena: string;
-  confirmarContrasena: string;
+  email: string = '';
+  contrasena: string = '';
+  confirmarContrasena: string = '';
+  mensajeError = '';
 
   constructor(private autenticacion: AuthenticationService) { }
 
   ngOnInit() {}
 
   registrarUsuario() {
-    if (this.contrasena === this.confirmarContrasena) {
-      this.autenticacion.registrarUsuario(this.email, this.contrasena);
+    this.mensajeError = '';
+
+    if (this.email === '' || this.contrasena === '' || this.confirmarContrasena === '') {
+      this.mensajeError = 'Todos los campos son necesarios. Por favor complete el formulario.';
+
+    } else if (this.contrasena !== this.confirmarContrasena) {
+      this.mensajeError = 'La confirmación de contraseña no coincide. Deben ser iguales.'; 
+
     } else {
-      if ($('#registro p').html() === '') {
-        $('#registro p').append('La confirmación de contraseña no coincide. Vuelve a intentar').css('color', 'red');
-      } else {
-        
-      }
-      
-      
+      this.autenticacion.registrarUsuario(this.email, this.contrasena);
     }
     
   }

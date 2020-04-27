@@ -8,14 +8,23 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class PopoverRecuperarContrasenaComponent implements OnInit {
 
-  email: string;
+  email: string = '';
+  mensajeError = '';
 
   constructor(private autenticacion: AuthenticationService) { }
 
   ngOnInit() {}
 
   recuperarContrasena() {
-    this.autenticacion.recuperarContrasena(this.email);
+    this.mensajeError = '';
+
+    if (this.email === '') {
+      this.mensajeError = 'Ha dejado el campo vacío, por favor proporcione su email.';
+
+    } else {
+      this.autenticacion.recuperarContrasena(this.email);
+    }
+    
   }
 
 }
