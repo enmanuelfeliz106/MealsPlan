@@ -24,7 +24,7 @@ export class PopoverRecuperarContrasenaComponent implements OnInit {
     } else {
       this.autenticacion.recuperarContrasena(this.email);
     }
-    
+
   }
 
 }

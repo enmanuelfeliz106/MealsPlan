@@ -67,13 +67,13 @@
           <ion-icon slot="icon-only" name="star-outline"></ion-icon>
         </ion-item-option>
       </ng-template>
-      <ion-item-option color="success" (click)="actualizarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)">
+      <ion-item-option color="success" (click)="presentPopoverAgregarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)">
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-item-option>
     </ion-item-options>
 
     <ion-item-options side="start">
-      <ion-item-option color="danger" (click)="presentAlertBorrarComida(idsDocument[i])">
+      <ion-item-option color="danger" (click)="borrarComida(idsDocument[i])">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-item-option>
     </ion-item-options>

@@ -11,7 +11,6 @@ export class PopoverTablaMedidasComponent implements OnInit {
   numero = 1;
   medida = 'onzas';
   equivalencias;
-  
 
   constructor(public popover: PopoverController) { }
 
@@ -55,7 +54,7 @@ export class PopoverTablaMedidasComponent implements OnInit {
                             {med: 'cucharaditas', valor: ((this.numero * 1000) / 8).toFixed(2)}, // ... a gramos a cdita
                             {med: 'pintas', valor: ((this.numero * 35.274) * 0.0625).toFixed(2)}, // ... a onza a pinta
                             ];
-      
+
     }  else if (this.medida === 'litros') {
       this.equivalencias = [{med: 'gramos', valor: ((this.numero * 33.814) * 28.35).toFixed(2)}, // a onza a gramos
                             {med: 'onzas', valor: (this.numero * 33.814).toFixed(2)},
@@ -65,7 +64,7 @@ export class PopoverTablaMedidasComponent implements OnInit {
                             {med: 'cucharaditas', valor: ((this.numero * 33.814) * 6).toFixed(2)}, // ... a onza a cdita
                             {med: 'pintas', valor: ((this.numero * 33.814) * 0.0625).toFixed(2)}, // ... a onza a pinta
                             ];
-      
+
     } else if (this.medida === 'cucharaditas') {
       this.equivalencias = [{med: 'gramos', valor: ((this.numero * 0.166667) * 28.35).toFixed(2)}, // a onza a gramos
                             {med: 'onzas', valor: (this.numero * 0.166667).toFixed(2)},
@@ -75,7 +74,7 @@ export class PopoverTablaMedidasComponent implements OnInit {
                             {med: 'litros', valor: ((this.numero * 0.166667) * 6).toFixed(2)}, // ... a onza a cdita
                             {med: 'pintas', valor: ((this.numero * 0.166667) * 0.0625).toFixed(2)}, // ... a onza a pinta
                             ];
-      
+
     }  else if (this.medida === 'cucharadas') {
       this.equivalencias = [{med: 'gramos', valor: ((this.numero * 0.5) * 28.35).toFixed(2)}, // a onza a gramos
                             {med: 'onzas', valor: (this.numero * 0.5).toFixed(2)},
@@ -85,7 +84,7 @@ export class PopoverTablaMedidasComponent implements OnInit {
                             {med: 'litros', valor: ((this.numero * 0.5) * 6).toFixed(2)}, // ... a onza a cdita
                             {med: 'pintas', valor: ((this.numero * 0.5) * 0.0625).toFixed(2)}, // ... a onza a pinta
                             ];
-      
+
     } else if (this.medida === 'tazas') {
       this.equivalencias = [{med: 'gramos', valor: ((this.numero * 8.11537) * 28.35).toFixed(2)}, // a onza a gramos
                             {med: 'onzas', valor: (this.numero * 8.11537).toFixed(2)},
@@ -95,7 +94,7 @@ export class PopoverTablaMedidasComponent implements OnInit {
                             {med: 'litros', valor: ((this.numero * 8.11537) * 6).toFixed(2)}, // ... a onza a cdita
                             {med: 'pintas', valor: ((this.numero * 8.11537) * 0.0625).toFixed(2)}, // ... a onza a pinta
                             ];
-      
+
     } else if (this.medida === 'pinta') {
       this.equivalencias = [{med: 'gramos', valor: ((this.numero * 16) * 28.35).toFixed(2)}, // a onza a gramos
                             {med: 'onzas', valor: (this.numero * 16).toFixed(2)},
@@ -105,13 +104,12 @@ export class PopoverTablaMedidasComponent implements OnInit {
                             {med: 'litros', valor: ((this.numero * 16) * 6).toFixed(2)}, // ... a onza a cdita
                             {med: 'cucharadita', valor: ((this.numero * 16) * 6).toFixed(2)}, // ... a onza a pinta
                             ];
-      
+
     } else {
       console.log('Error...');
 
     }
-    
-    
+
   }
 
   cerrarPopover() {

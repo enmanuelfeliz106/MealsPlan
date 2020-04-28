@@ -3,8 +3,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { PopoverController } from '@ionic/angular';
 import { PopoverRegistroComponent } from '../popover-registro/popover-registro.component';
 import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contrasena/popover-recuperar-contrasena.component';
-import * as firebase from 'firebase';
-import { environment } from '../../environments/environment';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -44,7 +43,7 @@ export class InicioPage implements OnInit {
     const popover = await this.popover.create({
       component: PopoverRegistroComponent,
       event: ev,
-      
+
     });
     return await popover.present();
   }
@@ -53,7 +52,7 @@ export class InicioPage implements OnInit {
     const popover = await this.popover.create({
       component: PopoverRecuperarContrasenaComponent,
       event: ev,
-      
+
     });
     return await popover.present();
   }

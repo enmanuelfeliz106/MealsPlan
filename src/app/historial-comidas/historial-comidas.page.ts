@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, AlertController, NavController } from '@ionic/angular';
-import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
-import { PopoverComponent } from '../popover/popover.component';
 import * as firebase from 'firebase';
 import * as $ from 'jquery';
-import { Comida } from '../popover-agregar-comida/popover-agregar-comida.component';
+import { CRUDComidasService, Comida } from '../services/crud-comidas.service';
+
 
 @Component({
   selector: 'app-historial-comidas',
@@ -25,9 +23,9 @@ export class HistorialComidasPage {
   fecha: Date;
   select = 'fecha'; // campo
   palabraClave = '';
-  
 
-  constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService,
+
+  constructor(public popoverController: PopoverController, private crud: CRUDComidasService,
               public alert: AlertController, private nav: NavController) {
 
     this.idUsuario = firebase.auth().currentUser.uid;
@@ -42,45 +40,12 @@ export class HistorialComidasPage {
 
   obtenerComidasDeHoy() {
     this.comidasDeHoy = [];
-    
-    let comida = firebase.firestore().collection('comidasGuardadas');
-    let query = comida.where('userID', '==', this.idUsuario).where('fecha', '==', this.hoy).get()
-        .then(snapshot => {
-          if (snapshot.empty) {
-            console.log('No matching documents.');
-            return;
-          }
-  
-          snapshot.forEach(doc => {
-            console.log(doc.id, '=>', doc.data());
-            this.comidasDeHoy.push(doc.data());
-  
-          });
-        })
-        .catch(err => {
-          console.log('Error getting documents', err);
-        });
 
-    
-
-  }
-
-
-  async presentPopover(ev: any, comida) {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      event: ev,
-      componentProps: {
-        comidaObj: comida
-      },
-      cssClass: 'popover'
-      
-    });
-    return await popover.present();
+    this.crud.mostrarComidas('fecha', this.hoy);
+    this.comidasDeHoy = this.crud.comidas;
   }
 
   mostrarComidas() {
-    
 
     this.comidas = [];
     this.idsDocument = [];
@@ -100,55 +65,30 @@ export class HistorialComidasPage {
       valor = this.palabraClave;
     }
 
-    let comida = firebase.firestore().collection('comidasGuardadas');
-    let query = comida.where('userID', '==', this.idUsuario).where(this.select, '==', valor).get()
-      .then(snapshot => {
-        if (snapshot.empty) {
-          console.log('No matching documents.');
-          return;
-        }
-
-        snapshot.forEach(doc => {
-          console.log(doc.id, '=>', doc.data());
-          this.comidas.push(doc.data());
-          this.idsDocument.push(doc.id);
-          this.favoritas.push(doc.get('favorita'));
-          
-          
-
-
-        });
-      })
-      .catch(err => {
-        console.log('Error getting documents', err);
-      });
+    this.crud.mostrarComidas(this.select, valor);
+    this.comidas = this.crud.comidas;
+    this.idsDocument = this.crud.idsDocument;
+    this.favoritas = this.crud.favoritas;
 
   }
 
   favorita(index: number, idDoc: string) {
     if (this.favoritas[index] === false) {
-      
-   
+
       $("#boton" + idDoc).removeAttr("color");
       $("#boton" + idDoc).attr("color", "warning");
-      
 
       firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: true});
       this.favoritas[index] = true;
-      
-
-      
 
     } else {
-      
+
       $("#boton" + idDoc).removeAttr("color");
       $("#boton" + idDoc).attr("color", "light");
 
       firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: false});
       this.favoritas[index] = false;
-    } 
-     
-
+    }
   }
 
   pasarAHoy(index) {
@@ -201,24 +141,26 @@ export class HistorialComidasPage {
       }
 
     }
-    
-    
+
     if (this.validador === true) {
-      this.alertaError('Ya tienes esta comida registrada en las comidas para hoy.');
+      this.crud.alertaError('Ya tienes esta comida registrada en las comidas para hoy.');
 
     } else {
       firebase.firestore().collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
-      
-        this.alertaExito();
+
+        this.crud.alertaExito();
 
         }).catch( (error) => {
 
-          this.alertaError('Consulta con tu proveedor.');
+          this.crud.alertaError('Intente de nuevo. Si el problema persiste, reporte su situación a nuestro correo.');
 
         });
     }
-    
 
+  }
+
+  presentPopover(ev, comida) {
+    this.crud.popoverMostrarDetalles(ev, comida);
   }
 
   async presentAlertPasarComida(index) {
@@ -240,32 +182,5 @@ export class HistorialComidasPage {
 
     await alert.present();
   }
-
-  async alertaExito() {
-    const alert = await this.alert.create({
-      header: 'Exito',
-      subHeader: 'Comida guardada',
-      message: 'Puedes visualizarla en tu lista de comidas guardadas',
-      buttons: ['OK'],
-      cssClass: 'alertaExito'
-    });
-
-    await alert.present();
-    
-  }
-
-  async alertaError(mensaje) {
-    
-    const alert = await this.alert.create({
-          header: 'Error',
-          subHeader: 'Algo salio mal',
-          message: mensaje,
-          buttons: ['OK'],
-          cssClass: 'alertaError'
-        });
-    
-    await alert.present();
-  }
-
 
 }
