@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { PopoverController, AlertController, NavController } from '@ionic/angular';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
-import { stringify } from 'querystring';
-import { FechaService } from '../services/fecha.service';
 
 
 
@@ -18,14 +16,13 @@ export class CalendarioPage implements OnInit {
   type: 'string';
 
 
-  constructor(private popover: PopoverController, private alert: AlertController, private fecha: FechaService,
-              private nav: NavController) {
+  constructor(private popover: PopoverController, private alert: AlertController, private nav: NavController) {
 
-   }
+  }
 
-   irAtras() {
+  irAtras() {
      this.nav.back();
-   }
+  }
 
   ngOnInit() {
 
@@ -33,19 +30,15 @@ export class CalendarioPage implements OnInit {
 
   onChange($event) {
     console.log($event);
-    
   }
 
   mostrarPopover() {
-    this.fecha.fecha = this.date;
-    if (this.fecha.fecha === undefined) {
+    if (this.date === undefined) {
       this.presentAlert();
     } else {
 
-      this.presentPopover(null);
+      this.presentPopoverAgregarComida(null);
     }
-    
-    
   }
 
   async presentAlert() {
@@ -60,15 +53,14 @@ export class CalendarioPage implements OnInit {
   }
 
 
-  async presentPopover(ev: any) {
-    
-
+  async presentPopoverAgregarComida(ev: any) {
+    let date = new Date(this.date).toLocaleDateString();
     const popover = await this.popover.create({
       component: PopoverAgregarComidaComponent,
       event: ev,
       translucent: true,
       componentProps:  {
-        fecha: this.date,
+        fecha: date,
         titulo: 'Agregar Comida',
         opcion: 'agregar',
         docId: null,
@@ -80,13 +72,11 @@ export class CalendarioPage implements OnInit {
 
       },
       cssClass: 'popover',
-      
-      
+
     });
     
     return await popover.present();
    
   }
-
-
+  
 }

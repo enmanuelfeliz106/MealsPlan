@@ -1,11 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
-import { Calendar } from '@ionic-native/calendar/ngx';
+import { Component, OnInit} from '@angular/core';
 import { PopoverController, MenuController } from '@ionic/angular';
 import { PopoverTablaMedidasComponent } from '../popover-tabla-medidas/popover-tabla-medidas.component';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
-import { AuthenticationService } from '../services/authentication.service';
-
 
 
 @Component({
@@ -26,25 +23,23 @@ export class MenuComponent implements OnInit {
         this.login = false;
       }
     });
-    
+
    }
 
   ngOnInit() {}
 
-  async presentPopover(ev: any) {
+  async presentPopoverTabla(ev: any) {
     const popover = await this.popover.create({
       component: PopoverTablaMedidasComponent,
       event: ev,
       translucent: true,
       cssClass: 'popover'
-      
     });
     return await popover.present();
   }
 
   cerrarMenu() {
     this.menu.close();
-    
   }
 
   cerrarSesion() {
@@ -52,11 +47,8 @@ export class MenuComponent implements OnInit {
     firebase.auth().signOut().then((exito) => {
       this.router.navigate(['/inicio']);
     });
-    
-  }
 
-  
- 
+  }
 
 }
 

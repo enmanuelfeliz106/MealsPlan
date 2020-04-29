@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, NavController } from '@ionic/angular';
-import { AuthenticationService } from '../services/authentication.service';
-import * as firebase from 'firebase';
 import { PopoverComponent } from '../popover/popover.component';
+import { CRUDComidasService } from '../services/crud-comidas.service';
 
 @Component({
   selector: 'app-comidas-favoritas',
@@ -11,23 +10,18 @@ import { PopoverComponent } from '../popover/popover.component';
 })
 export class ComidasFavoritasPage implements OnInit {
 
-  idUsuario;
+
   comidas = [];
-  vacio: boolean;
 
-  constructor(public popoverController: PopoverController, private autenticacion: AuthenticationService, private nav: NavController) {
+  constructor(public popoverController: PopoverController, private crud: CRUDComidasService, private nav: NavController) {
 
-    this.idUsuario = firebase.auth().currentUser.uid;
-
-    this.mostrarComidas();
+    this.obtenerComidas();
 
   }
 
   irAtras() {
     this.nav.back();
   }
-
-
 
   async presentPopover(ev: any, comida) {
     const popover = await this.popoverController.create({
@@ -42,35 +36,11 @@ export class ComidasFavoritasPage implements OnInit {
     return await popover.present();
   }
 
-  mostrarComidas() {
-    
+  obtenerComidas() {
 
     this.comidas = [];
-
-    let comida = firebase.firestore().collection('comidasGuardadas');
-    let query = comida.where('userID', '==', this.idUsuario).where('favorita', '==', true).get()
-      .then(snapshot => {
-        if (snapshot.empty) {
-          this.vacio = true;
-          console.log('No matching documents.');
-          return;
-        } else { 
-          this.vacio = false;
-        }
-
-        snapshot.forEach(doc => {
-          console.log(doc.id, '=>', doc.data());
-          this.comidas.push(doc.data());
-          
-          
-          
-
-
-        });
-      })
-      .catch(err => {
-        console.log('Error getting documents', err);
-      });
+    this.crud.mostrarComidas('favorita', true);
+    this.comidas = this.crud.comidas;
 
   }
 

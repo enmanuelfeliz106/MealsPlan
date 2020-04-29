@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-popover-registro',

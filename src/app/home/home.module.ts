@@ -4,13 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { HomePage } from './home.page';
-import { PopoverComponent } from '../popover/popover.component';
-import { MenuComponent } from '../menu/menu.component';
-
-
-
 
 
 @NgModule({
@@ -24,17 +18,14 @@ import { MenuComponent } from '../menu/menu.component';
         path: '',
         component: HomePage
 
-      },
-      
-    
+      }
+
     ]),
-    
 
   ],
   declarations: [
     HomePage,
-    
-  ],
-  
+
+  ]
 })
 export class HomePageModule {}
