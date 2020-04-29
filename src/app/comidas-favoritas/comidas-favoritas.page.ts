@@ -12,7 +12,6 @@ export class ComidasFavoritasPage implements OnInit {
 
 
   comidas = [];
-  vacio: boolean;
 
   constructor(public popoverController: PopoverController, private crud: CRUDComidasService, private nav: NavController) {
 
@@ -42,7 +41,6 @@ export class ComidasFavoritasPage implements OnInit {
     this.comidas = [];
     this.crud.mostrarComidas('favorita', true);
     this.comidas = this.crud.comidas;
-    this.vacio = this.crud.vacio;
 
   }
 

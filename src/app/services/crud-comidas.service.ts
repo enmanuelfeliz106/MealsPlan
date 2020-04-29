@@ -22,7 +22,6 @@ export interface Comida {
 export class CRUDComidasService {
 
   idUsuario;
-  vacio: boolean;
   comidas = [];
   idsDocument = [];
   checkButton = [];
@@ -85,19 +84,20 @@ export class CRUDComidasService {
 
   borrarComida(idDoc) {
     this.presentAlertBorrarComida(idDoc);
-    this.presentAlertComidaBorrada();
+    
   }
 
   mostrarComidas(filtro: string, valor: any) {
+    this.comidas = [];
+    this.idsDocument = [];
+    this.checkButton = [];
+    this.favoritas = [];
     let comida = firebase.firestore().collection('comidasGuardadas');
     let query = comida.where('userID', '==', this.idUsuario).where(filtro, '==', valor).get()
       .then(snapshot => {
         if (snapshot.empty) {
-          this.vacio = true;
           console.log('No matching documents.');
           return;
-        } else {
-          this.vacio = false;
         }
 
         snapshot.forEach(doc => {
@@ -169,6 +169,7 @@ export class CRUDComidasService {
           cssClass: 'danger',
           handler: () => {
             firebase.firestore().collection('comidasGuardadas').doc(idDoc).delete();
+            this.presentAlertComidaBorrada();
           }
         }]
     });

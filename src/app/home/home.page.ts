@@ -6,25 +6,23 @@ import * as firebase from 'firebase';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
 import { CRUDComidasService } from '../services/crud-comidas.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  vacio;
-  comidas;
-  idsDocument;
-  checkButton;
-  favoritas;
+  comidas = [];
+  idsDocument = [];
+  checkButton = [];
+  favoritas = [];
   hoy = new Date().toLocaleDateString();
 
   constructor(public popoverController: PopoverController, private crud: CRUDComidasService,
               public popover: PopoverController, public alert: AlertController) {
 
-
-    this.obtenerComidas();
+      this.obtenerComidas();
 
   }
 
@@ -32,12 +30,12 @@ export class HomePage {
     this.comidas = [];
     this.idsDocument = [];
     this.checkButton = [];
+    this.favoritas = [];
     this.crud.mostrarComidas('fecha', this.hoy);
     this.comidas = this.crud.comidas;
     this.idsDocument = this.crud.idsDocument;
     this.checkButton = this.crud.checkButton;
     this.favoritas = this.crud.favoritas;
-    this.vacio = this.crud.vacio;
 
   }
 
