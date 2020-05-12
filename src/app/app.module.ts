@@ -9,11 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireModule, FirebaseApp } from '@angular/fire';
+import { AngularFireModule} from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-import { Firebase } from '@ionic-native/firebase/ngx';
 import { PopoverAgregarComidaComponent } from './popover-agregar-comida/popover-agregar-comida.component';
 import { PopoverTablaMedidasComponent } from './popover-tabla-medidas/popover-tabla-medidas.component';
 import { CommonModule } from '@angular/common';
@@ -39,14 +37,13 @@ import { MenuComponent } from './menu/menu.component';
   exports: [
   ],
   entryComponents: [MenuComponent, PopoverTablaMedidasComponent, PopoverComponent, PopoverAgregarComidaComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), 
+  imports: [BrowserModule, IonicModule.forRoot(),
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebase),
             AngularFirestoreModule,
             CommonModule,
             FormsModule
-            
-            
+
           ],
 
   providers: [
@@ -54,9 +51,7 @@ import { MenuComponent } from './menu/menu.component';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     { provide: LOCALE_ID, useValue: 'zh-CN'},
-    Firebase,
-    FirebaseAuthentication
-    
+
   ],
   bootstrap: [AppComponent]
 })
