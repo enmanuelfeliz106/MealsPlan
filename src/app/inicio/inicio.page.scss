@@ -1,14 +1,16 @@
 
 ion-content {
     --background: rgba(0, 0, 114, 0.781);   
+
 }
 
 ion-content ion-header{
     width: 70%;
-    margin: 40px auto;
+    margin: auto;
+    text-align: center;
     img{
-        width: 100%;
-        margin: auto;
+        width: 70%;
+        margin: 10px auto;
     }
 }
 
@@ -38,11 +40,12 @@ ion-footer.footer1{
 ion-footer.footer2{
     color: aliceblue;
     text-align: center;
-    margin: 40px auto;
+    margin: 10px auto;
     a{
         
         text-decoration: underline;
         color: #2dd36f;
     }
 }
+
 
