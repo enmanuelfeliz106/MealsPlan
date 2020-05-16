@@ -21,12 +21,13 @@
     </ion-select>
   </ion-item>
 
-  <ion-item>
+  <ion-item *ngIf= "select == 'fecha'">
     <ion-label position="stacked">Fecha</ion-label>
     <ion-input type="date" name="fecha" [(ngModel)]="fecha"></ion-input>
   </ion-item>
 
-  <ion-item>
+
+  <ion-item *ngIf= "select == 'nombre'">
     <ion-label position="stacked"> Nombre del plato </ion-label>
     <ion-input type="text" name="palabraClave" [(ngModel)]="palabraClave"></ion-input>
   </ion-item>
@@ -59,7 +60,7 @@
   <br>
   <br>
 
-  <ion-card color="warning">
+  <ion-card color="warning" *ngIf= "select == 'nombre'">
     <ion-item color="warning">
       <ion-icon name="alert-circle-outline"></ion-icon>
       <ion-label>Advertencia</ion-label>
