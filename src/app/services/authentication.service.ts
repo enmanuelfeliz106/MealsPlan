@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,8 @@ export class AuthenticationService {
   registrarUsuario(email: string, contrasena: string) {
 
     firebase.auth().createUserWithEmailAndPassword(email, contrasena).then((exito) => {
-    this.alertaExito('Te has registrado correctamente', 'Ahora puedes iniciar sesión.' );
+    this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.' );
+    exito.user.sendEmailVerification();
 
     }).catch((error) => {
        // Handle Errors here.
@@ -45,8 +47,12 @@ export class AuthenticationService {
 
   login(email: string, contrasena: string) {
     firebase.auth().signInWithEmailAndPassword(email, contrasena).then((exito) => {
-
-      this.router.navigate(['/home']);
+      if (exito.user.emailVerified) {
+        this.router.navigate(['/home']);
+      } else {
+        this.alertaError('No has verificado tu email. Ve a tu correo y si no encuentras nuestro mensaje revisa en la bandeja de spams');
+      }
+      
 
     }).catch((error) => {
         // Handle Errors here.
