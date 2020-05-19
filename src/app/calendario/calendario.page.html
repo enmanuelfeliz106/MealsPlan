@@ -17,11 +17,10 @@
     <ion-calendar [(ngModel)]="date"
       (onChange)="onChange($event)"
       [type]="type"
-      [format]="'DD-MM-YYYY'">
+      format="'DD-MM-YYYY'">
     </ion-calendar>
 
   </div>
-
   
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed" (click)="mostrarPopover()">

@@ -3,7 +3,9 @@ import { PopoverController, AlertController, NavController, PickerController } f
 import * as firebase from 'firebase';
 import * as $ from 'jquery';
 import { CRUDComidasService, Comida } from '../services/crud-comidas.service';
-import { format, add } from 'date-fns';
+import { format} from 'date-fns';
+
+
 
 @Component({
   selector: 'app-historial-comidas',
@@ -19,8 +21,10 @@ export class HistorialComidasPage {
   comidasDeHoy;
   idsDocument = [];
   favoritas = [];
-  hoy = new Date().toLocaleDateString();
+  hoy = format(new Date(), 'MM/dd/yyyy');
   fecha: Date;
+  yearMin = new Date().getFullYear();
+  yearMax = this.yearMin + 1;
   select = 'fecha'; // campo o filtro
   palabraClave = '';
 
@@ -54,14 +58,7 @@ export class HistorialComidasPage {
     this.comidas = [];
     this.idsDocument = [];
     this.favoritas = [];
-    let fechaFormateada = format(new Date(this.fecha), 'M/dd/yyyy');
-    let fechaSub = new String(fechaFormateada).split('/');
-    let year = fechaSub[2];
-    let mes =  fechaSub[0];
-    let dia = (parseInt(fechaSub[1], 10) + 1).toString(); // para solventar el error de obtener un dia menor en el input
-    let fechaElegida = mes + '/' + dia + '/' + year;
-    
-
+    let fechaElegida = format(new Date(this.fecha), 'MM/dd/yyyy');
 
     let valor;
     if (this.select === 'fecha') {

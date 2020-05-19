@@ -5,6 +5,7 @@ import { PopoverComponent } from '../popover/popover.component';
 import * as firebase from 'firebase';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
 import { CRUDComidasService } from '../services/crud-comidas.service';
+import { format} from 'date-fns';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class HomePage {
   idsDocument = [];
   checkButton = [];
   favoritas = [];
-  hoy = new Date().toLocaleDateString();
+  hoy = format(new Date(), 'MM/dd/yyyy');
 
   constructor(public popoverController: PopoverController, private crud: CRUDComidasService,
               public popover: PopoverController, public alert: AlertController) {
@@ -97,11 +98,14 @@ export class HomePage {
     
     ingredientesArrayToString += ingredientes[ingredientes.length - 1]; // quitar ultima coma
 
+    let fechaLocal = new Date().toLocaleDateString();
+
     const popover = await this.popover.create({
       component: PopoverAgregarComidaComponent,
       event: ev,
       translucent: true,
       componentProps:  {
+        fechaLocal: fechaLocal,
         fecha: this.hoy,
         titulo: 'Editar Comida',
         opcion: 'editar',

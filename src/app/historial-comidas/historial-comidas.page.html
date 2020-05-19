@@ -22,8 +22,14 @@
   </ion-item>
 
   <ion-item *ngIf= "select == 'fecha'">
-    <ion-label position="stacked">Fecha</ion-label>
-    <ion-input type="date" name="fecha" [(ngModel)]="fecha"></ion-input>
+    <ion-label>Fecha: </ion-label>
+    <ion-datetime mode="ios" [(ngModel)]="fecha" value="1995-04-15" min="{{yearMin}}" max="{{yearMax}}"
+      doneText= "Ok"
+      cancelText= "Cancelar" 
+      pickerFormat= "D MMM YYYY"
+      dayNames="Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sábado"
+      displayFormat="DDDD, DD MMMM YYYY"
+      monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"></ion-datetime>
   </ion-item>
 
 
@@ -36,7 +42,7 @@
 
   <hr>
  
-  <ion-card *ngFor="let comida of comidas; index as i">
+  <ion-card *ngFor="let comida of comidas; index as i" id="alinearLabel">
     <ion-item>
       {{comida.fecha}}
       <ion-label (click)="presentAlertPasarComida(i)">{{comida.comida}}</ion-label>
@@ -73,7 +79,3 @@
   </ion-card>
 
 </ion-content>
-
-
-
-
