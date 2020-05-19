@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { stringify } from 'querystring';
 
 
 
