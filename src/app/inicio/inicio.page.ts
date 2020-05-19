@@ -14,8 +14,8 @@ export class InicioPage implements OnInit {
   contrasena: string;
 
   constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { 
-    this.email = '';
-    this.contrasena = '';
+    this.email = 'enmanuelfeliz106@gmail.com';
+    this.contrasena = 'universal0707';
   }
 
   ngOnInit() {

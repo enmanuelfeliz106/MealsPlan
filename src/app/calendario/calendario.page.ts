@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { PopoverController, AlertController, NavController } from '@ionic/angular';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
-
+import { format} from 'date-fns';
 
 
 @Component({
@@ -54,12 +54,14 @@ export class CalendarioPage implements OnInit {
 
 
   async presentPopoverAgregarComida(ev: any) {
-    let date = new Date(this.date).toLocaleDateString();
+    let date = format(new Date(this.date), 'MM/dd/yyyy');
+    let fechaLocal = new Date(this.date).toLocaleDateString();
     const popover = await this.popover.create({
       component: PopoverAgregarComidaComponent,
       event: ev,
       translucent: true,
       componentProps:  {
+        fechaLocal: fechaLocal,
         fecha: date,
         titulo: 'Agregar Comida',
         opcion: 'agregar',

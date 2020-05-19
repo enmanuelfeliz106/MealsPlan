@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, AlertController, NavController } from '@ionic/angular';
+import { PopoverController, AlertController, NavController, PickerController } from '@ionic/angular';
 import * as firebase from 'firebase';
 import * as $ from 'jquery';
 import { CRUDComidasService, Comida } from '../services/crud-comidas.service';
+import { format} from 'date-fns';
+
 
 
 @Component({
@@ -19,19 +21,25 @@ export class HistorialComidasPage {
   comidasDeHoy;
   idsDocument = [];
   favoritas = [];
-  hoy = new Date().toLocaleDateString();
+  hoy = format(new Date(), 'MM/dd/yyyy');
   fecha: Date;
-  select = 'fecha'; // campo
+  yearMin = new Date().getFullYear();
+  yearMax = this.yearMin + 1;
+  select = 'fecha'; // campo o filtro
   palabraClave = '';
+
 
 
   constructor(public popoverController: PopoverController, private crud: CRUDComidasService,
               public alert: AlertController, private nav: NavController) {
 
+
     this.idUsuario = firebase.auth().currentUser.uid;
     this.obtenerComidasDeHoy();
 
+
   }
+
 
   irAtras() {
     this.nav.back();
@@ -50,13 +58,7 @@ export class HistorialComidasPage {
     this.comidas = [];
     this.idsDocument = [];
     this.favoritas = [];
-
-    let fechaConvertida = new Date(this.fecha).toLocaleDateString();
-    let fechaSub = new String(fechaConvertida).split('/');
-    let mes = fechaSub[0];
-    let dia = (parseInt(fechaSub[1], 10) + 1).toString(); // para solventar el error de obtener un dia menor en el input
-    let year = fechaSub[2];
-    let fechaElegida = mes + '/' + dia + '/' + year;
+    let fechaElegida = format(new Date(this.fecha), 'MM/dd/yyyy');
 
     let valor;
     if (this.select === 'fecha') {
