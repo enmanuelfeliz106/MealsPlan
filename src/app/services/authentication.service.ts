@@ -140,6 +140,12 @@ export class AuthenticationService {
         });
   }
 
+  cerrarSesion() {
+    firebase.auth().signOut().then(exito => {
+      this.router.navigate(['/inicio']);
+    });
+  }
+
 
 
 }

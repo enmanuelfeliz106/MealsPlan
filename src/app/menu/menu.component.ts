@@ -1,8 +1,9 @@
 import { Component, OnInit} from '@angular/core';
-import { PopoverController, MenuController } from '@ionic/angular';
+import { PopoverController, MenuController, AlertController } from '@ionic/angular';
 import { PopoverTablaMedidasComponent } from '../popover-tabla-medidas/popover-tabla-medidas.component';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -13,14 +14,15 @@ import * as firebase from 'firebase';
 export class MenuComponent implements OnInit {
 
   login: boolean;
-  constructor(public popover: PopoverController, private menu: MenuController, private router: Router) {
+  constructor(public popover: PopoverController, private menu: MenuController, private router: Router, 
+              public alert: AlertController, private autenticacion: AuthenticationService) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
-        this.login = true;
+        this.login = false;
       } else {
         // No user is signed in.
-        this.login = false;
+        this.login = true;
       }
     });
 
@@ -43,11 +45,27 @@ export class MenuComponent implements OnInit {
   }
 
   cerrarSesion() {
-    this.menu.close();
-    firebase.auth().signOut().then((exito) => {
-      this.router.navigate(['/inicio']);
+    this.presentAlertConfirm();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alert.create({
+      header: 'Cerrar Sesión',
+      message: '¿Seguro que desea irse?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel'
+        }, {
+          text: 'Sí',
+          handler: () => {
+            this.autenticacion.cerrarSesion();
+          }
+        }
+      ]
     });
 
+    await alert.present();
   }
 
 }
