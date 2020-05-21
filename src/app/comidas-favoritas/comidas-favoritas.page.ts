@@ -44,6 +44,10 @@ export class ComidasFavoritasPage implements OnInit {
 
   }
 
+  pasarComidaAHoy(index) {
+    this.crud.presentAlertPasarComida(index);
+  }
+
   ngOnInit() {
   }
 
