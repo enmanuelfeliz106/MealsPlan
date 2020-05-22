@@ -228,7 +228,7 @@ export class CRUDComidasService {
     const alert = await this.alerta.create({
       header: 'Exito',
       subHeader: 'Comida guardada',
-      message: 'Puedes visualizarla en tu lista de comidas guardadas',
+      message: 'Puedes visualizarla en tu lista de comidas de hoy',
       buttons: ['OK'],
       cssClass: 'alertaExito'
     });
