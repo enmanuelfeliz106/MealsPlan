@@ -214,6 +214,7 @@ export class CRUDComidasService {
     const popover = await this.popover.create({
       component: PopoverComponent,
       event: ev,
+      backdropDismiss: false,
       componentProps: {
         comidaObj: comida
       },

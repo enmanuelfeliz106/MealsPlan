@@ -60,6 +60,7 @@ export class CalendarioPage implements OnInit {
       component: PopoverAgregarComidaComponent,
       event: ev,
       translucent: true,
+      backdropDismiss: false,
       componentProps:  {
         fechaLocal: fechaLocal,
         fecha: date,

@@ -29,20 +29,19 @@ export class InicioPage implements OnInit {
 
   recuperarContrasena() {
     this.popoverRecuperarContrasena(null);
-    this.email = '';
-    this.contrasena = '';
+    
   }
 
   registrarse() {
     this.popoverRegistrarUsuario(null);
-    this.email = '';
-    this.contrasena = '';
+   
   }
 
   async popoverRegistrarUsuario(ev: any) {
     const popover = await this.popover.create({
       component: PopoverRegistroComponent,
       event: ev,
+      backdropDismiss: false
 
     });
     return await popover.present();
@@ -52,6 +51,7 @@ export class InicioPage implements OnInit {
     const popover = await this.popover.create({
       component: PopoverRecuperarContrasenaComponent,
       event: ev,
+      backdropDismiss: false
 
     });
     return await popover.present();
