@@ -106,22 +106,10 @@ export class AuthenticationService {
   }
 
   recuperarContrasena(email: string) {
-    let actionCodeSettings = {
-      url: 'https://meals-plan.firebaseio.com',
-      iOS: {
-        bundleId: 'com.mealsPlan.app'
-      },
-      android: {
-        packageName: 'com.mealsPlan.app',
-        installApp: true,
-        minimumVersion: '12'
-      },
-      handleCodeInApp: true
-    };
 
-    firebase.auth().sendPasswordResetEmail(email, actionCodeSettings).then( (exito) => {
+    firebase.auth().sendPasswordResetEmail(email).then( (exito) => {
           // Password reset email sent.
-          this.alertaExito('Se le ha mandado un correo.', 'Verifique su bandeja de entrada y siga los pasos de correo.');
+          this.alertaExito('Se le ha mandado un correo.', 'Verifique su bandeja de entrada y siga los pasos del mensaje.');
         })
         .catch((error) => {
           // Error occurred. Inspect error.code.
