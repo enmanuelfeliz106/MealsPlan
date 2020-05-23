@@ -25,6 +25,7 @@ export class HistorialComidasPage {
   yearMax = this.yearMin + 1;
   select = 'fecha'; // campo o filtro
   palabraClave = '';
+  botonMostrar: boolean;
 
 
 
@@ -34,7 +35,7 @@ export class HistorialComidasPage {
 
     this.idUsuario = firebase.auth().currentUser.uid;
     this.obtenerComidasDeHoy();
-
+    this.botonMostrar = false;
 
   }
 
@@ -68,6 +69,9 @@ export class HistorialComidasPage {
     this.comidas = this.crud.comidas;
     this.idsDocument = this.crud.idsDocument;
     this.favoritas = this.crud.favoritas;
+
+    this.botonMostrar = true;
+    setTimeout(exito => {this.botonMostrar = false; }, 2000);
 
   }
 

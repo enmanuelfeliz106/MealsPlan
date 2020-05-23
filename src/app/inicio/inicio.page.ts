@@ -12,19 +12,24 @@ import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contra
 export class InicioPage implements OnInit {
   email: string;
   contrasena: string;
+  botonIniciarSesion: boolean;
 
   constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { 
     this.email = 'enmanuelfeliz106@gmail.com';
     this.contrasena = 'universal0707';
+    this.botonIniciarSesion = false;
   }
 
   ngOnInit() {
   }
 
+
   iniciarSesion() {
     this.autenticacion.login(this.email, this.contrasena);
     this.email = '';
     this.contrasena = '';
+    this.botonIniciarSesion = true;
+    setTimeout(exito => {this.botonIniciarSesion = false; }, 2000);
   }
 
   recuperarContrasena() {

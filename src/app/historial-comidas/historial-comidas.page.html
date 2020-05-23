@@ -38,7 +38,7 @@
     <ion-input type="text" name="palabraClave" [(ngModel)]="palabraClave"></ion-input>
   </ion-item>
 
-  <ion-button color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
+  <ion-button disabled="{{botonMostrar}}" color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
 
   <hr>
  
