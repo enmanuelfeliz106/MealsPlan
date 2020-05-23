@@ -17,9 +17,11 @@ export class PopoverAgregarComidaComponent implements OnInit {
   ingredientes: string;
   notas: string;
   calorias: number;
-  
+  botonAgregar: boolean;
 
-  constructor(private popover: PopoverController, public alerta: AlertController, private crud: CRUDComidasService) { }
+  constructor(private popover: PopoverController, public alerta: AlertController, private crud: CRUDComidasService) {
+    this.botonAgregar = false;
+   }
 
   ngOnInit() { }
 
@@ -65,6 +67,9 @@ export class PopoverAgregarComidaComponent implements OnInit {
       }
 
     }
+
+    this.botonAgregar = true;
+    setTimeout(exito => {this.botonAgregar = false; }, 2000);
   }
 
   cerrarPopover() {

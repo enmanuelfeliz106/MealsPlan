@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-popover-recuperar-contrasena',
@@ -11,7 +12,7 @@ export class PopoverRecuperarContrasenaComponent implements OnInit {
   email: string = '';
   mensajeError = '';
 
-  constructor(private autenticacion: AuthenticationService) { }
+  constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { }
 
   ngOnInit() {}
 
@@ -25,6 +26,11 @@ export class PopoverRecuperarContrasenaComponent implements OnInit {
       this.autenticacion.recuperarContrasena(this.email);
     }
 
+  }
+
+  cerrarPopover() {
+
+    this.popover.dismiss();
   }
 
 }

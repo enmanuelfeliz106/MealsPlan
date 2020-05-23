@@ -38,14 +38,14 @@
     <ion-input type="text" name="palabraClave" [(ngModel)]="palabraClave"></ion-input>
   </ion-item>
 
-  <ion-button color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
+  <ion-button disabled="{{botonMostrar}}" color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
 
   <hr>
  
   <ion-card *ngFor="let comida of comidas; index as i" id="alinearLabel">
     <ion-item>
       {{comida.fecha}}
-      <ion-label (click)="presentAlertPasarComida(i)">{{comida.comida}}</ion-label>
+      <ion-label (click)="pasarComidaAHoy(i)">{{comida.comida}}</ion-label>
       <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
     </ion-item>
   

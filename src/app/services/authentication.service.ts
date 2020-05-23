@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { stringify } from 'querystring';
@@ -12,7 +12,7 @@ import { stringify } from 'querystring';
 })
 export class AuthenticationService {
 
-  constructor(public alerta: AlertController, private router: Router) { 
+  constructor(public alerta: AlertController, private router: Router, public popoverCtrl: PopoverController) { 
     
   }
 
@@ -21,6 +21,7 @@ export class AuthenticationService {
     firebase.auth().createUserWithEmailAndPassword(email, contrasena).then((exito) => {
     this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.' );
     exito.user.sendEmailVerification();
+    this.popoverCtrl.dismiss();
 
     }).catch((error) => {
        // Handle Errors here.
@@ -106,22 +107,11 @@ export class AuthenticationService {
   }
 
   recuperarContrasena(email: string) {
-    let actionCodeSettings = {
-      url: 'https://meals-plan.firebaseio.com',
-      iOS: {
-        bundleId: 'com.mealsPlan.app'
-      },
-      android: {
-        packageName: 'com.mealsPlan.app',
-        installApp: true,
-        minimumVersion: '12'
-      },
-      handleCodeInApp: true
-    };
 
-    firebase.auth().sendPasswordResetEmail(email, actionCodeSettings).then( (exito) => {
+    firebase.auth().sendPasswordResetEmail(email).then( (exito) => {
           // Password reset email sent.
-          this.alertaExito('Se le ha mandado un correo.', 'Verifique su bandeja de entrada y siga los pasos de correo.');
+          this.alertaExito('Se le ha mandado un correo.', 'Verifique su bandeja de entrada y siga los pasos del mensaje.');
+          this.popoverCtrl.dismiss();
         })
         .catch((error) => {
           // Error occurred. Inspect error.code.

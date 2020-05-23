@@ -21,7 +21,7 @@
       
       <ion-item>
         {{comida.fecha}}
-        <ion-label>{{comida.comida}}</ion-label>
+        <ion-label (click)="pasarComidaAHoy(i)">{{comida.comida}}</ion-label>
         <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
       </ion-item>
     

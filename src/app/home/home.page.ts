@@ -103,6 +103,7 @@ export class HomePage {
     const popover = await this.popover.create({
       component: PopoverAgregarComidaComponent,
       event: ev,
+      backdropDismiss: false,
       translucent: true,
       componentProps:  {
         fechaLocal: fechaLocal,

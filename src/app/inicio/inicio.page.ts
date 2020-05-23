@@ -12,37 +12,41 @@ import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contra
 export class InicioPage implements OnInit {
   email: string;
   contrasena: string;
+  botonIniciarSesion: boolean;
 
   constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { 
     this.email = 'enmanuelfeliz106@gmail.com';
     this.contrasena = 'universal0707';
+    this.botonIniciarSesion = false;
   }
 
   ngOnInit() {
   }
 
+
   iniciarSesion() {
     this.autenticacion.login(this.email, this.contrasena);
     this.email = '';
     this.contrasena = '';
+    this.botonIniciarSesion = true;
+    setTimeout(exito => {this.botonIniciarSesion = false; }, 2000);
   }
 
   recuperarContrasena() {
     this.popoverRecuperarContrasena(null);
-    this.email = '';
-    this.contrasena = '';
+    
   }
 
   registrarse() {
     this.popoverRegistrarUsuario(null);
-    this.email = '';
-    this.contrasena = '';
+   
   }
 
   async popoverRegistrarUsuario(ev: any) {
     const popover = await this.popover.create({
       component: PopoverRegistroComponent,
       event: ev,
+      backdropDismiss: false
 
     });
     return await popover.present();
@@ -52,6 +56,7 @@ export class InicioPage implements OnInit {
     const popover = await this.popover.create({
       component: PopoverRecuperarContrasenaComponent,
       event: ev,
+      backdropDismiss: false
 
     });
     return await popover.present();

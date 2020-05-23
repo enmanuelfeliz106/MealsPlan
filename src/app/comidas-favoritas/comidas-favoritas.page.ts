@@ -27,6 +27,7 @@ export class ComidasFavoritasPage implements OnInit {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       event: ev,
+      backdropDismiss: false,
       componentProps: {
         comidaObj: comida
       },
@@ -42,6 +43,10 @@ export class ComidasFavoritasPage implements OnInit {
     this.crud.mostrarComidas('favorita', true);
     this.comidas = this.crud.comidas;
 
+  }
+
+  pasarComidaAHoy(index) {
+    this.crud.presentAlertPasarComida(index);
   }
 
   ngOnInit() {

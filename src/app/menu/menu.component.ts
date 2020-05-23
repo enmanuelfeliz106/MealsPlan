@@ -35,6 +35,7 @@ export class MenuComponent implements OnInit {
       component: PopoverTablaMedidasComponent,
       event: ev,
       translucent: true,
+      backdropDismiss: false,
       cssClass: 'popover'
     });
     return await popover.present();

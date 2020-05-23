@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-popover-registro',
@@ -13,7 +14,7 @@ export class PopoverRegistroComponent implements OnInit {
   confirmarContrasena: string = '';
   mensajeError = '';
 
-  constructor(private autenticacion: AuthenticationService) { }
+  constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { }
 
   ngOnInit() {}
 
@@ -30,6 +31,11 @@ export class PopoverRegistroComponent implements OnInit {
       this.autenticacion.registrarUsuario(this.email, this.contrasena);
     }
     
+  }
+
+  cerrarPopover() {
+
+    this.popover.dismiss();
   }
 
 }
