@@ -34,7 +34,6 @@ export class HistorialComidasPage {
 
 
     this.idUsuario = firebase.auth().currentUser.uid;
-    this.obtenerComidasDeHoy();
     this.botonMostrar = false;
 
   }
@@ -42,13 +41,6 @@ export class HistorialComidasPage {
 
   irAtras() {
     this.nav.back();
-  }
-
-
-  obtenerComidasDeHoy() {
-
-    this.crud.mostrarComidas('fecha', this.hoy);
-
   }
 
   mostrarComidas() {
