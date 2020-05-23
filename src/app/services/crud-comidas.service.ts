@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { PopoverController, AlertController } from '@ionic/angular';
+import { PopoverController, AlertController, LoadingController } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 import { format} from 'date-fns';
 
@@ -32,7 +32,7 @@ export class CRUDComidasService {
   favoritas = [];
   hoy = format(new Date(), 'MM/dd/yyyy');
 
-  constructor(public popover: PopoverController, public alerta: AlertController) {
+  constructor(public popover: PopoverController, public alerta: AlertController, public loaderCtrl: LoadingController) {
     this.idUsuario = firebase.auth().currentUser.uid;
   }
 
@@ -93,6 +93,7 @@ export class CRUDComidasService {
   }
 
   mostrarComidas(filtro: string, valor: any) {
+    this.presentLoading();
     this.comidas = [];
     this.idsDocument = [];
     this.checkButton = [];
@@ -102,6 +103,7 @@ export class CRUDComidasService {
       .then(snapshot => {
         if (snapshot.empty) {
           console.log('No matching documents.');
+          this.loaderCtrl.dismiss();
           return;
         }
 
@@ -114,15 +116,18 @@ export class CRUDComidasService {
 
 
         });
+        this.loaderCtrl.dismiss();
       })
       .catch(err => {
 
+        this.alertaError('Hubo un error cargando las comidas, intenta de nuevo refrescando. Si el problema persiste contactanos.');
         console.log('Error getting documents', err);
+        this.loaderCtrl.dismiss();
       });
   }
 
   pasarAHoy(index) {
-
+    this.mostrarComidas('fecha', this.hoy);
     this.comidasDeHoy = this.comidas;
 
     this.nuevaComida = {
@@ -281,6 +286,15 @@ export class CRUDComidasService {
     });
 
     await alert.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loaderCtrl.create({
+      cssClass: 'my-custom-class',
+      message: 'Espere por favor...',
+
+    });
+    await loading.present();
   }
 
 
