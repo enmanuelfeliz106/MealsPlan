@@ -60,7 +60,31 @@ ion-toolbar{
     
 }*/
 
+ion-calendar{
+    border: 2px groove rgba(0, 0, 114, 0.781);
+    border-radius: 10px;
 
+    div.title{
+        background-color: #2dd36f ;
+        border-radius: 20px;
+        *{
+            color: aliceblue !important;
+        }
+    }
+    .forward.md.button.button-clear.button-has-icon-only.ion-activatable.ion-focusable.hydrated{
+        background-color: rgba(0, 0, 114, 0.781);
+        border: 5px solid rgba(0, 0, 114, 0.781);
+        border-top-right-radius: 50px ;
+        border-bottom-right-radius: 50px;
+    }
+
+    .back.md.button.button-clear.button-has-icon-only.ion-activatable.ion-focusable.hydrated{
+        background-color: rgba(0, 0, 114, 0.781);
+        border: 5px solid rgba(0, 0, 114, 0.781);
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+    }
+}
 
 
 
