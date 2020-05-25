@@ -49,8 +49,10 @@ export class AuthenticationService {
 
   login(email: string, contrasena: string) {
     firebase.auth().signInWithEmailAndPassword(email, contrasena).then((exito) => {
+
       if (exito.user.emailVerified) {
         this.router.navigate(['/home']);
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       } else {
         this.alertaError('No has verificado tu email. Ve a tu correo y si no encuentras nuestro mensaje revisa en la bandeja de spams');
       }

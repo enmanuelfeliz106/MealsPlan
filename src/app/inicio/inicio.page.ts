@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverController } from '@ionic/angular';
 import { PopoverRegistroComponent } from '../popover-registro/popover-registro.component';
 import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contrasena/popover-recuperar-contrasena.component';
+
 
 @Component({
   selector: 'app-inicio',
