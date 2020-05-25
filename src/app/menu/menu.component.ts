@@ -20,9 +20,11 @@ export class MenuComponent implements OnInit {
       if (user) {
         // User is signed in.
         this.login = false;
+        this.router.navigate(['/home']);
       } else {
         // No user is signed in.
         this.login = true;
+        this.router.navigate(['/inicio']);
       }
     });
 
