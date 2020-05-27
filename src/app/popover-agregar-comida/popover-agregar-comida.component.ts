@@ -18,6 +18,11 @@ export class PopoverAgregarComidaComponent implements OnInit {
   notas: string;
   calorias: number;
   botonAgregar: boolean;
+  titulo;
+  fechaLocal;
+  opcion;
+  fecha;
+  docId;
 
   constructor(private popover: PopoverController, public alerta: AlertController, private crud: CRUDComidasService) {
     this.botonAgregar = false;
