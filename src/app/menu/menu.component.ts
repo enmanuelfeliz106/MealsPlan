@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
       if (user) {
         // User is signed in.
         this.login = false;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']); // para mantener sesion iniciada: persistencia local en authentication service
       } else {
         // No user is signed in.
         this.login = true;
