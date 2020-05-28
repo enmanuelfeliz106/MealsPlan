@@ -4,7 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+  { path: '', redirectTo: '/bienvenida-animada', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: 'calendario',
@@ -21,7 +21,12 @@ const routes: Routes = [
   {
     path: 'comidas-favoritas',
     loadChildren: () => import('./comidas-favoritas/comidas-favoritas.module').then( m => m.ComidasFavoritasPageModule)
+  },
+  {
+    path: 'bienvenida-animada',
+    loadChildren: () => import('./bienvenida-animada/bienvenida-animada.module').then( m => m.BienvenidaAnimadaPageModule)
   }
+
 
 
 
