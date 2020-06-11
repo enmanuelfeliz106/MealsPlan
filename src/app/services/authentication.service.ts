@@ -4,6 +4,7 @@ import { AlertController, PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { stringify } from 'querystring';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -136,6 +137,43 @@ export class AuthenticationService {
     firebase.auth().signOut().then(exito => {
       this.router.navigate(['/inicio']);
     });
+  }
+
+  async eliminarCuenta() {
+    const alert = await this.alerta.create({
+      header: 'Eliminar Cuenta',
+      subHeader: '¿Seguro que desea eliminar su cuenta?',
+      message: 'Si elimina su cuenta perderá todas sus comidas registradas, toda la información de la cuenta y dejará de existir su usuario.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          cssClass: 'danger',
+          handler: () => {
+              firebase.auth().currentUser.delete();
+              this.cuentaBorrada();
+              this.router.navigate(['/inicio']);
+          }
+        }]
+    });
+    await alert.present();
+  }
+
+  async cuentaBorrada() {
+    const alert = await this.alerta.create({
+      header: 'Cuenta Borrada',
+      subHeader: 'Lamentamos que se vaya',
+      message: 'Registrese nuevamente cuando quiera, le estaremos esperando.',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+        }]
+    });
+    await alert.present();
   }
 
 
