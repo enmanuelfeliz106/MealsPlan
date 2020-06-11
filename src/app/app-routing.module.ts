@@ -25,7 +25,11 @@ const routes: Routes = [
   {
     path: 'bienvenida-animada',
     loadChildren: () => import('./bienvenida-animada/bienvenida-animada.module').then( m => m.BienvenidaAnimadaPageModule)
+  },  {
+    path: 'ajustes',
+    loadChildren: () => import('./ajustes/ajustes.module').then( m => m.AjustesPageModule)
   }
+
 
 
 
