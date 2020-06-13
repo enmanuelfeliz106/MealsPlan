@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
   constructor(public popover: PopoverController, private menu: MenuController, private router: Router, 
               public alert: AlertController, private autenticacion: AuthenticationService) {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+      if (user && user.emailVerified) {
         // User is signed in.
         this.login = false;
         this.router.navigate(['/home']); // para mantener sesion iniciada: persistencia local en authentication service

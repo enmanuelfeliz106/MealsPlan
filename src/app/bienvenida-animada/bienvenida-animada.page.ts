@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as lottie from 'lottie-web';
 import { element } from 'protractor';
+import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-bienvenida-animada',
@@ -9,7 +10,14 @@ import { element } from 'protractor';
 })
 export class BienvenidaAnimadaPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+    if (firebase.auth().currentUser) {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/inicio']);
+    }
+
+   }
 
   ngOnInit() {
   }
