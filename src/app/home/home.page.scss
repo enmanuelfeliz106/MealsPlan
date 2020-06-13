@@ -21,7 +21,7 @@ ion-item ion-label h1{
 }
 
 ion-header{
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 #mensajePantallaVacia{
@@ -29,4 +29,9 @@ ion-header{
   margin: 200px 20px;
 }
 
+#fecha ion-label{
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+}
 

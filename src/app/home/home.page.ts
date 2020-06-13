@@ -128,6 +128,7 @@ export class HomePage {
 
   doRefresh(event) {
     console.log('Begin async operation');
+    this.hoy = format(new Date(), 'MM/dd/yyyy');
     this.obtenerComidas();
     setTimeout(() => {
       console.log('Async operation has ended');

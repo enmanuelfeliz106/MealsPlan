@@ -6,12 +6,14 @@
       Comidas de hoy
       
     </ion-title>
-    {{hoy}}
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <ion-item id="fecha" color="light">
+    <ion-label>{{hoy}}</ion-label>
+  </ion-item>
+  
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-down-outline"
@@ -25,7 +27,7 @@
   <ion-item color="success">
     <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
     <ion-label>
-      <p>Desliza para refrescar</p> 
+      <p>Desliza para actualizar</p> 
     </ion-label>
     <ion-icon name="arrow-down-circle-outline" slot="end"></ion-icon>
   </ion-item>
