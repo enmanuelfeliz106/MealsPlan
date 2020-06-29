@@ -20,9 +20,27 @@ export class AuthenticationService {
   registrarUsuario(email: string, contrasena: string) {
 
     firebase.auth().createUserWithEmailAndPassword(email, contrasena).then((exito) => {
-    this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.' );
-    exito.user.sendEmailVerification();
-    this.popoverCtrl.dismiss();
+      let usuarioID = firebase.auth().currentUser.uid;
+      let dataUsuario = {
+        email: email,
+        nombre: 'Enmanuel',
+        apellidos: 'Feliz Espinal',
+        sexo: 'masculino',
+        fechaNacimiento: '11/06/1996'
+      };
+      this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.')
+      .then(exito => {
+        firebase.firestore().collection('usuarios').doc(usuarioID).set(dataUsuario).then(exito => {
+          console.log('Se ha guardado el usuario');
+        }).catch(error => {
+          console.log('No se ha podido guardar el usuario', error);
+        });
+      });
+      exito.user.sendEmailVerification();
+
+      this.popoverCtrl.dismiss().then( exito => {
+      this.cerrarSesion(); // cerrar sesion para evitar problemas con el menu
+    });
 
     }).catch((error) => {
        // Handle Errors here.
@@ -49,6 +67,7 @@ export class AuthenticationService {
   }
 
   login(email: string, contrasena: string) {
+
     firebase.auth().signInWithEmailAndPassword(email, contrasena).then((exito) => {
 
       if (exito.user.emailVerified) {
@@ -56,8 +75,9 @@ export class AuthenticationService {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       } else {
         this.alertaError('No has verificado tu email. Ve a tu correo y si no encuentras nuestro mensaje revisa en la bandeja de spams');
+        this.cerrarSesion(); // para evitar problemas con el menu
       }
-      
+
 
     }).catch((error) => {
         // Handle Errors here.
@@ -140,6 +160,7 @@ export class AuthenticationService {
   }
 
   async eliminarCuenta() {
+    let usuarioID = firebase.auth().currentUser.uid;
     const alert = await this.alerta.create({
       header: 'Eliminar Cuenta',
       subHeader: '¿Seguro que desea eliminar su cuenta?',
@@ -153,9 +174,23 @@ export class AuthenticationService {
           text: 'Eliminar',
           cssClass: 'danger',
           handler: () => {
-              firebase.auth().currentUser.delete();
-              this.cuentaBorrada();
-              this.router.navigate(['/inicio']);
+            firebase.firestore().collection('usuarios').doc(usuarioID).delete().then(exito => {
+              firebase.auth().currentUser.delete().then(exito => {
+                this.cuentaBorrada();
+                this.router.navigate(['/inicio']);
+              }).catch( error => {
+                 // Error occurred. Inspect error.code.
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                if (errorCode === 'auth/requires-recent-login') {
+                  this.alertaError('Su inicio de sesión debe ser reciente para poder completar esta operación. Por favor cierre e inicie sesión e intentelo de nuevo.');
+
+                } else {
+                  this.alertaError(errorMessage);
+                }
+
+              });
+            });
           }
         }]
     });
