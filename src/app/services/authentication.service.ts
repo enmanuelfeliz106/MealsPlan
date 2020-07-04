@@ -174,10 +174,15 @@ export class AuthenticationService {
           text: 'Eliminar',
           cssClass: 'danger',
           handler: () => {
-            firebase.firestore().collection('usuarios').doc(usuarioID).delete().then(exito => {
+              let idUsuario = firebase.auth().currentUser.uid;
+              let ruta = firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').path;
+
+              this.deleteAtPath(ruta);
+
               firebase.auth().currentUser.delete().then(exito => {
                 this.cuentaBorrada();
                 this.router.navigate(['/inicio']);
+
               }).catch( error => {
                  // Error occurred. Inspect error.code.
                 let errorCode = error.code;
@@ -190,7 +195,7 @@ export class AuthenticationService {
                 }
 
               });
-            });
+
           }
         }]
     });
@@ -211,6 +216,17 @@ export class AuthenticationService {
     await alert.present();
   }
 
+  deleteAtPath(path) {
+    var deleteFn = firebase.functions().httpsCallable('recursiveDelete');
+    deleteFn({ path: path })
+        .then(function(result) {
+            console.log('Delete success: ' + JSON.stringify(result));
+        })
+        .catch(function(err) {
+            console.log('Delete failed, see console,');
+            console.warn(err);
+        });
+}
 
 
 }

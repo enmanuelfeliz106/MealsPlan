@@ -33,6 +33,7 @@
     "core-js": "^2.5.4",
     "date-fns": "^2.14.0",
     "firebase": "^7.14.4",
+    "firebase-tools": "^8.4.3",
     "ion2-calendar": "^3.0.0-rc.0",
     "jquery": "^3.5.0",
     "moment": "^2.24.0",
