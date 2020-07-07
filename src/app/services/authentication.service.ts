@@ -14,7 +14,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class AuthenticationService {
 
   constructor(public alerta: AlertController, private router: Router, public popoverCtrl: PopoverController) { 
-    
+
   }
 
   registrarUsuario(email: string, contrasena: string) {
@@ -174,12 +174,14 @@ export class AuthenticationService {
           text: 'Eliminar',
           cssClass: 'danger',
           handler: () => {
+              
               let idUsuario = firebase.auth().currentUser.uid;
               let ruta = firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').path;
 
-              this.deleteAtPath(ruta);
+              
 
               firebase.auth().currentUser.delete().then(exito => {
+                this.deleteCollection(ruta, 150); // 150 comidas borradas en cada vuelta
                 this.cuentaBorrada();
                 this.router.navigate(['/inicio']);
 
@@ -216,17 +218,47 @@ export class AuthenticationService {
     await alert.present();
   }
 
-  deleteAtPath(path) {
-    var deleteFn = firebase.functions().httpsCallable('recursiveDelete');
-    deleteFn({ path: path })
-        .then(function(result) {
-            console.log('Delete success: ' + JSON.stringify(result));
-        })
-        .catch(function(err) {
-            console.log('Delete failed, see console,');
-            console.warn(err);
+  deleteCollection(collectionPath, batchSize) {
+    let collectionRef = firebase.firestore().collection(collectionPath);
+    let query = collectionRef.orderBy('__name__').limit(batchSize);
+  
+    return new Promise((resolve, reject) => {
+      this.deleteQueryBatch(query, batchSize, resolve, reject);
+    });
+  }
+  
+  deleteQueryBatch(query, batchSize, resolve, reject) {
+    query.get()
+      .then((snapshot) => {
+        // When there are no documents left, we are done
+        if (snapshot.size === 0) {
+          return 0;
+        }
+  
+        // Delete documents in a batch
+        let batch = firebase.firestore().batch();
+        snapshot.docs.forEach((doc) => {
+          batch.delete(doc.ref);
         });
-}
+  
+        return batch.commit().then(() => {
+          return snapshot.size;
+        });
+      }).then((numDeleted) => {
+        if (numDeleted === 0) {
+          resolve();
+          return;
+        }
+  
+        // Recurse on the next process tick, to avoid
+        // exploding the stack.
+        process.nextTick((exito) => {
+
+          this.deleteQueryBatch(query, batchSize, resolve, reject);
+        });
+      })
+      .catch(reject);
+  }
 
 
 }
