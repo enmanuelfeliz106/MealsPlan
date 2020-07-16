@@ -41,12 +41,13 @@ export class HomePage {
   }
 
   check(index: number, idDoc: string) {
+    let idUsuario = firebase.auth().currentUser.uid;
     if (this.checkButton[index] === false) {
 
       $("ion-item #" + idDoc).removeAttr("color");
       $("ion-item #" + idDoc).attr("color", "success");
 
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({check: true});
+      firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').doc(idDoc).update({check: true});
       this.checkButton[index] = true;
 
     } else {
@@ -54,18 +55,19 @@ export class HomePage {
       $("ion-item #" + idDoc).removeAttr("color");
       $("ion-item #" + idDoc).attr("color", "light");
 
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({check: false});
+      firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').doc(idDoc).update({check: false});
       this.checkButton[index] = false;
     }
   }
 
   agregarAFavoritas(index: number, idDoc: string) {
+    let idUsuario = firebase.auth().currentUser.uid;
     if (this.favoritas[index] === false) {
 
       $("ion-item-options #favorita" + idDoc).removeAttr("color");
       $("ion-item-options #favorita" + idDoc).attr("color", "warning");
 
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: true});
+      firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').doc(idDoc).update({favorita: true});
       this.favoritas[index] = true;
 
     } else {
@@ -73,7 +75,7 @@ export class HomePage {
       $("ion-item-options #favorita" + idDoc).removeAttr("color");
       $("ion-item-options #favorita" + idDoc).attr("color", "light");
 
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: false});
+      firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').doc(idDoc).update({favorita: false});
       this.favoritas[index] = false;
     }
 

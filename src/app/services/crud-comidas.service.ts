@@ -77,7 +77,7 @@ export class CRUDComidasService {
   actualizarComida(idDoc: string, comida: string, nombre: string, ingredientes: string, notas: string, calorias: number) {
     let ingredientesArray = new String(ingredientes).split(',');
 
-    firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({
+    firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).update({
       comida: comida,
       nombre: nombre,
       ingredientes: ingredientesArray,
@@ -107,8 +107,8 @@ export class CRUDComidasService {
     this.idsDocument = [];
     this.checkButton = [];
     this.favoritas = [];
-    let comida = firebase.firestore().collection('comidasGuardadas');
-    let query = comida.where('userID', '==', this.idUsuario).where(filtro, '==', valor).get()
+    let comida = firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas');
+    let query = comida.where(filtro, '==', valor).get()
       .then(snapshot => {
         if (snapshot.empty) {
           console.log('No matching documents.');
@@ -188,7 +188,7 @@ export class CRUDComidasService {
       this.alertaError('Ya tienes esta comida registrada en las comidas para hoy.');
 
     } else {
-      firebase.firestore().collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
+      firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
 
         this.alertaExito();
 
@@ -239,7 +239,7 @@ export class CRUDComidasService {
     const alert = await this.alerta.create({
       header: 'Exito',
       subHeader: 'Comida guardada',
-      message: 'Puedes visualizarla en tu lista de comidas de hoy',
+      message: 'Puedes visualizarla en tu lista de comidas de hoy, recuerda refrescar para notar los cambios.',
       buttons: ['OK'],
       cssClass: 'alertaExito'
     });
@@ -274,7 +274,7 @@ export class CRUDComidasService {
           text: 'Eliminar',
           cssClass: 'danger',
           handler: () => {
-            firebase.firestore().collection('comidasGuardadas').doc(idDoc).delete();
+            firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).delete();
             this.presentAlertComidaBorrada();
           }
         }]

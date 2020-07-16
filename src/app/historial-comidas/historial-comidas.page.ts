@@ -73,7 +73,7 @@ export class HistorialComidasPage {
       $("#boton" + idDoc).removeAttr("color");
       $("#boton" + idDoc).attr("color", "warning");
 
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: true});
+      firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).update({favorita: true});
       this.favoritas[index] = true;
 
     } else {
@@ -81,7 +81,7 @@ export class HistorialComidasPage {
       $("#boton" + idDoc).removeAttr("color");
       $("#boton" + idDoc).attr("color", "light");
 
-      firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({favorita: false});
+      firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).update({favorita: false});
       this.favoritas[index] = false;
     }
   }
