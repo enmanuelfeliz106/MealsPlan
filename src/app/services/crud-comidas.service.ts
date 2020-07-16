@@ -6,7 +6,6 @@ import { format} from 'date-fns';
 
 export interface Comida {
   fecha: string;
-  userID: string;
   comida: string;
   nombre: string;
   ingredientes: Array<any>;
@@ -40,10 +39,9 @@ export class CRUDComidasService {
     let ingredientesArray = new String(ingredientes).split(',');
 
     let nuevaComida: Comida;
-
+    let usuarioID = firebase.auth().currentUser.uid;
     nuevaComida = {
       fecha: fecha,
-      userID: firebase.auth().currentUser.uid,
       comida: comida,
       nombre: nombre,
       ingredientes: ingredientesArray,
@@ -53,7 +51,7 @@ export class CRUDComidasService {
       favorita: false
     };
 
-    firebase.firestore().collection('comidasGuardadas').add(nuevaComida).then( (exito) => {
+    firebase.firestore().collection('usuarios').doc(usuarioID).collection('comidasGuardadas').add(nuevaComida).then( (exito) => {
       this.alertaExito();
       this.popover.dismiss();
 
@@ -63,12 +61,23 @@ export class CRUDComidasService {
         this.popover.dismiss();
 
     });
+    /*
+    firebase.firestore().collection('comidasGuardadas').add(nuevaComida).then( (exito) => {
+      this.alertaExito();
+      this.popover.dismiss();
+
+      }).catch( (error) => {
+
+        this.alertaError('Intente de nuevo. Si el problema persiste, reporte su situación a nuestro correo.');
+        this.popover.dismiss();
+
+    });*/
   }
 
   actualizarComida(idDoc: string, comida: string, nombre: string, ingredientes: string, notas: string, calorias: number) {
     let ingredientesArray = new String(ingredientes).split(',');
 
-    firebase.firestore().collection('comidasGuardadas').doc(idDoc).update({
+    firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).update({
       comida: comida,
       nombre: nombre,
       ingredientes: ingredientesArray,
@@ -98,8 +107,8 @@ export class CRUDComidasService {
     this.idsDocument = [];
     this.checkButton = [];
     this.favoritas = [];
-    let comida = firebase.firestore().collection('comidasGuardadas');
-    let query = comida.where('userID', '==', this.idUsuario).where(filtro, '==', valor).get()
+    let comida = firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas');
+    let query = comida.where(filtro, '==', valor).get()
       .then(snapshot => {
         if (snapshot.empty) {
           console.log('No matching documents.');
@@ -132,7 +141,6 @@ export class CRUDComidasService {
 
     this.nuevaComida = {
         fecha: this.hoy,
-        userID: this.idUsuario,
         comida: this.comidas[index].comida,
         nombre: this.comidas[index].nombre,
         ingredientes: this.comidas[index].ingredientes,
@@ -148,7 +156,6 @@ export class CRUDComidasService {
     for (let i = 0; i < this.comidasDeHoy.length; i++) {
       comidaReset = {
         fecha: this.hoy,
-        userID: this.comidasDeHoy[i].userID,
         comida: this.comidasDeHoy[i].comida,
         nombre: this.comidasDeHoy[i].nombre,
         ingredientes: this.comidasDeHoy[i].ingredientes,
@@ -166,8 +173,7 @@ export class CRUDComidasService {
           this.nuevaComida.notas === comidaReset.notas && 
           this.nuevaComida.calorias === comidaReset.calorias &&
           this.nuevaComida.check === comidaReset.check &&
-          this.nuevaComida.favorita === comidaReset.favorita && 
-          this.nuevaComida.userID === comidaReset.userID) {
+          this.nuevaComida.favorita === comidaReset.favorita) {
 
         this.validador = true;
         break;
@@ -182,7 +188,7 @@ export class CRUDComidasService {
       this.alertaError('Ya tienes esta comida registrada en las comidas para hoy.');
 
     } else {
-      firebase.firestore().collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
+      firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
 
         this.alertaExito();
 
@@ -233,7 +239,7 @@ export class CRUDComidasService {
     const alert = await this.alerta.create({
       header: 'Exito',
       subHeader: 'Comida guardada',
-      message: 'Puedes visualizarla en tu lista de comidas de hoy',
+      message: 'Puedes visualizarla en tu lista de comidas de hoy, recuerda refrescar para notar los cambios.',
       buttons: ['OK'],
       cssClass: 'alertaExito'
     });
@@ -268,7 +274,7 @@ export class CRUDComidasService {
           text: 'Eliminar',
           cssClass: 'danger',
           handler: () => {
-            firebase.firestore().collection('comidasGuardadas').doc(idDoc).delete();
+            firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).delete();
             this.presentAlertComidaBorrada();
           }
         }]

@@ -14,15 +14,33 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class AuthenticationService {
 
   constructor(public alerta: AlertController, private router: Router, public popoverCtrl: PopoverController) { 
-    
+
   }
 
   registrarUsuario(email: string, contrasena: string) {
 
     firebase.auth().createUserWithEmailAndPassword(email, contrasena).then((exito) => {
-    this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.' );
-    exito.user.sendEmailVerification();
-    this.popoverCtrl.dismiss();
+      let usuarioID = firebase.auth().currentUser.uid;
+      let dataUsuario = {
+        email: email,
+        nombre: 'Enmanuel',
+        apellidos: 'Feliz Espinal',
+        sexo: 'masculino',
+        fechaNacimiento: '11/06/1996'
+      };
+      this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.')
+      .then(exito => {
+        firebase.firestore().collection('usuarios').doc(usuarioID).set(dataUsuario).then(exito => {
+          console.log('Se ha guardado el usuario');
+        }).catch(error => {
+          console.log('No se ha podido guardar el usuario', error);
+        });
+      });
+      exito.user.sendEmailVerification();
+
+      this.popoverCtrl.dismiss().then( exito => {
+      this.cerrarSesion(); // cerrar sesion para evitar problemas con el menu
+    });
 
     }).catch((error) => {
        // Handle Errors here.
@@ -49,6 +67,7 @@ export class AuthenticationService {
   }
 
   login(email: string, contrasena: string) {
+
     firebase.auth().signInWithEmailAndPassword(email, contrasena).then((exito) => {
 
       if (exito.user.emailVerified) {
@@ -56,8 +75,9 @@ export class AuthenticationService {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       } else {
         this.alertaError('No has verificado tu email. Ve a tu correo y si no encuentras nuestro mensaje revisa en la bandeja de spams');
+        this.cerrarSesion(); // para evitar problemas con el menu
       }
-      
+
 
     }).catch((error) => {
         // Handle Errors here.
@@ -140,6 +160,7 @@ export class AuthenticationService {
   }
 
   async eliminarCuenta() {
+    let usuarioID = firebase.auth().currentUser.uid;
     const alert = await this.alerta.create({
       header: 'Eliminar Cuenta',
       subHeader: '¿Seguro que desea eliminar su cuenta?',
@@ -153,9 +174,30 @@ export class AuthenticationService {
           text: 'Eliminar',
           cssClass: 'danger',
           handler: () => {
-              firebase.auth().currentUser.delete();
-              this.cuentaBorrada();
-              this.router.navigate(['/inicio']);
+              
+              let idUsuario = firebase.auth().currentUser.uid;
+              let ruta = firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').path;
+
+              
+
+              firebase.auth().currentUser.delete().then(exito => {
+                this.deleteCollection(ruta, 150); // 150 comidas borradas en cada vuelta
+                this.cuentaBorrada();
+                this.router.navigate(['/inicio']);
+
+              }).catch( error => {
+                 // Error occurred. Inspect error.code.
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                if (errorCode === 'auth/requires-recent-login') {
+                  this.alertaError('Su inicio de sesión debe ser reciente para poder completar esta operación. Por favor cierre e inicie sesión e intentelo de nuevo.');
+
+                } else {
+                  this.alertaError(errorMessage);
+                }
+
+              });
+
           }
         }]
     });
@@ -176,6 +218,47 @@ export class AuthenticationService {
     await alert.present();
   }
 
+  deleteCollection(collectionPath, batchSize) {
+    let collectionRef = firebase.firestore().collection(collectionPath);
+    let query = collectionRef.orderBy('__name__').limit(batchSize);
+  
+    return new Promise((resolve, reject) => {
+      this.deleteQueryBatch(query, batchSize, resolve, reject);
+    });
+  }
+  
+  deleteQueryBatch(query, batchSize, resolve, reject) {
+    query.get()
+      .then((snapshot) => {
+        // When there are no documents left, we are done
+        if (snapshot.size === 0) {
+          return 0;
+        }
+  
+        // Delete documents in a batch
+        let batch = firebase.firestore().batch();
+        snapshot.docs.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+  
+        return batch.commit().then(() => {
+          return snapshot.size;
+        });
+      }).then((numDeleted) => {
+        if (numDeleted === 0) {
+          resolve();
+          return;
+        }
+  
+        // Recurse on the next process tick, to avoid
+        // exploding the stack.
+        process.nextTick((exito) => {
+
+          this.deleteQueryBatch(query, batchSize, resolve, reject);
+        });
+      })
+      .catch(reject);
+  }
 
 
 }
