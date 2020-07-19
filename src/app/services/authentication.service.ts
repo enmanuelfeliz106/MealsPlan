@@ -17,26 +17,26 @@ export class AuthenticationService {
 
   }
 
-  registrarUsuario(email: string, contrasena: string) {
+  registrarUsuario(email: string, contrasena: string, nombre: string, apellidos: string, sexo: string, fechaNacimiento: string) {
 
     firebase.auth().createUserWithEmailAndPassword(email, contrasena).then((exito) => {
       let usuarioID = firebase.auth().currentUser.uid;
       let dataUsuario = {
         email: email,
-        nombre: 'Enmanuel',
-        apellidos: 'Feliz Espinal',
-        sexo: 'masculino',
-        fechaNacimiento: '11/06/1996'
+        nombre: nombre,
+        apellidos: apellidos,
+        sexo: sexo,
+        fechaNacimiento: fechaNacimiento
       };
-      this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.')
-      .then(exito => {
-        firebase.firestore().collection('usuarios').doc(usuarioID).set(dataUsuario).then(exito => {
-          console.log('Se ha guardado el usuario');
-        }).catch(error => {
-          console.log('No se ha podido guardar el usuario', error);
-        });
+      firebase.firestore().collection('usuarios').doc(usuarioID).set(dataUsuario).then(exito => {
+        console.log('Se ha guardado el usuario');
+      }).catch(error => {
+        console.log('No se ha podido guardar el usuario', error);
       });
-      exito.user.sendEmailVerification();
+
+      exito.user.sendEmailVerification().then(exito =>{
+        this.alertaExito('Te has registrado correctamente', 'Revisa tu correo para verificar tu email antes de iniciar sesión.');
+      });
 
       this.popoverCtrl.dismiss().then( exito => {
       this.cerrarSesion(); // cerrar sesion para evitar problemas con el menu

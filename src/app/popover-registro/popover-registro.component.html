@@ -22,6 +22,33 @@
       <ion-input type="password" placeholder="Confirmar Contraseña" name="confirmarContrasena" [(ngModel)]="confirmarContrasena"></ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-input type="text" placeholder="Nombre" name="nombre" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Apellidos" name="apellidos" [(ngModel)]="apellidos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select interface="popover" [(ngModel)]="sexo">
+        <ion-select-option value="Masculino">Masculino</ion-select-option>
+        <ion-select-option value="Femenino">Femenino</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de nacimiento</ion-label>
+      <ion-datetime mode="ios" [(ngModel)]="fechaNacimiento" min="{{yearMin}}" max="{{yearMax}}"
+        doneText= "Ok"
+        cancelText= "Cancelar" 
+        pickerFormat= "D MMM YYYY"
+        dayNames="Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sábado"
+        displayFormat="DDDD, DD MMMM YYYY"
+        monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"></ion-datetime>
+    </ion-item>
+
     
     <ion-button color="success" expand="block" (click)="registrarUsuario()">Registrarme</ion-button>
     <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
