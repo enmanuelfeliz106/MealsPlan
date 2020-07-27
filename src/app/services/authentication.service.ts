@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { stringify } from 'querystring';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 
@@ -13,7 +14,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class AuthenticationService {
 
-  constructor(public alerta: AlertController, private router: Router, public popoverCtrl: PopoverController) { 
+  constructor(public alerta: AlertController, private router: Router, public popoverCtrl: PopoverController, private google: GooglePlus) { 
 
   }
 
@@ -61,6 +62,37 @@ export class AuthenticationService {
       } else {
         this.alertaError(errorMessage);
       }
+      console.log(error);
+    });
+
+  }
+
+  loginConGoogle() {
+
+    this.google.login({}).then(res => {
+      const userData = res;
+
+      let provider = firebase.auth.GoogleAuthProvider.credential(null, userData.accessToken);
+
+
+      firebase.auth().signInWithCredential(provider).then(exito => {
+
+        let userId = firebase.auth().currentUser.uid;
+
+        firebase.firestore().collection('usuarios').doc(userId).set(userData).then(exito => {
+          console.log('Se ha guardado el usuario');
+        }).catch(error => {
+          console.log('No se ha podido guardar el usuario', error);
+        });
+
+        this.router.navigate(['/home']);
+
+      }).catch(error => {
+        console.log(error);
+        this.alertaError('Algo salio mal. Contacta al soporte.');
+      });
+
+    }).catch(error => {
       console.log(error);
     });
 
