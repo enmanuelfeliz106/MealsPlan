@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { PopoverController } from '@ionic/angular';
+import { format} from 'date-fns';
 
 @Component({
   selector: 'app-popover-registro',
@@ -12,6 +13,13 @@ export class PopoverRegistroComponent implements OnInit {
   email: string = '';
   contrasena: string = '';
   confirmarContrasena: string = '';
+  nombre = '';
+  apellidos = '';
+  sexo = '';
+  fechaNacimiento = '';
+  hoy = new Date().toString();
+  yearMin = new Date().getFullYear() - 110; // la edad maxima de una persona es 100 anios
+  yearMax = new Date().getFullYear() - 10; // la edad minima es 10 anios
   mensajeError = '';
 
   constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { }
@@ -21,14 +29,15 @@ export class PopoverRegistroComponent implements OnInit {
   registrarUsuario() {
     this.mensajeError = '';
 
-    if (this.email === '' || this.contrasena === '' || this.confirmarContrasena === '') {
+    if (this.email === '' || this.contrasena === '' || this.confirmarContrasena === '' || this.nombre === '' || this.apellidos === '' || this.sexo === '' || this.fechaNacimiento === '') {
       this.mensajeError = 'Todos los campos son necesarios. Por favor complete el formulario.';
 
     } else if (this.contrasena !== this.confirmarContrasena) {
       this.mensajeError = 'La confirmación de contraseña no coincide. Deben ser iguales.'; 
 
     } else {
-      this.autenticacion.registrarUsuario(this.email, this.contrasena);
+      let fechaNacimientoFormateada = format(new Date(this.fechaNacimiento), 'MM/dd/yyyy');
+      this.autenticacion.registrarUsuario(this.email, this.contrasena, this.nombre, this.apellidos, this.sexo, fechaNacimientoFormateada);
     }
     
   }

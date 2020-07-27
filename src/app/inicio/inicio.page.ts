@@ -4,6 +4,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { PopoverController } from '@ionic/angular';
 import { PopoverRegistroComponent } from '../popover-registro/popover-registro.component';
 import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contrasena/popover-recuperar-contrasena.component';
+import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,8 +17,9 @@ export class InicioPage implements OnInit {
   email: string;
   contrasena: string;
   botonIniciarSesion: boolean;
+  provider = new firebase.auth.GoogleAuthProvider();
 
-  constructor(private autenticacion: AuthenticationService, public popover: PopoverController) { 
+  constructor(private autenticacion: AuthenticationService, public popover: PopoverController, private router: Router) { 
     this.email = 'enmanuelfeliz106@gmail.com';
     this.contrasena = 'universal0707';
     this.botonIniciarSesion = false;
@@ -62,6 +65,11 @@ export class InicioPage implements OnInit {
 
     });
     return await popover.present();
+  }
+
+  entrarConGoogle() {
+    this.autenticacion.loginConGoogle();
+
   }
 
 }

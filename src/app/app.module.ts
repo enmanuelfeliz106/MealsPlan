@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PopoverComponent } from './popover/popover.component';
 import { MenuComponent } from './menu/menu.component';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 
@@ -42,7 +43,8 @@ import { MenuComponent } from './menu/menu.component';
             AngularFireModule.initializeApp(environment.firebase),
             AngularFirestoreModule,
             CommonModule,
-            FormsModule
+            FormsModule,
+            
 
           ],
 
@@ -51,6 +53,7 @@ import { MenuComponent } from './menu/menu.component';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     { provide: LOCALE_ID, useValue: 'zh-CN'},
+    GooglePlus
 
   ],
   bootstrap: [AppComponent]
