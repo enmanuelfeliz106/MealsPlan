@@ -2,6 +2,7 @@ import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { PopoverController, AlertController, NavController } from '@ionic/angular';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
 import { format} from 'date-fns';
+import { CalendarComponentOptions } from 'ion2-calendar';
 
 
 @Component({
@@ -14,6 +15,11 @@ export class CalendarioPage implements OnInit {
 
   date: Date;
   type: 'string';
+  opciones: CalendarComponentOptions = {
+    monthPickerFormat: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    weekdays: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+    color: 'danger'
+  };
 
 
   constructor(private popover: PopoverController, private alert: AlertController, private nav: NavController) {
