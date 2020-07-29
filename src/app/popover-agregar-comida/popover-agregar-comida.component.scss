@@ -1,8 +1,33 @@
-p{
+#contenedor{
+    border: 2px solid aliceblue;
+    border-radius: 5px;
+}
+
+
+#fecha{
     text-align: center; 
+    background: #DD3A46;
+    color: aliceblue;
+    border-radius: 10px;
+    display: block;
+    width: max-content;
+    margin: 5px auto;
+    padding: 5px;
 }
 
 
 #mensajeError{
-    color: rgb(255, 74, 74);
+    color: #DD3A46;
+    text-align: center;
 }
+
+ion-item{
+    --background: transparent;
+    color: aliceblue;
+}
+
+ion-button{
+    
+    margin: 10px auto;
+}
+

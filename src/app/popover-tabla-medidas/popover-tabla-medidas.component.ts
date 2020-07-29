@@ -17,6 +17,8 @@ export class PopoverTablaMedidasComponent implements OnInit {
   ngOnInit() {}
 
   convertir() {
+    document.getElementById('equivalenciasYBotones').style.marginBottom = '160px';
+
     if (this.medida === 'onzas') {
       this.equivalencias = [{med: 'gramos', valor: (this.numero * 28.35).toFixed(2)},
                             {med: 'libras', valor: (this.numero * 0.0625).toFixed(2)},
