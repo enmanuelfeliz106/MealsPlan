@@ -9,8 +9,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-item id="fecha" color="light">
+<ion-content [fullscreen]="false">
+  <ion-item id="fecha">
     <ion-label>{{hoy}}</ion-label>
   </ion-item>
   
@@ -24,7 +24,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-item color="success">
+  <ion-item color="warning">
     <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
     <ion-label>
       <p>Desliza para actualizar</p> 
@@ -39,7 +39,7 @@
   
   <ion-item-sliding *ngFor="let comida of comidas; index as i">
     
-    <ion-item>
+    <ion-item color="light">
       <br> <br> <br> <br>
       <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
         

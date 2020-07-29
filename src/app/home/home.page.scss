@@ -13,15 +13,12 @@ ion-item ion-label{
 ion-item-sliding{
   border: 1px solid rgba(0, 0, 114, 0.781);
   margin: 15px 0;
+  border-radius: 10px;
   
 }
 
 ion-item ion-label h1{
   font-size: 0.85em; 
-}
-
-ion-header{
-  margin-bottom: 5px;
 }
 
 #mensajePantallaVacia{
@@ -35,3 +32,13 @@ ion-header{
   font-size: 1.2em;
 }
 
+#fecha{
+  --background: #DD3A46;
+  color: aliceblue;
+}
+
+ion-item-sliding{
+  ion-item, ion-item-options{
+    border-radius: 10px;
+  }
+}
