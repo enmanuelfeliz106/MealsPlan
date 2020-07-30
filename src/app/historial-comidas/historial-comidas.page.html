@@ -21,7 +21,7 @@
     </ion-select>
   </ion-item>
 
-  <ion-item *ngIf= "select == 'fecha'">
+  <ion-item *ngIf= "select == 'fecha'" id="fecha">
     <ion-label>Fecha: </ion-label>
     <ion-datetime mode="ios" [(ngModel)]="fecha" value="1995-04-15" min="{{yearMin}}" max="{{yearMax}}"
       doneText= "Ok"
