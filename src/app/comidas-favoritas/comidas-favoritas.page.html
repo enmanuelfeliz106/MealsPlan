@@ -16,18 +16,21 @@
     <ion-card-content> No has agregado ninguna comida favorita.</ion-card-content>
   </ion-card>
 
-  <ion-list>
-    <ion-card *ngFor="let comida of comidas; index as i">
+    <ion-card color="warning" *ngFor="let comida of comidas; index as i">
       
-      <ion-item>
-        {{comida.fecha}}
-        <ion-label (click)="pasarComidaAHoy(i)">{{comida.comida}}</ion-label>
-        <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="primary">Ver</ion-button>
+      <ion-item color="warning">
+        <ion-label>{{comida.comida}}</ion-label>
+        <ion-button fill="outline" slot="end" (click)="presentPopover(null, comida)" color="dark">Ver</ion-button>
       </ion-item>
     
       <ion-card-content>
-        {{comida.nombre}}
+        <p><strong>Fecha:</strong> {{comida.fecha}}</p> 
+        <p id="fecha"><strong>Nombre:</strong> {{comida.nombre}}</p> 
+        <ion-icon id="iconoMas" name="duplicate-outline" slot="end" (click)="pasarComidaAHoy(i)"></ion-icon>
       </ion-card-content>
+
+     
+
     </ion-card>
-  </ion-list>
+
 </ion-content>
