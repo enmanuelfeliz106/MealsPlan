@@ -41,4 +41,9 @@ ion-item-sliding{
   ion-item, ion-item-options{
     border-radius: 10px;
   }
+
+  ion-item ion-button.detalles{
+    --background: rgba(0, 0, 114, 0.781);
+  }
+  
 }

@@ -66,6 +66,8 @@ export class HomePage {
 
       $("ion-item-options #favorita" + idDoc).removeAttr("color");
       $("ion-item-options #favorita" + idDoc).attr("color", "warning");
+      $("#" + idDoc).removeAttr("color");
+      $("#" + idDoc).attr("color", "warning");
 
       firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').doc(idDoc).update({favorita: true});
       this.favoritas[index] = true;
@@ -74,6 +76,8 @@ export class HomePage {
 
       $("ion-item-options #favorita" + idDoc).removeAttr("color");
       $("ion-item-options #favorita" + idDoc).attr("color", "light");
+      $("#" + idDoc).removeAttr("color");
+      $("#" + idDoc).attr("color", "light");
 
       firebase.firestore().collection('usuarios').doc(idUsuario).collection('comidasGuardadas').doc(idDoc).update({favorita: false});
       this.favoritas[index] = false;
