@@ -61,6 +61,11 @@ ion-calendar{
         color: aliceblue !important;
         font-family: CabinItalic !important; 
     }
+
+    button[disabled] p{
+        color: black !important;
+        
+    }
     
     border: 2px groove rgba(0, 0, 114, 0.781);
     border-radius: 10px;
