@@ -1,50 +1,43 @@
 
+<div id="contenedor">
+
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-title>
+      Medidas | Equivalencias
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content>
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Tabla de medidas y equivalencias</ion-card-title>
-  </ion-card-header>
 
-  <ion-card-content>
+        <ion-item id="select">
+          <ion-input type="number" name="numero" [(ngModel)]="numero"></ion-input>
+          <ion-select mode="ios" okText="Ok" cancelText="Cancelar" [(ngModel)]="medida">
+            <ion-select-option value="onzas">onzas</ion-select-option>
+            <ion-select-option value="gramos">gramos</ion-select-option>
+            <ion-select-option value="tazas">tazas</ion-select-option>
+            <ion-select-option value="cucharadas">cucharadas</ion-select-option>
+            <ion-select-option value="cucharaditas">cucharaditas</ion-select-option>
+            <ion-select-option value="pintas">pintas</ion-select-option>
+            <ion-select-option value="kilos">kilos</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <div id="equivalenciasYBotones">
+          <ion-item *ngFor="let equivalencia of equivalencias">
+            <p> = {{equivalencia.valor}} {{equivalencia.med}}</p>
+          </ion-item>
+        
 
-    <ion-list>
-    
-      <ion-item>
-        <ion-input type="number" name="numero" [(ngModel)]="numero"></ion-input>
-        <ion-select mode="ios" okText="Ok" cancelText="Cancelar" [(ngModel)]="medida">
-          <ion-select-option value="onzas">onzas</ion-select-option>
-          <ion-select-option value="gramos">gramos</ion-select-option>
-          <ion-select-option value="tazas">tazas</ion-select-option>
-          <ion-select-option value="cucharadas">cucharadas</ion-select-option>
-          <ion-select-option value="cucharaditas">cucharaditas</ion-select-option>
-          <ion-select-option value="pintas">pintas</ion-select-option>
-          <ion-select-option value="kilos">kilos</ion-select-option>
-        </ion-select>
-      </ion-item>
+        <ion-button color="success" (click)="convertir()" expand="block">Mostrar equivalencias</ion-button>
+        <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cerrar</ion-button>
 
-      <ion-button color="primary" (click)="convertir()" expand="block">Mostrar equivalencias</ion-button>
-      <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cerrar</ion-button>
-    
-    </ion-list>
-
-    <ion-list>
-      <ion-item *ngFor="let equivalencia of equivalencias">
-        <p> = {{equivalencia.valor}} {{equivalencia.med}}</p>
-      </ion-item>
-    </ion-list>
-    
-
-    
-  </ion-card-content>
-
-</ion-card>
-
-
-<br>
+        </div>
+        
 </ion-content>
-<br>
-<br>
 
-
+</div>

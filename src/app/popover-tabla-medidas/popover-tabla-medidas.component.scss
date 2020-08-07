@@ -1,8 +1,4 @@
 
-ion-card-title{
-    text-align: center;
-}
-
 
 p, ion-input, ion-select, ion-select-option{
     font-size: 1.2em;
@@ -10,17 +6,23 @@ p, ion-input, ion-select, ion-select-option{
 
 ion-button{
     
-    margin: 15px auto;
-}
-
-ion-card{
-    margin: 10px;
+    margin: 10px auto;
 }
 
 ion-content{
-    margin: 15px;
+    padding: 5px;
 }
 
 ion-item ion-input{
     margin: auto;
+}
+
+ion-item{
+    --background: transparent;
+    color: aliceblue;
+}
+
+#select, #contenedor{
+    border: 2px solid aliceblue;
+    border-radius: 5px;
 }

@@ -1,5 +1,5 @@
 
-
+<div id="contenedor">
 <ion-header>
   
   <ion-toolbar>
@@ -11,8 +11,6 @@
 <ion-content>
 
   <p id="fecha"><strong>Fecha elegida:</strong> {{fechaLocal}}</p>
-
-  <ion-list>
   
     <ion-item>
       <ion-label>Comida</ion-label>
@@ -46,15 +44,15 @@
       <ion-input required type="number" name="calorias" [(ngModel)]="calorias"></ion-input>
     </ion-item>
   
-  </ion-list>
-  
   <p id="mensajeError"> {{mensajeError}}</p>
 
-  <ion-button disabled="{{botonAgregar}}" color="primary" expand="block" (click)="agregarOActualizarComida(opcion, fecha, docId, comida, nombre, ingredientes, notas, calorias)">Guardar</ion-button>
+  <ion-button disabled="{{botonAgregar}}" color="success" expand="block" (click)="agregarOActualizarComida(opcion, fecha, docId, comida, nombre, ingredientes, notas, calorias)">Guardar</ion-button>
   <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
   <br> 
 
 </ion-content>
+
+</div>
 
 
 

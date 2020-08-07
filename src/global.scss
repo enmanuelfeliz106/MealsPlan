@@ -25,8 +25,23 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@font-face {
+    font-family: Cabin;
+    src: url(./assets/Cabin/Cabin-Regular.ttf);
+}
+
+@font-face {
+    font-family: CabinItalic;
+    src: url(./assets/Cabin/Cabin-SemiBoldItalic.ttf);
+}
+
 *{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Cabin;
+}
+
+ion-content{
+    --background: rgba(0, 0, 114, 0.781);
+    color: aliceblue;
 }
 
 ion-toolbar{
@@ -40,36 +55,34 @@ ion-toolbar{
 
 }
 
-/*
-.alertaExito{
-
-    --background: #2dd36f ;
-    alert-button{
-        color: white;
-      }
-    
-}
-
-.alertaError{
-
-    --background: #eb445a;
-    alert-button{
-        color: white;
-      }
-      
-    
-}*/
-
 ion-calendar{
+    background: #DD3A46 !important;
+    *{
+        color: aliceblue !important;
+        font-family: CabinItalic !important; 
+    }
+
+    button[disabled] p{
+        color: black !important;
+        
+    }
+    
     border: 2px groove rgba(0, 0, 114, 0.781);
     border-radius: 10px;
 
+    ion-calendar-month{
+        background: #E07C70 !important;
+        border-radius: 10px;
+    }
+
     div.title{
-        background-color: #2dd36f ;
+        background-color:#DD3A46;
         border-radius: 20px;
         *{
             color: aliceblue !important;
         }
+        border-top: 2px solid rgba(0, 0, 114, 0.781);
+        border-bottom: 2px solid rgba(0, 0, 114, 0.781);
     }
     .forward.md.button.button-clear.button-has-icon-only.ion-activatable.ion-focusable.hydrated{
         background-color: rgba(0, 0, 114, 0.781);

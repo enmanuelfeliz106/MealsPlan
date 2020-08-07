@@ -16,6 +16,7 @@
   
     <ion-calendar [(ngModel)]="date"
       (onChange)="onChange($event)"
+      [options]="opciones"
       [type]="type"
       format="'DD-MM-YYYY'">
     </ion-calendar>

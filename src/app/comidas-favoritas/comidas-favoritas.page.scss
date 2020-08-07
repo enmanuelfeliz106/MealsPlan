@@ -6,3 +6,33 @@ ion-label{
     text-align: center;
     margin: 200px 20px;
   }
+
+
+#nombre{
+    display: inline-block;
+    color: rgba(0, 0, 114, 0.781);
+    font-family: CabinItalic; 
+    font-size: 1.2em;
+    font-weight: bold;
+
+    strong{
+        color: black;
+        font-size: 0.8em;
+    }
+}
+
+#botonIconoMas{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    --background: #DD3A46;  
+
+}
+
+#iconomas{
+    color: aliceblue;
+}
+
+ion-item ion-button.detalles{
+    --background: rgba(0, 0, 114, 0.781);
+  }

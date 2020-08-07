@@ -9,8 +9,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-item id="fecha" color="light">
+<ion-content [fullscreen]="false">
+  <ion-item id="fecha">
     <ion-label>{{hoy}}</ion-label>
   </ion-item>
   
@@ -24,7 +24,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-item color="success">
+  <ion-item color="warning">
     <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
     <ion-label>
       <p>Desliza para actualizar</p> 
@@ -39,7 +39,7 @@
   
   <ion-item-sliding *ngFor="let comida of comidas; index as i">
     
-    <ion-item>
+    <ion-item *ngIf="comida.favorita == true; else elsefavorita"  color="warning" id="{{idsDocument[i]}}">
       <br> <br> <br> <br>
       <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
         
@@ -57,9 +57,35 @@
         </h1>
         
       </ion-label>
-      <ion-button fill="outline" slot="end" (click)="presentPopover(null, comidas[i])" color="primary">Ver</ion-button>
+      <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comidas[i])" >Ver</ion-button>
       <br> <br> <br> <br>
     </ion-item>
+
+    <ng-template #elsefavorita>
+      <ion-item color="light" id="{{idsDocument[i]}}">
+        <br> <br> <br> <br>
+        <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
+          
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+        <ng-template #elseBlock>
+          <ion-button (click)="check(i, idsDocument[i])" color="success" id="{{idsDocument[i]}}">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ng-template>
+        
+        <ion-label>
+          <h1>
+            {{comida.comida}}
+          </h1>
+          
+        </ion-label>
+        <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comidas[i])">Ver</ion-button>
+        <br> <br> <br> <br>
+      </ion-item>
+    </ng-template>
+
+
 
     <ion-item-options side="end">
       <ion-item-option *ngIf="comida.favorita == false; else elseBlock2" color="light" (click)="agregarAFavoritas(i, idsDocument[i])" id="favorita{{idsDocument[i]}}">
