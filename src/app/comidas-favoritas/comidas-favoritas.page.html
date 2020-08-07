@@ -19,14 +19,17 @@
     <ion-card color="warning" *ngFor="let comida of comidas; index as i">
       
       <ion-item color="warning">
-        <ion-label>{{comida.comida}}</ion-label>
+        <ion-label><strong>{{comida.comida}}</strong></ion-label>
         <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comida)">Ver</ion-button>
       </ion-item>
     
       <ion-card-content>
         <p><strong>Fecha:</strong> {{comida.fecha}}</p> 
-        <p id="fecha"><strong>Nombre:</strong> {{comida.nombre}}</p> 
-        <ion-icon id="iconoMas" name="duplicate-outline" slot="end" (click)="pasarComidaAHoy(i)"></ion-icon>
+        <p id="nombre"><strong>Nombre:</strong> {{comida.nombre}}</p>
+        <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(i)" >
+          <ion-icon id="iconoMas" name="duplicate-outline"></ion-icon>
+        </ion-button> 
+        
       </ion-card-content>
 
      

@@ -8,15 +8,29 @@ ion-label{
   }
 
 
-#fecha{
+#nombre{
     display: inline-block;
+    color: rgba(0, 0, 114, 0.781);
+    font-family: CabinItalic; 
+    font-size: 1.2em;
+    font-weight: bold;
+
+    strong{
+        color: black;
+        font-size: 0.8em;
+    }
 }
 
-#iconoMas{
+#botonIconoMas{
     position: absolute;
-    right: 20px;
-    font-size: 30px;
+    right: 15px;
+    bottom: 15px;
+    --background: #DD3A46;  
 
+}
+
+#iconomas{
+    color: aliceblue;
 }
 
 ion-item ion-button.detalles{
