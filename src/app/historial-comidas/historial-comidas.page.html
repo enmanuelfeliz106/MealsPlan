@@ -38,24 +38,28 @@
     <ion-input type="text" name="palabraClave" [(ngModel)]="palabraClave"></ion-input>
   </ion-item>
 
-  <ion-button disabled="{{botonMostrar}}" color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
+  <ion-button id="botonMostrar" disabled="{{botonMostrar}}" color="success" expand="block" (click)="mostrarComidas()">Mostrar comidas</ion-button>
 
   <hr>
  
-  <ion-card *ngFor="let comida of comidas; index as i" id="alinearLabel">
+  <ion-card *ngFor="let comida of comidas; index as i" id="comida">
+
     <ion-item>
-      <ion-label (click)="pasarComidaAHoy(i)">{{comida.comida}}</ion-label>
+      <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(i)" >
+        <ion-icon id="iconoMas" name="duplicate-outline"></ion-icon>
+      </ion-button> 
+      <ion-label>{{comida.comida}}</ion-label>
       <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comida)">Ver</ion-button>
     </ion-item>
   
     <ion-card-content>
       {{comida.nombre}}
       <ion-button slot="end" *ngIf="comida.favorita == false; else elseBlock" color="light" size="small" (click)="favorita(i, idsDocument[i])" id="boton{{idsDocument[i]}}">
-        <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="star-outline" size="small"></ion-icon>
       </ion-button>
       <ng-template #elseBlock>
         <ion-button slot="end" color="warning"  size="small" (click)="favorita(i, idsDocument[i])" id="boton{{idsDocument[i]}}">
-          <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+          <ion-icon slot="icon-only" name="star-outline" size="small"></ion-icon>
         </ion-button>
       </ng-template>
     </ion-card-content>
