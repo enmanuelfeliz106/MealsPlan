@@ -135,60 +135,24 @@ export class CRUDComidasService {
       });
   }
 
-  pasarAHoy(index) {
-    this.mostrarComidas('fecha', this.hoy);
-    this.comidasDeHoy = this.comidas;
+  pasarAHoy(comida, idDoc) {
+    
 
     this.nuevaComida = {
         fecha: this.hoy,
-        comida: this.comidas[index].comida,
-        nombre: this.comidas[index].nombre,
-        ingredientes: this.comidas[index].ingredientes,
-        notas: this.comidas[index].notas,
-        calorias: this.comidas[index].calorias,
+        comida: comida.comida,
+        nombre: comida.nombre,
+        ingredientes: comida.ingredientes,
+        notas: comida.notas,
+        calorias: comida.calorias,
         check: false,
-        favorita: false
+        favorita: comida.favorita
       };
 
-    let comidaReset: Comida;
+    firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).
+    update({favorita: false}); // quitar de favorita para no repetirla en la pagina de favoritas
 
-
-    for (let i = 0; i < this.comidasDeHoy.length; i++) {
-      comidaReset = {
-        fecha: this.hoy,
-        comida: this.comidasDeHoy[i].comida,
-        nombre: this.comidasDeHoy[i].nombre,
-        ingredientes: this.comidasDeHoy[i].ingredientes,
-        notas: this.comidasDeHoy[i].notas,
-        calorias: this.comidasDeHoy[i].calorias,
-        check: false,
-        favorita: false
-      };
-
-
-      if (this.nuevaComida.comida === comidaReset.comida &&
-          this.nuevaComida.nombre === comidaReset.nombre && 
-          this.nuevaComida.ingredientes === comidaReset.ingredientes &&
-          this.nuevaComida.fecha === comidaReset.fecha &&
-          this.nuevaComida.notas === comidaReset.notas && 
-          this.nuevaComida.calorias === comidaReset.calorias &&
-          this.nuevaComida.check === comidaReset.check &&
-          this.nuevaComida.favorita === comidaReset.favorita) {
-
-        this.validador = true;
-        break;
-
-      } else {
-        this.validador = false;
-      }
-
-    }
-
-    if (this.validador === true) {
-      this.alertaError('Ya tienes esta comida registrada en las comidas para hoy.');
-
-    } else {
-      firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
+    firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').add(this.nuevaComida).then( (exito) => {
 
         this.alertaExito();
 
@@ -197,11 +161,10 @@ export class CRUDComidasService {
           this.alertaError('Intente de nuevo. Si el problema persiste, reporte su situación a nuestro correo.');
 
         });
-    }
 
   }
 
-  async presentAlertPasarComida(index) {
+  async presentAlertPasarComida(comida, idDoc) {
     const alert = await this.alerta.create({
       header: 'Pasar comida para hoy',
       subHeader: '¿Seguro que desea hacerlo?',
@@ -213,7 +176,7 @@ export class CRUDComidasService {
         {
           text: 'Si',
           handler: () => {
-            this.pasarAHoy(index);
+            this.pasarAHoy(comida, idDoc);
           }
         }]
     });
