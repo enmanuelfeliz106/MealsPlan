@@ -12,6 +12,7 @@ export class ComidasFavoritasPage implements OnInit {
 
 
   comidas = [];
+  idsDocument = [];
 
   constructor(public popoverController: PopoverController, private crud: CRUDComidasService, private nav: NavController) {
 
@@ -40,13 +41,15 @@ export class ComidasFavoritasPage implements OnInit {
   obtenerComidas() {
 
     this.comidas = [];
+    this.idsDocument = [];
     this.crud.mostrarComidas('favorita', true);
     this.comidas = this.crud.comidas;
+    this.idsDocument = this.crud.idsDocument;
 
   }
 
-  pasarComidaAHoy(index) {
-    this.crud.presentAlertPasarComida(index);
+  pasarComidaAHoy(comida, id) {
+    this.crud.presentAlertPasarComida(comida, id);
   }
 
   ngOnInit() {

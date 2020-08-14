@@ -45,7 +45,7 @@
   <ion-card *ngFor="let comida of comidas; index as i" id="comida">
 
     <ion-item>
-      <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(i)" >
+      <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(comida, idsDocument[i])" >
         <ion-icon id="iconoMas" name="duplicate-outline"></ion-icon>
       </ion-button> 
       <ion-label>{{comida.comida}}</ion-label>

@@ -26,7 +26,7 @@
       <ion-card-content>
         <p><strong>Fecha:</strong> {{comida.fecha}}</p> 
         <p id="nombre"><strong>Nombre:</strong> {{comida.nombre}}</p>
-        <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(i)" >
+        <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(comida, idsDocument[i])" >
           <ion-icon id="iconoMas" name="duplicate-outline"></ion-icon>
         </ion-button> 
         

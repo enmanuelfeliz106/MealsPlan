@@ -92,8 +92,8 @@ export class HistorialComidasPage {
     this.crud.popoverMostrarDetalles(ev, comida);
   }
 
-  pasarComidaAHoy(index) {
-    this.crud.presentAlertPasarComida(index);
+  pasarComidaAHoy(comida, idDoc) {
+    this.crud.presentAlertPasarComida(comida, idDoc);
   }
 
 }
