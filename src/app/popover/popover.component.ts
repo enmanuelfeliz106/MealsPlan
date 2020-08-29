@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { PopoverCompartirEnRedesComponent } from '../popover-compartir-en-redes/popover-compartir-en-redes.component';
 
 
 @Component({
@@ -12,13 +13,26 @@ export class PopoverComponent implements OnInit {
 
   comidaObj;
 
-  constructor(public popover: PopoverController) {}
+  constructor(public popoverController: PopoverController) {}
 
   ngOnInit() {}
 
+  async compartirComidaEnRedes(ev: any, comidaObj) {
+    const popover = await this.popoverController.create({
+      component: PopoverCompartirEnRedesComponent,
+      event: ev,
+      translucent: true,
+      componentProps: {
+        comida: comidaObj
+      }
+    });
+    return await popover.present();
+  }
+
+
   cerrarPopover() {
 
-    this.popover.dismiss();
+    this.popoverController.dismiss();
   }
 
 }

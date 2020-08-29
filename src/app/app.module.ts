@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { PopoverComponent } from './popover/popover.component';
 import { MenuComponent } from './menu/menu.component';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { PopoverCompartirEnRedesComponent } from './popover-compartir-en-redes/popover-compartir-en-redes.component';
 
 
 
@@ -34,10 +36,12 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     PopoverTablaMedidasComponent,
     PopoverComponent,
     PopoverAgregarComidaComponent,
+    PopoverCompartirEnRedesComponent
     ],
   exports: [
   ],
-  entryComponents: [MenuComponent, PopoverTablaMedidasComponent, PopoverComponent, PopoverAgregarComidaComponent],
+  entryComponents: [MenuComponent, PopoverTablaMedidasComponent, PopoverComponent,
+                    PopoverAgregarComidaComponent, PopoverCompartirEnRedesComponent],
   imports: [BrowserModule, IonicModule.forRoot(),
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebase),
@@ -53,7 +57,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     { provide: LOCALE_ID, useValue: 'zh-CN'},
-    GooglePlus
+    GooglePlus,
+    SocialSharing
 
   ],
   bootstrap: [AppComponent]
