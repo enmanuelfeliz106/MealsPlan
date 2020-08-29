@@ -5,11 +5,15 @@
   
   <ion-toolbar>
     <p>{{comidaObj.nombre}}</p>
+    <ion-button color="transparent" slot="end" (click)="compartirComidaEnRedes(null, comidaObj)">
+      <ion-icon name="share-social-outline" slot="icon-only"></ion-icon>
+    </ion-button>
     
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
   <ion-card>
     <ion-card-header>
       
