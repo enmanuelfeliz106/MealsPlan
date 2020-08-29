@@ -20,8 +20,6 @@ export class InicioPage implements OnInit {
   provider = new firebase.auth.GoogleAuthProvider();
 
   constructor(private autenticacion: AuthenticationService, public popover: PopoverController, private router: Router) { 
-    this.email = 'enmanuelfeliz106@gmail.com';
-    this.contrasena = 'universal0707';
     this.botonIniciarSesion = false;
   }
 
