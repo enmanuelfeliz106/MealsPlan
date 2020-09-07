@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
-import { PopoverController, AlertController} from '@ionic/angular';
+import { PopoverController, AlertController, Platform } from '@ionic/angular';
 import { PopoverComponent } from '../popover/popover.component';
 import * as firebase from 'firebase';
 import { PopoverAgregarComidaComponent } from '../popover-agregar-comida/popover-agregar-comida.component';
@@ -14,6 +14,7 @@ import { format} from 'date-fns';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  subscription;
   comidas = [];
   idsDocument = [];
   checkButton = [];
@@ -21,7 +22,7 @@ export class HomePage {
   hoy = format(new Date(), 'MM/dd/yyyy');
 
   constructor(public popoverController: PopoverController, private crud: CRUDComidasService,
-              public popover: PopoverController, public alert: AlertController) {
+              public popover: PopoverController, public alert: AlertController, private platform: Platform) {
 
       this.obtenerComidas();
 
@@ -140,6 +141,16 @@ export class HomePage {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
+  }
+
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+      // do nothing
+    });
+  }
+  
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
 

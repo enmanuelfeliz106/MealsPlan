@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, Platform } from '@ionic/angular';
 import { PopoverRegistroComponent } from '../popover-registro/popover-registro.component';
 import { PopoverRecuperarContrasenaComponent } from '../popover-recuperar-contrasena/popover-recuperar-contrasena.component';
 import * as firebase from 'firebase';
@@ -14,12 +14,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
+  subscription;
   email: string;
   contrasena: string;
   botonIniciarSesion: boolean;
   provider = new firebase.auth.GoogleAuthProvider();
 
-  constructor(private autenticacion: AuthenticationService, public popover: PopoverController, private router: Router) { 
+  constructor(private autenticacion: AuthenticationService, public popover: PopoverController, private router: Router,
+              private platform: Platform) { 
     this.botonIniciarSesion = false;
   }
 
@@ -68,6 +70,16 @@ export class InicioPage implements OnInit {
   entrarConGoogle() {
     this.autenticacion.loginConGoogle();
 
+  }
+
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+      // do nothing
+    });
+  }
+  
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
 }
