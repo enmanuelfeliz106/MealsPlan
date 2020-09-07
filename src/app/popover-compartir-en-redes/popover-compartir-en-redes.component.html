@@ -12,8 +12,8 @@
 
   <ion-icon src="assets\Whatsapp_icon.svg" (click)="compartirEnWhatsapp(comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)"></ion-icon>
   <ion-icon src="assets\Instagram_icon.svg" (click)="compartirEnInstagram(comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)"></ion-icon>
-  <ion-icon src="assets\Facebook_icon.svg"></ion-icon>
-  <ion-icon src="assets\Email_icon.svg"></ion-icon>
+  <ion-icon src="assets\Facebook_icon.svg" (click)="compartirEnFacebook(comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)"></ion-icon>
+  <ion-icon src="assets\Email_icon.svg" (click)="compartirPorCorreo(comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)"></ion-icon>
 
   <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
 
