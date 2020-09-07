@@ -17,10 +17,11 @@ export class PopoverCompartirEnRedesComponent implements OnInit {
   ngOnInit() {}
 
   compartirEnWhatsapp(comida, nombre, ingredientes, notas, calorias) {
+
     let mensaje = 'Mira mi ' + comida + ' que he planeado con Meals Plan. ' + '-----' + nombre + '----- ' + ' INGREDIENTES: ' + ingredientes + '.' + ' NOTAS: ' + notas + '.' + ' CALORÍAS: ' + calorias + '.';
     this.share.canShareVia('whatsapp').then(exito => {
 
-      this.share.shareViaWhatsApp(mensaje, 'assets\MealsPlan-azul.png', 'https://docs.google.com/document/d/1m1M0Ls5L8kOPD_GY1Cyjzlt5txjhqYJ1AoujUBbavf0/edit').then(exito =>{
+      this.share.shareViaWhatsApp(mensaje).then(exito =>{
         this.popoverController.dismiss();
       }).catch(err => {
         this.popoverController.dismiss();
@@ -38,7 +39,7 @@ export class PopoverCompartirEnRedesComponent implements OnInit {
     let mensaje = 'Mira mi ' + comida + ' que he planeado con Meals Plan. ' + '-----' + nombre + '----- ' + ' INGREDIENTES: ' + ingredientes + '.' + ' NOTAS: ' + notas + '.' + ' CALORÍAS: ' + calorias + '.';
     this.share.canShareVia('instagram').then(exito => {
 
-      this.share.shareViaInstagram(mensaje, 'assets\MealsPlan-azul.png').then(exito =>{
+      this.share.shareViaInstagram(mensaje, null).then(exito =>{
         this.popoverController.dismiss();
       }).catch(err => {
         this.popoverController.dismiss();
@@ -48,6 +49,42 @@ export class PopoverCompartirEnRedesComponent implements OnInit {
     }).catch(error => {
       this.popoverController.dismiss();
       this.alerta.alertaError('Error al compartir comida en instagram' + error);
+    });
+
+  }
+
+  compartirEnFacebook(comida, nombre, ingredientes, notas, calorias) {
+    let mensaje = 'Mira mi ' + comida + ' que he planeado con Meals Plan. ' + '-----' + nombre + '----- ' + ' INGREDIENTES: ' + ingredientes + '.' + ' NOTAS: ' + notas + '.' + ' CALORÍAS: ' + calorias + '.';
+    this.share.canShareVia('facebook').then(exito => {
+
+      this.share.shareViaFacebook(mensaje).then(exito =>{
+        this.popoverController.dismiss();
+      }).catch(err => {
+        this.popoverController.dismiss();
+        this.alerta.alertaError('Error al compartir comida en facebook' + err);
+      });
+
+    }).catch(error => {
+      this.popoverController.dismiss();
+      this.alerta.alertaError('Error al compartir comida en facebook' + error);
+    });
+
+  }
+
+  compartirPorCorreo(comida, nombre, ingredientes, notas, calorias) {
+    let mensaje = 'Mira mi ' + comida + ' que he planeado con Meals Plan. ' + '-----' + nombre + '----- ' + ' INGREDIENTES: ' + ingredientes + '.' + ' NOTAS: ' + notas + '.' + ' CALORÍAS: ' + calorias + '.';
+    this.share.canShareViaEmail().then(exito => {
+
+      this.share.shareViaEmail(mensaje, 'Mi comida planeada con Meals Plan', ['']).then(exito =>{
+        this.popoverController.dismiss();
+      }).catch(err => {
+        this.popoverController.dismiss();
+        this.alerta.alertaError('Error al compartir comida por correo' + err);
+      });
+
+    }).catch(error => {
+      this.popoverController.dismiss();
+      this.alerta.alertaError('Error al compartir comida por correo' + error);
     });
 
   }
