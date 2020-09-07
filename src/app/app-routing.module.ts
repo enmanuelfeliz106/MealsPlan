@@ -28,6 +28,10 @@ const routes: Routes = [
   },  {
     path: 'ajustes',
     loadChildren: () => import('./ajustes/ajustes.module').then( m => m.AjustesPageModule)
+  },
+  {
+    path: 'manual-de-uso-y-preguntas',
+    loadChildren: () => import('./manual-de-uso-y-preguntas/manual-de-uso-y-preguntas.module').then( m => m.ManualDeUsoYPreguntasPageModule)
   }
 
 
