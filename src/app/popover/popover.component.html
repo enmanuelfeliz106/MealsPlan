@@ -1,0 +1,57 @@
+
+<div id="contenedor">
+
+<ion-header>
+  
+  <ion-toolbar>
+    <p>{{comidaObj.nombre}}</p>
+    <ion-button color="transparent" slot="end" (click)="compartirComidaEnRedes(null, comidaObj)">
+      <ion-icon name="share-social-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Ingredientes:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p *ngFor="let ingrediente of comidaObj.ingredientes; index as i">
+        <ion-icon name="chevron-forward-outline"></ion-icon> {{comidaObj.ingredientes[i]}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Notas:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{comidaObj.notas}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title>Calorías:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{comidaObj.calorias}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cerrar</ion-button>
+
+</ion-content>
+
+
+</div>

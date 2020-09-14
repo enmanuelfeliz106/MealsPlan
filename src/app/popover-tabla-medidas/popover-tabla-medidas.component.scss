@@ -1,0 +1,28 @@
+
+
+p, ion-input, ion-select, ion-select-option{
+    font-size: 1.2em;
+}
+
+ion-button{
+    
+    margin: 10px auto;
+}
+
+ion-content{
+    padding: 5px;
+}
+
+ion-item ion-input{
+    margin: auto;
+}
+
+ion-item{
+    --background: transparent;
+    color: aliceblue;
+}
+
+#select, #contenedor{
+    border: 2px solid aliceblue;
+    border-radius: 5px;
+}

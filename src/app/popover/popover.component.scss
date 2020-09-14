@@ -1,0 +1,42 @@
+
+ion-card{
+    border: 1px solid #2dd36f;
+}
+
+ion-toolbar{
+    p{
+        font-size: 1.2em;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    ion-button{
+        
+        
+        border-top: solid 2px #2dd36f;
+        border-left: solid 2px rgb(67, 67, 255);
+        border-bottom: solid 2px #fc3535;
+        border-right: solid 2px #ff23c8;
+        //border: solid 2px rgba(0, 0, 114, 0.781);
+        border-radius: 5px;
+        float: right;
+        margin-right: 10px;
+        background: aliceblue;
+
+        ion-icon{
+            color: rgba(0, 0, 114, 0.781);
+        }
+    }
+
+    
+    
+}
+
+ion-card-content{
+    font-size: 1.2em;
+}
+
+#contenedor{
+    border: 2px solid aliceblue;
+    border-radius: 5px;
+}

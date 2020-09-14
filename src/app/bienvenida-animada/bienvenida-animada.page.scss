@@ -1,0 +1,19 @@
+
+@keyframes animacion {
+    from {transform: rotate(-20deg); transition: linear;}
+    to {transform: rotate(20deg); transition: linear;}
+  }
+
+
+ion-content{
+    --background: rgba(0, 0, 114, 0.781);
+    text-align: center;
+    ion-img{
+        margin: 100px auto;
+        display: flex;
+        animation-name: animacion;
+        animation-duration: 1s;
+        animation-iteration-count: 2;
+        
+    }
+}

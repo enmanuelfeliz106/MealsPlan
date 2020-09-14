@@ -1,0 +1,41 @@
+
+#botonMostrar{
+    margin: 15px;
+}
+
+#comida ion-label{
+    text-align: center;
+    font-weight: bold;
+}
+
+#comida ion-card-content{
+    color: rgba(0, 0, 114, 0.781);
+    font-family: CabinItalic;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#comida ion-card-content ion-button{
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+}
+
+#fecha{
+    --background: #DD3A46;
+    color: aliceblue;
+}
+
+ion-item ion-button.detalles{
+    --background: rgba(0, 0, 114, 0.781);
+}
+
+#botonIconoMas{
+    --background: #DD3A46;  
+
+}
+
+#iconomas{
+    color: aliceblue;
+}
+

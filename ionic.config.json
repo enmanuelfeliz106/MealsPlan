@@ -1,5 +1,7 @@
 {
   "name": "MealsPlan",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

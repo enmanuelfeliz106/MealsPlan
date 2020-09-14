@@ -1,0 +1,8 @@
+{
+  "exportDataUploadBucket": "wipeout-takeout.appspot.com",
+  "firestore": {
+    "clearData": [
+      {"collection": "usuarios", "doc": "UID_VARIABLE"}
+    ]
+  }
+}

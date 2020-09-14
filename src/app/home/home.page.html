@@ -1,20 +1,115 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
+    <ion-menu-button slot="start"></ion-menu-button>
     <ion-title>
-      Blank
+      
+      Comidas de hoy
+      
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="false">
+  <ion-item id="fecha">
+    <ion-label>{{hoy}}</ion-label>
+  </ion-item>
+  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item color="warning">
+    <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
+    <ion-label>
+      <p>Desliza para actualizar</p> 
+    </ion-label>
+    <ion-icon name="arrow-down-circle-outline" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-card *ngIf="comidas.length == 0" color="warning" id="mensajePantallaVacia">
+    <ion-card-content> No has agregado ninguna comida para hoy.</ion-card-content>
+  </ion-card>
+
+  
+  <ion-item-sliding *ngFor="let comida of comidas; index as i">
+    
+    <ion-item *ngIf="comida.favorita == true; else elsefavorita"  color="warning" id="{{idsDocument[i]}}">
+      <br> <br> <br> <br>
+      <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
+        
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-button>
+      <ng-template #elseBlock>
+        <ion-button (click)="check(i, idsDocument[i])" color="success" id="{{idsDocument[i]}}">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ng-template>
+      
+      <ion-label>
+        <h1>
+          {{comida.comida}}
+        </h1>
+        
+      </ion-label>
+      <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comidas[i])" >Ver</ion-button>
+      <br> <br> <br> <br>
+    </ion-item>
+
+    <ng-template #elsefavorita>
+      <ion-item color="light" id="{{idsDocument[i]}}">
+        <br> <br> <br> <br>
+        <ion-button *ngIf="comida.check == false; else elseBlock" (click)="check(i, idsDocument[i])" color="light" id="{{idsDocument[i]}}">
+          
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+        <ng-template #elseBlock>
+          <ion-button (click)="check(i, idsDocument[i])" color="success" id="{{idsDocument[i]}}">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ng-template>
+        
+        <ion-label>
+          <h1>
+            {{comida.comida}}
+          </h1>
+          
+        </ion-label>
+        <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comidas[i])">Ver</ion-button>
+        <br> <br> <br> <br>
+      </ion-item>
+    </ng-template>
+
+
+
+    <ion-item-options side="end">
+      <ion-item-option *ngIf="comida.favorita == false; else elseBlock2" color="light" (click)="agregarAFavoritas(i, idsDocument[i])" id="favorita{{idsDocument[i]}}">
+        <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+      </ion-item-option>
+      <ng-template #elseBlock2>
+        <ion-item-option color="warning" (click)="agregarAFavoritas(i, idsDocument[i])" id="favorita{{idsDocument[i]}}">
+          <ion-icon slot="icon-only" name="star-outline"></ion-icon>
+        </ion-item-option>
+      </ng-template>
+      <ion-item-option color="success" (click)="presentPopoverAgregarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="start">
+      <ion-item-option color="danger" (click)="borrarComida(idsDocument[i])">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+  </ion-item-sliding>
+
+  
+
 </ion-content>
+

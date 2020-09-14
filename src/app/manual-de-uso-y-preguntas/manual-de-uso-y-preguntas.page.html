@@ -1,0 +1,92 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="irAtras()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Manual de uso y preguntas</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item color="light">
+    <ion-label>Funciones</ion-label>
+    <ion-select interface="popover" [(ngModel)]="select">
+      <ion-select-option value="Guardar comida">Guardar comida</ion-select-option>
+      <ion-select-option value="Manipular comidas guardadas">Manipular comidas guardadas</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-card *ngIf="select == 'Guardar comida'" >
+    <ion-card-header>
+      <ion-card-title>Guardar una comida</ion-card-title>
+      <ion-card-subtitle>Página: <strong>Calendario de comidas</strong></ion-card-subtitle>
+    </ion-card-header>
+        
+     
+    <ion-card-content>
+      <ion-img src="/assets/MP-MU-Calendario.png"></ion-img>
+
+      <p>
+        <strong>1)</strong> Estos son los botones de siguiente (derecha) y anterior(izquierda) y se refieren al mes o al año dependiendo
+          de si estás visualizando la elección de mes o de día.
+      </p>
+
+      <p>
+        <strong>2)</strong> Cambia el calendario de elegir día a elegir meses y viceversa, de forma que cuando visualizas los meses
+          puedes modificar el año y cuando visualizas los días puedes cambiar el mes.
+      </p>
+
+      <p>
+        <strong>3)</strong> Estos son los días del calendario que ya han pasado (los negros), no puedes agregar ninguna comida para estos días. 
+      </p>
+
+      <p>
+        <strong>4)</strong> Estos son los días que sí puedes elegir. Elige el día en el que quieres guardar una comida y luego pulsa el botón con signo de más(+) en la parte
+          inferior de la página para comenzar a agregar una nueva comida. 
+      </p>
+
+      
+      
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngIf="select == 'Manipular comidas guardadas'" >
+    <ion-card-header>
+      <ion-card-title>Manipular comidas guardadas</ion-card-title>
+      <ion-card-subtitle>Página: <strong>Comidas de hoy</strong></ion-card-subtitle>
+    </ion-card-header>
+        
+     
+    <ion-card-content>
+      <ion-img src="/assets/MP-MU-ManipularComida.png"></ion-img>
+
+      <p>
+        <strong>1)</strong> Así se ve una comida del día actual. Tienes disponible la opción de pulsar la casilla de verificación o "check box"
+          para validar si ya te la comiste o no. Además, puedes ver los detalles de tu comida pulsando el botón "ver".
+      </p>
+
+      <p>
+        <strong>2)</strong> Si deslizas la comida a la izquierda verás las opciones de añadir a favoritas y la opción de editar comida. 
+      </p>
+
+      <p>
+        <strong>3)</strong> Si deslizas la comida a la derecha verás las opción de eliminar comida.
+      </p>
+
+      
+      
+    </ion-card-content>
+
+  </ion-card>
+    
+
+
+
+</ion-content>

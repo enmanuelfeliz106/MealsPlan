@@ -1,0 +1,39 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="irAtras()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Comidas Favoritas</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="comidas.length == 0" color="warning" id="mensajePantallaVacia">
+    <ion-card-content> No has agregado ninguna comida favorita.</ion-card-content>
+  </ion-card>
+
+    <ion-card color="warning" *ngFor="let comida of comidas; index as i">
+      
+      <ion-item color="warning">
+        <ion-label><strong>{{comida.comida}}</strong></ion-label>
+        <ion-button class="detalles" fill="solid" slot="end" (click)="presentPopover(null, comida)">Ver</ion-button>
+      </ion-item>
+    
+      <ion-card-content>
+        <p><strong>Fecha:</strong> {{comida.fecha}}</p> 
+        <p id="nombre"><strong>Nombre:</strong> {{comida.nombre}}</p>
+        <ion-button id="botonIconoMas" size="small" (click)="pasarComidaAHoy(comida, idsDocument[i])" >
+          <ion-icon id="iconoMas" name="duplicate-outline"></ion-icon>
+        </ion-button> 
+        
+      </ion-card-content>
+
+     
+
+    </ion-card>
+
+</ion-content>

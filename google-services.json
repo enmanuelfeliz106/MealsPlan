@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "359216860124",
+    "firebase_url": "https://meals-plan.firebaseio.com",
+    "project_id": "meals-plan",
+    "storage_bucket": "meals-plan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359216860124:android:5609572fd21198d581dd19",
+        "android_client_info": {
+          "package_name": "com.mealsPlan.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359216860124-ejscbd9smumc9ur481doe012avbb51it.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO3GxDkBY5AIO7LedsugcgsyLYMj_ji1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359216860124-ejscbd9smumc9ur481doe012avbb51it.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,3 +24,81 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+    font-family: Cabin;
+    src: url(./assets/Cabin/Cabin-Regular.ttf);
+}
+
+@font-face {
+    font-family: CabinItalic;
+    src: url(./assets/Cabin/Cabin-SemiBoldItalic.ttf);
+}
+
+*{
+    font-family: Cabin;
+}
+
+ion-content{
+    --background: rgba(0, 0, 114, 0.781);
+    color: aliceblue;
+}
+
+ion-toolbar{
+    text-align: center;
+    --background: rgba(0, 0, 114, 0.781);
+    color: aliceblue;
+  }
+
+.popover {
+    --width: 90%;
+
+}
+
+ion-calendar{
+    background: #DD3A46 !important;
+    *{
+        color: aliceblue !important;
+        font-family: CabinItalic !important; 
+    }
+
+    button[disabled] p{
+        color: black !important;
+        
+    }
+    
+    border: 2px groove rgba(0, 0, 114, 0.781);
+    border-radius: 10px;
+
+    ion-calendar-month{
+        background: #E07C70 !important;
+        border-radius: 10px;
+    }
+
+    div.title{
+        background-color:#DD3A46;
+        border-radius: 20px;
+        *{
+            color: aliceblue !important;
+        }
+        border-top: 2px solid rgba(0, 0, 114, 0.781);
+        border-bottom: 2px solid rgba(0, 0, 114, 0.781);
+    }
+    .forward.md.button.button-clear.button-has-icon-only.ion-activatable.ion-focusable.hydrated{
+        background-color: rgba(0, 0, 114, 0.781);
+        border: 5px solid rgba(0, 0, 114, 0.781);
+        border-top-right-radius: 50px ;
+        border-bottom-right-radius: 50px;
+    }
+
+    .back.md.button.button-clear.button-has-icon-only.ion-activatable.ion-focusable.hydrated{
+        background-color: rgba(0, 0, 114, 0.781);
+        border: 5px solid rgba(0, 0, 114, 0.781);
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+    }
+
+}
+
+
+
