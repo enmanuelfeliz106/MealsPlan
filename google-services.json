@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "359216860124-gsvgte01i55mngmk4leejc85epgkvgfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mealsPlan.app",
+            "certificate_hash": "fcb8e83cc2c074a410fbbe4552254f0efdbb4b23"
+          }
+        },
+        {
           "client_id": "359216860124-ejscbd9smumc9ur481doe012avbb51it.apps.googleusercontent.com",
           "client_type": 3
         }
