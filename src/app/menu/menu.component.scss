@@ -1,16 +1,19 @@
 
-
-ion-item{
-    --background: transparent;
-    color: aliceblue;
+ion-button{
+    margin-top: 10px;
+    --ripple-color: #44e283;
 }
 
 ion-icon {
-    color: aliceblue;
+    color: rgba(0, 0, 114, 0.781);
+    font-weight: bold;
+    position: absolute;
+    right: -2px;
 }
 
 
 ion-content, ion-header, ion-toolbar{
-    --background: #FEBE10;
+    --background: rgba(0, 0, 114, 0.781);
+
 }
 

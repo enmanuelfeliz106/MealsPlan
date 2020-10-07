@@ -7,37 +7,47 @@
   </ion-header>
   <ion-content>
 
-      <ion-item routerLink="/home" routerDirection="forward" (click)="cerrarMenu()"> Comidas de hoy
+      <ion-button color="light" shape="round" expand="block" routerLink="/home" routerDirection="forward" (click)="cerrarMenu()">
+        Comidas de hoy
         <ion-icon name="today-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item routerLink="/calendario" routerDirection="forward" (click)="cerrarMenu()"> Calendario de comidas
+      <ion-button color="light" shape="round" expand="block" routerLink="/calendario" routerDirection="forward" (click)="cerrarMenu()">
+        Calendario de comidas
         <ion-icon name="calendar-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item (click)="presentPopoverTabla(null)"> Tabla de medidas y equivalencias
+      <ion-button color="light" shape="round" expand="block" (click)="presentPopoverTabla(null)">
+        Medidas y equivalencias
         <ion-icon name="reader-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item button="true" routerLink="/historial-comidas" routerDirection="forward" (click)="cerrarMenu()"> Historial de comidas
+      <ion-button color="light" shape="round" expand="block" routerLink="/historial-comidas" routerDirection="forward" (click)="cerrarMenu()">
+        Historial de comidas
         <ion-icon name="documents-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item button="true" routerLink="/comidas-favoritas" routerDirection="forward" (click)="cerrarMenu()"> Comidas Favoritas
+      <ion-button color="light" shape="round" expand="block" routerLink="/comidas-favoritas" routerDirection="forward" (click)="cerrarMenu()">
+        Comidas Favoritas
         <ion-icon name="star-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item button="true" routerLink="/manual-de-uso-y-preguntas" (click)="cerrarMenu()"> Manual de uso y preguntas
+      <ion-button color="light" shape="round" expand="block" routerLink="/manual-de-uso-y-preguntas" routerDirection="forward" (click)="cerrarMenu()">
+        Manual y preguntas
         <ion-icon name="book-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item button="true" routerLink="/ajustes" routerDirection="forward" (click)="cerrarMenu()"> Ajustes
+      <ion-button color="light" shape="round" expand="block" routerLink="/ajustes" routerDirection="forward" (click)="cerrarMenu()">
+        Ajustes
         <ion-icon name="settings-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
 
-      <ion-item button="true" (click)="cerrarSesion()"> Cerrar Sesión
+      <ion-button color="light" shape="round" expand="block" (click)="cerrarSesion()">
+        Cerrar Sesion
         <ion-icon name="log-out-outline" slot="end"></ion-icon>
-      </ion-item>
+      </ion-button>
+
+     
 
     
   </ion-content>
