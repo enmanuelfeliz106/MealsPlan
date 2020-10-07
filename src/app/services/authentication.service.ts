@@ -81,11 +81,12 @@ export class AuthenticationService {
 
         firebase.firestore().collection('usuarios').doc(userId).set(userData).then(exito => {
           console.log('Se ha guardado el usuario');
+          this.router.navigate(['/home']);
         }).catch(error => {
           console.log('No se ha podido guardar el usuario', error);
         });
 
-        this.router.navigate(['/home']);
+        
 
       }).catch(error => {
         console.log(error);
