@@ -55,8 +55,14 @@ export class PopoverAgregarComidaComponent implements OnInit {
       this.validarComas(ingredientes);
     }
 
-    if (this.comida === '' || this.nombre === '' || this.ingredientes === '') {
-      this.mensajeError = 'Solo los campos de notas y calorías pueden estar vacíos.';
+    if (this.comida === '') {
+      this.mensajeError = 'No has elegido la comida, por favor selecciona una';
+
+    } else if (this.nombre === '') {
+      this.mensajeError = 'No has puesto nombre a tu comida.';
+
+    } else if (this.ingredientes === '') {
+      this.mensajeError = 'No has indicado los ingredientes de tu comida';
 
     } else if (this.tieneComa === false) {
       this.mensajeError = 'Por favor, divida los ingredientes por comas.';
