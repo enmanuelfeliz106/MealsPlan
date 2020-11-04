@@ -31,7 +31,7 @@
 
     <ion-item>
       <ion-label position="stacked">Ingredientes</ion-label>
-      <ion-textarea name="ingredientes" [(ngModel)]="ingredientes" placeholder="Consejo: separelos por coma"></ion-textarea>
+      <ion-textarea name="ingredientes" [(ngModel)]="ingredientes" placeholder="Separelos por coma"></ion-textarea>
     </ion-item>
 
     <ion-item>
@@ -39,14 +39,326 @@
       <ion-textarea name="notas" [(ngModel)]="notas"></ion-textarea>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Calorías</ion-label>
-      <ion-input required type="number" name="calorias" [(ngModel)]="calorias"></ion-input>
+    <ion-item (click)="especificacionesAvanzadasToggle()" id="especificacionesAvanzadas" color="warning"> 
+      <ion-label>Especificaciones avanzadas</ion-label>
+      <ion-icon name={{iconoEspecificacionesAvanzadas}} slot="end"></ion-icon>
     </ion-item>
+
+    <div *ngIf="especificacionesAvanzadas">
+
+      <ion-item>
+        <ion-label position="stacked">Calorías</ion-label>
+        <ion-input type="number" name="calorias" [(ngModel)]="calorias"></ion-input>
+      </ion-item>
+
+      <p class="macroYMicro" (click)="macronutrientesToggle()">Macronutrientes
+        <ion-icon name={{iconoMacronutrientes}} slot="end"></ion-icon>
+      </p>
+
+      <div *ngIf="macronutrientes" >
+        <p class="medidas">Medidas en <strong>gramos</strong></p>
+
+        <ion-item>
+          <ion-label position="stacked">Carbohidratos</ion-label>
+          <ion-input type="number" name="carbohidratos" [(ngModel)]="carbohidratos"></ion-input>
+          
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Proteínas</ion-label>
+          <ion-input type="number" name="proteinas" [(ngModel)]="proteinas"></ion-input>
+          
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Grasas totales</ion-label>
+          <ion-input type="number" name="grasas" [(ngModel)]="grasas"></ion-input>
+          
+        </ion-item>
+
+      </div>
+
+      <p class="macroYMicro" (click)="micronutrientesToggle()">Micronutrientes
+        <ion-icon name={{iconoMicronutrientes}} slot="end"></ion-icon>
+      </p>
+
+      <div *ngIf="micronutrientes" id="micronutrientes">
+
+        <p class="medidas">Medidas en <strong>miligramos</strong></p>
+
+        
+        <p id="tituloVitaminas">Vitaminas</p>
+
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">A</ion-label>
+                  <ion-input type="number" name="vitaminaA" [(ngModel)]="vitaminaA"></ion-input>
+                  
+                </ion-item>
+                
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B1</ion-label>
+                  <ion-input type="number" name="vitaminaB1" [(ngModel)]="vitaminaB1"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B2</ion-label>
+                  <ion-input type="number" name="vitaminaB2" [(ngModel)]="vitaminaB2"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B3</ion-label>
+                  <ion-input type="number" name="vitaminaB3" [(ngModel)]="vitaminaB3"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-align-items-center">
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B5</ion-label>
+                  <ion-input type="number" name="vitaminaB5" [(ngModel)]="vitaminaB5"></ion-input>
+                  
+                </ion-item>
+                
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B6</ion-label>
+                  <ion-input type="number" name="vitaminaB6" [(ngModel)]="vitaminaB6"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B7/8</ion-label>
+                  <ion-input type="number" name="vitaminaB7B8" [(ngModel)]="vitaminaB7B8"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B9</ion-label>
+                  <ion-input type="number" name="vitaminaB9" [(ngModel)]="vitaminaB9"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-align-items-center">
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">B12</ion-label>
+                  <ion-input type="number" name="vitaminaB12" [(ngModel)]="vitaminaB12"></ion-input>
+                  
+                </ion-item>
+                
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">C</ion-label>
+                  <ion-input type="number" name="vitaminaC" [(ngModel)]="vitaminaC"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">D</ion-label>
+                  <ion-input type="number" name="vitaminaD" [(ngModel)]="vitaminaD"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">E</ion-label>
+                  <ion-input type="number" name="vitaminaE" [(ngModel)]="vitaminaE"></ion-input>
+                  
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="3">
+                <ion-item color="light">
+                  <ion-label position="stacked">K</ion-label>
+                  <ion-input type="number" name="vitaminaK" [(ngModel)]="vitaminaK"></ion-input>
+                  
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col size="3"></ion-col>
+
+              <ion-col size="3"></ion-col>
+
+              <ion-col size="3"></ion-col>
+
+            </ion-row>
+        </ion-grid>
+        
+        <p id="tituloMinerales">Minerales</p>
+
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Potasio</ion-label>
+                <ion-input type="number" name="potasio" [(ngModel)]="potasio"></ion-input>
+                
+              </ion-item>
+              
+            </ion-col>
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Cloro</ion-label>
+                <ion-input type="number" name="cloro" [(ngModel)]="cloro"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Sodio</ion-label>
+                <ion-input type="number" name="sodio" [(ngModel)]="sodio"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Calcio</ion-label>
+                <ion-input type="number" name="calcio" [(ngModel)]="calcio"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Fósforo</ion-label>
+                <ion-input type="number" name="fosforo" [(ngModel)]="fosforo"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Magne..</ion-label>
+                <ion-input type="number" name="magnesio" [(ngModel)]="magnesio"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Hierro</ion-label>
+                <ion-input type="number" name="hierro" [(ngModel)]="hierro"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Zinc</ion-label>
+                <ion-input type="number" name="zinc" [(ngModel)]="zinc"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Manga..</ion-label>
+                <ion-input type="number" name="manganeso" [(ngModel)]="manganeso"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Cobre</ion-label>
+                <ion-input type="number" name="cobre" [(ngModel)]="cobre"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Yodo</ion-label>
+                <ion-input type="number" name="yodo" [(ngModel)]="yodo"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Cromo</ion-label>
+                <ion-input type="number" name="cromo" [(ngModel)]="cromo"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Molibdeno</ion-label>
+                <ion-input type="number" name="molibdeno" [(ngModel)]="molibdeno"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Selenio</ion-label>
+                <ion-input type="number" name="selenio" [(ngModel)]="selenio"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="4">
+              <ion-item color="light">
+                <ion-label position="stacked">Cobalto</ion-label>
+                <ion-input type="number" name="cobalto" [(ngModel)]="cobalto"></ion-input>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+      </ion-grid>
+        
+
+      </div>
+
+
+
+  </div>
+
   
   <p id="mensajeError"> {{mensajeError}}</p>
 
-  <ion-button disabled="{{botonAgregar}}" color="success" expand="block" (click)="agregarOActualizarComida(opcion, fecha, docId, comida, nombre, ingredientes, notas, calorias)">Guardar</ion-button>
+  <ion-button disabled="{{botonAgregar}}" color="success" expand="block" (click)="agregarOActualizarComida(opcion, fecha, docId, comida, nombre, ingredientes, notas, calorias, 
+                                                                                                           carbohidratos, proteinas, grasas, vitaminaA, vitaminaB1, vitaminaB2, 
+                                                                                                           vitaminaB3, vitaminaB5, vitaminaB6, vitaminaB7B8, vitaminaB9, vitaminaB12,
+                                                                                                           vitaminaC, vitaminaD, vitaminaE, vitaminaK, potasio, cloro, sodio, calcio, 
+                                                                                                           fosforo, magnesio, hierro, zinc, manganeso, cobre, yodo, cromo, molibdeno, 
+                                                                                                           selenio, cobalto)">
+                                                                                                          
+  Guardar</ion-button>
+  
   <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cancelar</ion-button>
   <br> 
 

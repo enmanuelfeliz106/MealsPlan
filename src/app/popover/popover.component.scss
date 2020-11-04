@@ -40,3 +40,39 @@ ion-card-content{
     border: 2px solid aliceblue;
     border-radius: 5px;
 }
+
+#botonEspecificacionesAvanzadas{
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+#especificacionesAvanzadas{
+
+    .medidas{
+        text-align: center;
+        color: #ffd534;
+    }
+    
+    .macroYMicro{
+        background: aliceblue;
+        color: rgba(0, 0, 114, 0.781);
+        text-align: center;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    #tituloVitaminas, #tituloMinerales{
+        text-align: center;
+        font-weight: bold;
+        color: aliceblue;
+    }
+    
+    ion-grid{
+        ion-item{
+            border-radius: 10px;
+        }
+    }
+
+}

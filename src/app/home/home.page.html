@@ -96,7 +96,16 @@
           <ion-icon slot="icon-only" name="star-outline"></ion-icon>
         </ion-item-option>
       </ng-template>
-      <ion-item-option color="success" (click)="presentPopoverAgregarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias)">
+      <ion-item-option color="success" (click)="presentPopoverAgregarComida(null, idsDocument[i], comida.comida, comida.nombre, comida.ingredientes, comida.notas, comida.calorias,
+                                                                            comida.carbohidratos, comida.proteinas, comida.grasas,
+                                                                            comida.vitaminaA, comida.vitaminaB1, comida.vitaminaB2,
+                                                                            comida.vitaminaB3, comida.vitaminaB5, comida.vitaminaB6,
+                                                                            comida.vitaminaB7B8, comida.vitaminaB9, comida.vitaminaB12,
+                                                                            comida.vitaminaC, comida.vitaminaD, comida.vitaminaE, comida.vitaminaK,
+                                                                            comida.potasio, comida.cloro, comida.sodio, comida.calcio, comida.fosforo,
+                                                                            comida.magnesio, comida.hierro, comida.zinc, comida.manganeso,
+                                                                            comida.cobre, comida.yodo, comida.cromo, comida.molibdeno,
+                                                                            comida.selenio, comida.cobalto)">
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-item-option>
     </ion-item-options>
