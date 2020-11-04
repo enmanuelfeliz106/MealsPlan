@@ -49,9 +49,327 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-item (click)="especificacionesAvanzadasToggle()" id="botonEspecificacionesAvanzadas" color="warning"> 
+    <ion-label>Especificaciones avanzadas</ion-label>
+    <ion-icon name={{iconoEspecificacionesAvanzadas}} slot="end"></ion-icon>
+  </ion-item>
+
+  <div *ngIf="especificacionesAvanzadas" id="especificacionesAvanzadas">
+
+    <p class="macroYMicro" (click)="macronutrientesToggle()">Macronutrientes
+      <ion-icon name={{iconoMacronutrientes}} slot="end"></ion-icon>
+    </p>
+
+    <div *ngIf="macronutrientes" >
+      <p class="medidas">Medidas en <strong>gramos</strong></p>
+
+      <ion-card>
+        <ion-card-header>
+          
+          <ion-card-title>Carbohidratos</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{comidaObj.carbohidratos}}
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          
+          <ion-card-title>Proteínas</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{comidaObj.proteinas}}
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          
+          <ion-card-title>Grasas</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{comidaObj.grasas}}
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+    <p class="macroYMicro" (click)="micronutrientesToggle()">Micronutrientes
+      <ion-icon name={{iconoMicronutrientes}} slot="end"></ion-icon>
+    </p>
+
+    <div *ngIf="micronutrientes" id="micronutrientes">
+
+      <p class="medidas">Medidas en <strong>miligramos</strong></p>
+
+      
+      <p id="tituloVitaminas">Vitaminas</p>
+
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">A</ion-label>
+                <p>{{comidaObj.vitaminaA}}</p>
+                
+              </ion-item>
+              
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B1</ion-label>
+                <p>{{comidaObj.vitaminaB1}}</p>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B2</ion-label>
+                <p>{{comidaObj.vitaminaB2}}</p>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B3</ion-label>
+                <p>{{comidaObj.vitaminaB3}}</p>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B5</ion-label>
+                <p>{{comidaObj.vitaminaB5}}</p>
+                
+              </ion-item>
+              
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B6</ion-label>
+                <p>{{comidaObj.vitaminaB6}}</p>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B7/8</ion-label>
+                <p>{{comidaObj.vitaminaB7B8}}</p>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B9</ion-label>
+                <p>{{comidaObj.vitaminaB9}}</p>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">B12</ion-label>
+                <p>{{comidaObj.vitaminaB12}}</p>
+                
+              </ion-item>
+              
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">C</ion-label>
+                <p>{{comidaObj.vitaminaC}}</p>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">D</ion-label>
+                <p>{{comidaObj.vitaminaD}}</p>
+                
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">E</ion-label>
+                <p>{{comidaObj.vitaminaE}}</p>
+                
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="3">
+              <ion-item color="light">
+                <ion-label position="stacked">K</ion-label>
+                <p>{{comidaObj.vitaminaK}}</p>
+                
+              </ion-item>
+
+            </ion-col>
+
+            <ion-col size="3"></ion-col>
+
+            <ion-col size="3"></ion-col>
+
+            <ion-col size="3"></ion-col>
+
+          </ion-row>
+      </ion-grid>
+      
+      <p id="tituloMinerales">Minerales</p>
+
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Potasio</ion-label>
+              <p>{{comidaObj.potasio}}</p>
+              
+            </ion-item>
+            
+          </ion-col>
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Cloro</ion-label>
+              <p>{{comidaObj.cloro}}</p>
+              
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Sodio</ion-label>
+              <p>{{comidaObj.sodio}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Calcio</ion-label>
+              <p>{{comidaObj.calcio}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Fósforo</ion-label>
+              <p>{{comidaObj.fosforo}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Magne..</ion-label>
+              <p>{{comidaObj.magnesio}}</p>
+              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Hierro</ion-label>
+              <p>{{comidaObj.hierro}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Zinc</ion-label>
+              <p>{{comidaObj.zinc}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Manga..</ion-label>
+              <p>{{comidaObj.manganeso}}</p>
+              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Cobre</ion-label>
+              <p>{{comidaObj.cobre}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Yodo</ion-label>
+              <p>{{comidaObj.yodo}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Cromo</ion-label>
+              <p>{{comidaObj.cromo}}</p>
+              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Molibdeno</ion-label>
+              <p>{{comidaObj.molibdeno}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Selenio</ion-label>
+              <p>{{comidaObj.selenio}}</p>
+              
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-item color="light">
+              <ion-label position="stacked">Cobalto</ion-label>
+              <p>{{comidaObj.cobalto}}</p>
+              
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+    </ion-grid>
+      
+
+    </div>
+
+  </div>
+
   <ion-button color="danger" expand="block" (click)="cerrarPopover()">Cerrar</ion-button>
 
-</ion-content>
+  
+
+  </ion-content>
 
 
 </div>

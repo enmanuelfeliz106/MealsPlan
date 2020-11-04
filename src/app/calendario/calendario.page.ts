@@ -77,7 +77,14 @@ export class CalendarioPage implements OnInit {
         nombre: '',
         ingredientes: '',
         notas: '',
-        calorias: 0
+        calorias: null,
+        carbohidratos: null, proteinas: null, grasas: null,
+        vitaminaA: null, vitaminaB1: null, vitaminaB2: null, vitaminaB3: null, vitaminaB5: null,
+        vitaminaB6: null, vitaminaB7B8: null, vitaminaB9: null, vitaminaB12: null, vitaminaC: null,
+        vitaminaD: null, vitaminaE: null, vitaminaK: null, potasio: null, cloro: null, sodio: null,
+        calcio: null, fosforo: null, magnesio: null, hierro: null, zinc: null, manganeso: null,
+        cobre: null, yodo: null, cromo: null, molibdeno: null,
+        selenio: null, cobalto: null
 
       },
       cssClass: 'popover',

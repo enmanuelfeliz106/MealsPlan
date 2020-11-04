@@ -11,6 +11,18 @@ export interface Comida {
   ingredientes: Array<any>;
   notas: string;
   calorias: number;
+  /*Macronutrientes*/
+  carbohidratos: number; proteinas: number; grasas: number;
+  /*Micronutrientes*/
+  /*Vitaminas*/
+  vitaminaA: number; vitaminaB1: number; vitaminaB2: number; vitaminaB3: number; vitaminaB5: number;
+  vitaminaB6: number; vitaminaB7B8: number; vitaminaB9: number; vitaminaB12: number; vitaminaC: number;
+  vitaminaD: number; vitaminaE: number; vitaminaK: number;
+  /*Minerales*/
+  potasio: number; cloro: number; sodio: number; calcio: number; fosforo: number; magnesio: number;
+  hierro: number; zinc: number; manganeso: number; cobre: number; yodo: number; cromo: number; molibdeno: number;
+  selenio: number; cobalto: number;
+
   check: boolean;
   favorita: boolean;
 }
@@ -35,7 +47,15 @@ export class CRUDComidasService {
     this.idUsuario = firebase.auth().currentUser.uid;
   }
 
-  agregarComida(fecha: string, comida: string, nombre: string, ingredientes: string, notas: string, calorias: number) {
+  agregarComida(fecha: string, comida: string, nombre: string, ingredientes: string, notas: string, calorias: number,
+                carbohidratos: number, proteinas: number, grasas: number,
+                vitaminaA: number, vitaminaB1: number, vitaminaB2: number, vitaminaB3: number, vitaminaB5: number,
+                vitaminaB6: number, vitaminaB7B8: number, vitaminaB9: number, vitaminaB12: number, vitaminaC: number,
+                vitaminaD: number, vitaminaE: number, vitaminaK: number, potasio: number, cloro: number, sodio: number,
+                calcio: number, fosforo: number, magnesio: number, hierro: number, zinc: number, manganeso: number,
+                cobre: number, yodo: number, cromo: number, molibdeno: number,
+                selenio: number, cobalto: number) {
+
     let ingredientesArray = new String(ingredientes).split(',');
 
     let nuevaComida: Comida;
@@ -47,6 +67,15 @@ export class CRUDComidasService {
       ingredientes: ingredientesArray,
       notas: notas,
       calorias: calorias,
+      carbohidratos: carbohidratos, proteinas: proteinas, grasas: grasas,
+      vitaminaA: vitaminaA, vitaminaB1: vitaminaB1, vitaminaB2: vitaminaB2,
+      vitaminaB3: vitaminaB3, vitaminaB5: vitaminaB5, vitaminaB6: vitaminaB6,
+      vitaminaB7B8: vitaminaB7B8, vitaminaB9: vitaminaB9, vitaminaB12: vitaminaB12,
+      vitaminaC: vitaminaC, vitaminaD: vitaminaD, vitaminaE: vitaminaE, vitaminaK: vitaminaK,
+      potasio: potasio, cloro: cloro, sodio: sodio, calcio: calcio, fosforo: fosforo,
+      magnesio: magnesio, hierro: hierro, zinc: zinc, manganeso: manganeso,
+      cobre: cobre, yodo: yodo, cromo: cromo, molibdeno: molibdeno,
+      selenio: selenio, cobalto: cobalto,
       check: false,
       favorita: false
     };
@@ -74,7 +103,15 @@ export class CRUDComidasService {
     });*/
   }
 
-  actualizarComida(idDoc: string, comida: string, nombre: string, ingredientes: string, notas: string, calorias: number) {
+  actualizarComida(idDoc: string, comida: string, nombre: string, ingredientes: string, notas: string, calorias: number,
+                   carbohidratos: number, proteinas: number, grasas: number,
+                   vitaminaA: number, vitaminaB1: number, vitaminaB2: number, vitaminaB3: number, vitaminaB5: number,
+                   vitaminaB6: number, vitaminaB7B8: number, vitaminaB9: number, vitaminaB12: number, vitaminaC: number,
+                   vitaminaD: number, vitaminaE: number, vitaminaK: number, potasio: number, cloro: number, sodio: number,
+                   calcio: number, fosforo: number, magnesio: number, hierro: number, zinc: number, manganeso: number,
+                   cobre: number, yodo: number, cromo: number, molibdeno: number,
+                   selenio: number, cobalto: number) {
+
     let ingredientesArray = new String(ingredientes).split(',');
 
     firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).update({
@@ -82,7 +119,16 @@ export class CRUDComidasService {
       nombre: nombre,
       ingredientes: ingredientesArray,
       notas: notas,
-      calorias: calorias}).then( (exito) => {
+      calorias: calorias,
+      carbohidratos: carbohidratos, proteinas: proteinas, grasas: grasas,
+      vitaminaA: vitaminaA, vitaminaB1: vitaminaB1, vitaminaB2: vitaminaB2,
+      vitaminaB3: vitaminaB3, vitaminaB5: vitaminaB5, vitaminaB6: vitaminaB6,
+      vitaminaB7B8: vitaminaB7B8, vitaminaB9: vitaminaB9, vitaminaB12: vitaminaB12,
+      vitaminaC: vitaminaC, vitaminaD: vitaminaD, vitaminaE: vitaminaE, vitaminaK: vitaminaK,
+      potasio: potasio, cloro: cloro, sodio: sodio, calcio: calcio, fosforo: fosforo,
+      magnesio: magnesio, hierro: hierro, zinc: zinc, manganeso: manganeso,
+      cobre: cobre, yodo: yodo, cromo: cromo, molibdeno: molibdeno,
+      selenio: selenio, cobalto: cobalto}).then( (exito) => {
 
           this.alertaExito();
           this.popover.dismiss();
@@ -146,7 +192,16 @@ export class CRUDComidasService {
         notas: comida.notas,
         calorias: comida.calorias,
         check: false,
-        favorita: comida.favorita
+        favorita: comida.favorita,
+        carbohidratos: comida.carbohidratos, proteinas: comida.proteinas, grasas: comida.grasas,
+        vitaminaA: comida.vitaminaA, vitaminaB1: comida.vitaminaB1, vitaminaB2: comida.vitaminaB2,
+        vitaminaB3: comida.vitaminaB3, vitaminaB5: comida.vitaminaB5, vitaminaB6: comida.vitaminaB6,
+        vitaminaB7B8: comida.vitaminaB7B8, vitaminaB9: comida.vitaminaB9, vitaminaB12: comida.vitaminaB12,
+        vitaminaC: comida.vitaminaC, vitaminaD: comida.vitaminaD, vitaminaE: comida.vitaminaE, vitaminaK: comida.vitaminaK,
+        potasio: comida.potasio, cloro: comida.cloro, sodio: comida.sodio, calcio: comida.calcio, fosforo: comida.fosforo,
+        magnesio: comida.magnesio, hierro: comida.hierro, zinc: comida.zinc, manganeso: comida.manganeso,
+        cobre: comida.cobre, yodo: comida.yodo, cromo: comida.cromo, molibdeno: comida.molibdeno,
+        selenio: comida.selenio, cobalto: comida.cobalto
       };
 
     firebase.firestore().collection('usuarios').doc(this.idUsuario).collection('comidasGuardadas').doc(idDoc).

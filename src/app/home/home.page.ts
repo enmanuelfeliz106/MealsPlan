@@ -95,7 +95,13 @@ export class HomePage {
   }
 
   async presentPopoverAgregarComida(ev: any, idDoc, comida: string, nombre: string, ingredientes: Array<any>, notas: string,
-                         calorias: number ) {
+                                    calorias: number, carbohidratos: number, proteinas: number, grasas: number,
+                                    vitaminaA: number, vitaminaB1: number, vitaminaB2: number, vitaminaB3: number, vitaminaB5: number,
+                                    vitaminaB6: number, vitaminaB7B8: number, vitaminaB9: number, vitaminaB12: number, vitaminaC: number,
+                                    vitaminaD: number, vitaminaE: number, vitaminaK: number, potasio: number, cloro: number, sodio: number,
+                                    calcio: number, fosforo: number, magnesio: number, hierro: number, zinc: number, manganeso: number,
+                                    cobre: number, yodo: number, cromo: number, molibdeno: number,
+                                    selenio: number, cobalto: number ) {
     
     let ingredientesArrayToString: string = '';
     for (let i = 0; i < ingredientes.length - 1; i++) {
@@ -122,7 +128,16 @@ export class HomePage {
         nombre: nombre,
         ingredientes: ingredientesArrayToString,
         notas: notas,
-        calorias: calorias
+        calorias: calorias,
+        carbohidratos: carbohidratos, proteinas: proteinas, grasas: grasas,
+        vitaminaA: vitaminaA, vitaminaB1: vitaminaB1, vitaminaB2: vitaminaB2,
+        vitaminaB3: vitaminaB3, vitaminaB5: vitaminaB5, vitaminaB6: vitaminaB6,
+        vitaminaB7B8: vitaminaB7B8, vitaminaB9: vitaminaB9, vitaminaB12: vitaminaB12,
+        vitaminaC: vitaminaC, vitaminaD: vitaminaD, vitaminaE: vitaminaE, vitaminaK: vitaminaK,
+        potasio: potasio, cloro: cloro, sodio: sodio, calcio: calcio, fosforo: fosforo,
+        magnesio: magnesio, hierro: hierro, zinc: zinc, manganeso: manganeso,
+        cobre: cobre, yodo: yodo, cromo: cromo, molibdeno: molibdeno,
+        selenio: selenio, cobalto: cobalto
 
       },
       cssClass: 'popover'

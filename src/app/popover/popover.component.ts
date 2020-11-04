@@ -13,6 +13,13 @@ export class PopoverComponent implements OnInit {
 
   comidaObj;
 
+  especificacionesAvanzadas = false;
+  macronutrientes = false;
+  micronutrientes = false;
+  iconoEspecificacionesAvanzadas = 'chevron-forward-outline';
+  iconoMacronutrientes = 'chevron-forward-outline';
+  iconoMicronutrientes = 'chevron-forward-outline';
+
   constructor(public popoverController: PopoverController) {}
 
   ngOnInit() {}
@@ -33,6 +40,38 @@ export class PopoverComponent implements OnInit {
   cerrarPopover() {
 
     this.popoverController.dismiss();
+  }
+
+  especificacionesAvanzadasToggle() {
+    if (this.especificacionesAvanzadas === false) {
+      this.especificacionesAvanzadas = true;
+      this.iconoEspecificacionesAvanzadas = 'chevron-down-outline';
+    } else {
+      this.especificacionesAvanzadas = false;
+      this.iconoEspecificacionesAvanzadas = 'chevron-forward-outline';
+    }
+  }
+
+  macronutrientesToggle() {
+    if (this.macronutrientes === false) {
+      this.macronutrientes = true;
+      this.iconoMacronutrientes = 'chevron-down-outline';
+    } else {
+      this.macronutrientes = false;
+      this.iconoMacronutrientes = 'chevron-forward-outline';
+    }
+
+  }
+
+  micronutrientesToggle() {
+    if (this.micronutrientes === false) {
+      this.micronutrientes = true;
+      this.iconoMicronutrientes = 'chevron-down-outline';
+    } else {
+      this.micronutrientes = false;
+      this.iconoMicronutrientes = 'chevron-forward-outline';
+    }
+    
   }
 
 }
